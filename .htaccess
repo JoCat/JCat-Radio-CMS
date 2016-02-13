@@ -1,0 +1,10 @@
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^([a-z0-9_-]+)$ index.php?page=$1 [L]
+RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
+RewriteRule ^robots.txt$ modules/robots.txt [L]
+</IfModule>
