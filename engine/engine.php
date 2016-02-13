@@ -26,18 +26,17 @@
 		default:
 			require_once ( ENGINE_DIR . '/template/index.php');
 		break;
-/*
-		case 'registration':
-            require_once ( ENGINE_DIR . '/template/registration.php');
-            $tpl -> set( "{content}", $tpl -> showmodule( "registration.tpl" ) );
-		break;
-*/
-        case 'play':
-            require_once ( ENGINE_DIR . '/template/play.php');
-		break;
-        
+
         case 'news':
             require_once ( ENGINE_DIR . '/template/news.php');
+		break;
+
+        case 'page1':
+            require_once ( ENGINE_DIR . '/template/page1.php');
+		break;
+
+        case 'page2':
+            require_once ( ENGINE_DIR . '/template/page2.php');
 		break;
 
 	}
@@ -56,6 +55,7 @@
     }
     
     $tpl -> set( "{head}", $head );
+    $tpl -> set( "{adm_mail}", $config['admin_mail'] );
     $tpl -> set( "{footer}", $tpl -> showmodule( "footer.tpl" ) );
 	$tpl -> showtemplate();
 ?>
