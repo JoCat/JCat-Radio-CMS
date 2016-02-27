@@ -8,7 +8,7 @@ class jle_tpl
 	{
 		$this -> vars[ $name ] = $value;
     }
-	function showmodule( $tmp ) 
+	function showmodule( $tmp )
 	{
 		$tpl = $this -> template ."/". $tmp;
 		if ( !file_exists( $tpl ) ) die( "Template module ". $tpl ." not found!" );
@@ -18,9 +18,9 @@ class jle_tpl
 				$tpl = str_replace( $name, $value, $tpl );
 		return $tpl;
     }
-	function showtemplate( ) 
+	function showtemplate($tplt)
 	{
-		$tpl = $this -> template ."/main.tpl";
+		$tpl = $this -> template . $tplt;
 		if ( !file_exists( $tpl ) ) die( "Template ". $tpl ." not found!" );
 		$tpl = file_get_contents( $tpl );
 		if ( count( $this -> vars ) > 0 ) 

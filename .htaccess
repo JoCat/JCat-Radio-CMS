@@ -1,10 +1,18 @@
 DirectoryIndex index.php
 AddDefaultCharset UTF-8
-ServerSignature Off
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule ^([a-z0-9_-]+)$ index.php?page=$1 [L]
+#RewriteRule ^([a-z0-9_-]+)$ index.php?page=$1 [L]
+
+#Вывод новостей
+RewriteRule ^news$ index.php?page=news&show=shortnews [L]
+RewriteRule ^news/([a-z0-9_-]+)$ index.php?page=news&show=fullnews&link=$1 [L]
+
+#Вывод ведущих
+RewriteRule ^rj$ index.php?page=rj&show=all [L]
+RewriteRule ^rj/([a-z0-9_-]+)$ index.php?page=rj&show=rj&name=$1 [L]
+
 RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
 RewriteRule ^robots.txt$ modules/robots.txt [L]
 </IfModule>

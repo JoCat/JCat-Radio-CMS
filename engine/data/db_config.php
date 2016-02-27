@@ -7,27 +7,24 @@
 -------------------------------------
  Copyright (c) 2016 Molchanov. A.I.
 =====================================
- Конфигурационный файл
+ Конфигурационный файл базы данных
 =====================================
 */
 
-$config = array (
+$db_config = array (
 
-'home_title' => 'JLE Template',
+'server' => 'localhost',
 
-'charset' => 'utf-8',
+'user' => 'root',
 
-'description' => 'Test site for JLE',
+'password' => 'root',
 
-'keywords' => 'JLE, Default Template',
+'database' => 'jle_db',
 
-'admin_mail' => 'admin@mail.tld',
+'db_users' => 'jle_users',
 
-'shownews' => '10',
+'db_news' => 'jle_news'
 
-'showrj' => '10',
-
-'main_page' => '1'
 );
 
 ?>

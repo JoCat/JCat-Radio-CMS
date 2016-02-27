@@ -16,7 +16,7 @@
 
  include( ENGINE_DIR . '/data/config.php' );
  include( ENGINE_DIR . '/classes/template.class.php' );
- $tpl_dir = '/pages';
+ $tpl_dir = '/pages/';
  $tpl -> template = ROOT_DIR . $tpl_dir;
  $tpl -> set( "{dir}", $tpl_dir );
 
@@ -24,21 +24,24 @@
 	switch($page)
 	{
 		default:
-			require_once ( ENGINE_DIR . '/template/index.php');
+			require_once ( ENGINE_DIR . '/template/main.php');
 		break;
 
         case 'news':
             require_once ( ENGINE_DIR . '/template/news.php');
 		break;
 
-        case 'page1':
-            require_once ( ENGINE_DIR . '/template/page1.php');
+        case 'rj':
+            require_once ( ENGINE_DIR . '/template/rj.php');
 		break;
 
-        case 'page2':
-            require_once ( ENGINE_DIR . '/template/page2.php');
+        case 'programs':
+            require_once ( ENGINE_DIR . '/template/programs.php');
 		break;
 
+        case 'schedule':
+            require_once ( ENGINE_DIR . '/template/schedule.php');
+		break;
 	}
 
     $head = '
@@ -51,11 +54,11 @@
         $head .= '<title>'. $config['home_title'] .'</title>';
     }
     else {
-        $head .= '<title>' . $page_title .'&raquo;'. $config['home_title'] .'</title>';
+        $head .= '<title>' . $page_title .' &raquo; '. $config['home_title'] .'</title>';
     }
     
     $tpl -> set( "{head}", $head );
     $tpl -> set( "{adm_mail}", $config['admin_mail'] );
-    $tpl -> set( "{footer}", $tpl -> showmodule( "footer.tpl" ) );
-	$tpl -> showtemplate();
+    $tpl -> showtemplate('main.tpl');
+    echo "\n<!-- Powered by JLE v0.5 -->\r\n";
 ?>
