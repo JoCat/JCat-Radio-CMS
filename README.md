@@ -3,4 +3,4 @@
 
 Creator: Molchanov A.I.
 
-Version: 0.4_beta
+Release version: 0.4_beta
