@@ -1,16 +1,16 @@
 <?php
 /*
 =====================================
- JCat Light Engine
+ JCat Radio Engine
 -------------------------------------
  http://jcat.tk/
 -------------------------------------
- Copyright (c) 2016 Molchanov. A.I.
+ Copyright (c) 2016 Molchanov A.I.
 =====================================
  Главный обработчик движка
 =====================================
 */
- if (! defined ('JLE_KEY')) {
+ if (! defined ('JRE_KEY')) {
     die ( "Hacking attempt!" );
  }
 
@@ -60,5 +60,5 @@
     $tpl -> set( "{head}", $head );
     $tpl -> set( "{adm_mail}", $config['admin_mail'] );
     $tpl -> showtemplate('main.tpl');
-    echo "\n<!-- Powered by JLE v0.5 -->\r\n";
+    echo "\n<!-- Powered by JRE v0.5 -->\r\n";
 ?>

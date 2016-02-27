@@ -1,16 +1,16 @@
 <?php
 /*
 =====================================
- JCat Light Engine
+ JCat Radio Engine
 -------------------------------------
  http://jcat.tk/
 -------------------------------------
- Copyright (c) 2016 Molchanov. A.I.
+ Copyright (c) 2016 Molchanov A.I.
 =====================================
  Вывод новостей
 =====================================
 */
- if (! defined ('JLE_KEY')) {
+ if (! defined ('JRE_KEY')) {
     die ( "Hacking attempt!" );
  }
 
@@ -23,7 +23,8 @@
         case 'shortnews':
             $page_title = 'Новости';
             $shownews = $config['shownews'];
-            $result = @mysql_query("SELECT * FROM jle_news ORDER BY date DESC LIMIT 0,$shownews;");
+            $db_news = $config['db_news'];
+            $result = @mysql_query("SELECT * FROM $db_news ORDER BY date DESC LIMIT 0,$shownews;");
             
             while($row=@mysql_fetch_array($result)){
                 $tpl -> set( "{date}", date("m/d/Y - H:i",$row["date"]) );

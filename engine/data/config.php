@@ -1,11 +1,11 @@
 <?php
 /*
 =====================================
- JCat Light Engine
+ JCat Radio Engine
 -------------------------------------
  http://jcat.tk/
 -------------------------------------
- Copyright (c) 2016 Molchanov. A.I.
+ Copyright (c) 2016 Molchanov A.I.
 =====================================
  Конфигурационный файл
 =====================================
@@ -13,13 +13,13 @@
 
 $config = array (
 
-'home_title' => 'JLE Template',
+'home_title' => 'JRE Template',
 
 'charset' => 'utf-8',
 
-'description' => 'Test site for JLE',
+'description' => 'Test site for JRE',
 
-'keywords' => 'JLE, Default Template',
+'keywords' => 'JRE, Default Template',
 
 'admin_mail' => 'admin@mail.tld',
 

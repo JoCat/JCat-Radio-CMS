@@ -1,6 +1,6 @@
-#JCat Light Engine - Simplified and Lightweight CMS
-###JCat Light Engine - Упрощённая и Лёгкая CMS
+#JCat Radio Engine - CMS for Radio Site (JCat Radio CMS)
+###JCat Radio Engine - CMS для сайта Радио (JCat Radio CMS)
 
 Creator: Molchanov A.I.
 
-Release version: 0.4_beta
+Working version: 0.4_beta

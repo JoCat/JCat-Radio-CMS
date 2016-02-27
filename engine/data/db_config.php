@@ -1,11 +1,11 @@
 <?php
 /*
 =====================================
- JCat Light Engine
+ JCat Radio Engine
 -------------------------------------
  http://jcat.tk/
 -------------------------------------
- Copyright (c) 2016 Molchanov. A.I.
+ Copyright (c) 2016 Molchanov A.I.
 =====================================
  Конфигурационный файл базы данных
 =====================================
@@ -19,11 +19,13 @@ $db_config = array (
 
 'password' => 'root',
 
-'database' => 'jle_db',
+'database' => 'jre_db',
 
-'db_users' => 'jle_users',
+'db_users' => 'jre_users',
 
-'db_news' => 'jle_news'
+'db_news' => 'jre_news',
+
+'db_rj' => 'jre_rj'
 
 );
 

@@ -1,16 +1,16 @@
 <?php
 /*
 =====================================
- JCat Light Engine
+ JCat Radio Engine
 -------------------------------------
  http://jcat.tk/
 -------------------------------------
- Copyright (c) 2016 Molchanov. A.I.
+ Copyright (c) 2016 Molchanov A.I.
 =====================================
  Обработка начальной страницы
 =====================================
 */
- if (! defined ('JLE_KEY')) {
+ if (! defined ('JRE_KEY')) {
     die ( "Hacking attempt!" );
  }
 

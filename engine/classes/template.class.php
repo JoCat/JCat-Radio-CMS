@@ -1,6 +1,16 @@
 <?php
-
-class jle_tpl
+/*
+=====================================
+ JCat Radio Engine
+-------------------------------------
+ http://jcat.tk/
+-------------------------------------
+ Copyright (c) 2016 Molchanov A.I.
+=====================================
+ Класс шаблонизатора
+=====================================
+*/
+class jre_tpl
 {
 	private $vars = array();
 	var $template;
@@ -29,5 +39,5 @@ class jle_tpl
 		echo $tpl;
     }
 }
-$tpl = new jle_tpl;
+$tpl = new jre_tpl;
 ?>
