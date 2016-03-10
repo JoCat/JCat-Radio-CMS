@@ -3,16 +3,30 @@ AddDefaultCharset UTF-8
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
-#RewriteRule ^([a-z0-9_-]+)$ index.php?page=$1 [L]
+
+#Вывод статических страниц
 
 #Вывод новостей
-RewriteRule ^news$ index.php?page=news&show=shortnews [L]
-RewriteRule ^news/([a-z0-9_-]+)$ index.php?page=news&show=fullnews&link=$1 [L]
+RewriteRule ^news$ index.php?do=news&show=shortnews [L]
+RewriteRule ^news/([0-9]+)/$ index.php?do=news&show=shortnews&page=$1 [L]
+#RewriteRule ^news/([a-z0-9_-]+)$ index.php?do=news&show=fullnews&link=$1 [L]
 
 #Вывод ведущих
-RewriteRule ^rj$ index.php?page=rj&show=all [L]
-RewriteRule ^rj/([a-z0-9_-]+)$ index.php?page=rj&show=rj&name=$1 [L]
+RewriteRule ^rj$ index.php?do=rj&show=all [L]
+#RewriteRule ^rj/([a-z0-9_-]+)$ index.php?do=rj&show=rj&name=$1 [L]
 
-RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
-RewriteRule ^robots.txt$ modules/robots.txt [L]
+#Вывод программ
+RewriteRule ^programs$ index.php?do=programs&show=all [L]
+RewriteRule ^programs/([0-9]+)/$ index.php?do=programs&show=all&page=$1 [L]
+#RewriteRule ^programs/([a-z0-9_-]+)$ index.php?do=programs&show=programs&name=$1 [L]
+
+#Вывод расписания
+RewriteRule ^schedule$ index.php?do=schedule [L]
+
+#Альтернативный вывод расписания - Убран по просьбе заказчика (но возможна реализация)
+#RewriteRule ^schedule$ index.php?do=schedule&show=all [L]
+#RewriteRule ^schedule/([a-z]+)$ index.php?do=schedule&show=day&day=$1 [L]
+
+#RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
+#RewriteRule ^robots.txt$ modules/robots.txt [L]
 </IfModule>

@@ -10,6 +10,9 @@
  Класс шаблонизатора
 =====================================
 */
+if (! defined ('JRE_KEY')) {
+    die ( "Hacking attempt!" );
+}
 class jre_tpl
 {
 	private $vars = array();

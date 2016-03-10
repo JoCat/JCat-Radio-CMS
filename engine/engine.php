@@ -16,12 +16,12 @@
 
  include( ENGINE_DIR . '/data/config.php' );
  include( ENGINE_DIR . '/classes/template.class.php' );
- $tpl_dir = '/pages/';
+ $tpl_dir = '/pages';
  $tpl -> template = ROOT_DIR . $tpl_dir;
  $tpl -> set( "{dir}", $tpl_dir );
 
- $page = isset($_GET['page'])  ? $_GET['page'] : false;
-	switch($page)
+ $do = isset($_GET['do'])  ? $_GET['do'] : false;
+	switch($do)
 	{
 		default:
 			require_once ( ENGINE_DIR . '/template/main.php');
@@ -59,6 +59,6 @@
     
     $tpl -> set( "{head}", $head );
     $tpl -> set( "{adm_mail}", $config['admin_mail'] );
-    $tpl -> showtemplate('main.tpl');
+    $tpl -> showtemplate('/main.tpl');
     echo "\n<!-- Powered by JRE v0.5 -->\r\n";
 ?>

@@ -22,24 +22,22 @@
 	{
         case 'all':
             $page_title = 'Наши ведущие';
-            $showrj = $config['showrj'];
-            $db_rj = $config['db_rj'];
-            $result = @mysql_query("SELECT * FROM $db_rj ORDER BY date DESC LIMIT 0,$showrj;");
-            
-            while($row=@mysql_fetch_array($result)){
+            $stmt = $pdo->query('SELECT * FROM jre_rj ORDER BY id ASC');
+            while($row = $stmt->fetch()){
                 $tpl -> set( "{name}", $row["name"] );
                 $tpl -> set( "{description}", $row["description"] );
                 $content .= $tpl -> showmodule( "rjblock.tpl" );
             }
             $tpl -> set( "{content}", $content );
 		break;
-        
+        /*
         case 'rj':
             $page_title = $row["name"];
             //Temporarily not working
             $tpl -> set( "{content}", $tpl -> showmodule( "rjpage.tpl" ) );
 		break;
+        */
 	}
     
- @mysql_close();
+ $pdo = null;
 ?>

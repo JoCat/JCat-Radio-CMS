@@ -101,3 +101,19 @@ footer {
  width: 892px;
  float: left;
 }
+.navigation{
+ text-align: center;
+ margin-bottom: 20px;
+}
+.navigation span{
+ margin: 0px 2px;
+ padding: 2px 8px;
+ background-color: white;
+ border: 1px solid #ccc;
+}
+.error-alert {
+ padding: 10px;
+ background-color: #ff9999;
+ border: #ff6666 solid 1px;
+ font-size: 16px;
+}

@@ -23,9 +23,10 @@ $config = array (
 
 'admin_mail' => 'admin@mail.tld',
 
-'shownews' => '10',
+'shownews' => '5',
 
-'showrj' => '10',
+'showprog' => '5',
+
 
 'main_page' => '1'
 );

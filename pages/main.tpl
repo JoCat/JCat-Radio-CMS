@@ -15,9 +15,9 @@
             <li><a href="/news">News</a></li>
             <li><a href="/play">Listen</a></li>
             <li><a href="/rj">RJ</a></li>
-            <li><a href="/prog">Programs</a></li>
-            <li><a href="/rasp">Schedule</a></li>
-            <li><a href="/img">Background Images</a></li>
+            <li><a href="/programs">Programs</a></li>
+            <li><a href="/schedule">Schedule</a></li>
+            <li><a href="/image">Background Images</a></li>
           </ul>
           <ul class="nav navbar-nav right">
             <li><a href="/admin.php">Admin panel</a></li>
@@ -83,7 +83,7 @@
       </div>
       <div class="right" style="text-align: right;">
         counters<br>
-        Powered by JLE v0.5
+        Powered by JRE v0.5
       </div>
     </div>
     </footer>
