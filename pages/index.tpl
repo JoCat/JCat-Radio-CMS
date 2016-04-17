@@ -1,3 +1,4 @@
 <div style="text-align:center; font-size:2em; padding:1em;">
-Test index page
+Тестовая начальная страница<br>
+Вы можете изменить контент этой страницы в файле 'index.tpl'
 </div>

@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,400italic,400&subset=latin,cyrillic);
+body{
+  margin:0px;
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+}
+header{
+  height:80px;
+  font-size: 18px;
+  color: white;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJ0lEQVQIW2NkYGD4zzDzPwNDOiMDiGYEEkAeFAAFgcLYVECVg9QBAD7NEMms+CG9AAAAAElFTkSuQmCC) repeat;
+}
+header h1 {
+  padding: 0px 20px;
+  float: left;
+  font-weight: bold;
+  text-shadow: black 2px 2px 2px;
+}
+h1 {
+  margin: 0px;
+}
+nav {
+  padding: 0px 10px;
+  padding-top: 50px;
+}
+nav a{
+  font-size: 14px;
+  padding:  0 2px;
+  text-shadow: black 1px 1px 1px;
+}
+header a, footer a {
+  text-decoration: none;
+  color: white;
+}
+header a:hover, footer a:hover {
+  color: gold;
+}
+.content a {
+  text-decoration: none;
+  color: #888;
+}
+.content a:hover {
+  color: black;
+}
+.left {float:left;}
+.right {float:right;}
+footer {
+  background-color: #ccc;
+  font-size: 14px;
+  padding: 5px;
+}
+.content {
+  text-align: center;
+  font-size: 16px;
+  background-color: #eee;
+  padding: 10px;
+}
+form{
+  margin: 10px auto;
+  text-align: left;
+  font-size: 14px;
+}
+small {font-size:12px;}
+.input {
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  width: 280px;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  font-size: 16px;
+}
+.number{
+  width: 35px;
+  height: 20px;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+  padding-left: 2px;
+}
+.button {
+  border: solid 1px #ccc;
+  background-color: #0099ff;
+  border-radius: 3px;
+  width: 104px;
+  height: 44px;
+  color: white;
+  margin-left: 3px;
+  margin-top: 10px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #00bbff;
+}
+.news-table {
+  margin:10px auto;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+.news-table tr {
+  border-top: 1px solid #ccc;
+}
+.news-table td {
+  border-left: 1px solid #ccc;
+  padding:2px 8px;
+}
+.news-table th {
+  border-left: 1px solid #ccc;
+  padding: 10px 15px;
+}
+.news {
+  text-align: left;
+  width: 500px;
+  margin: 10px auto 5px;
+}
+.news .input {width: 478px;}
+.news .button {margin: 0px;}
+.news textarea {
+  font-family: 'Open Sans', sans-serif;
+  height: 150px;
+  max-width: 478px;
+}

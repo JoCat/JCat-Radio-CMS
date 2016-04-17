@@ -4,7 +4,8 @@ AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-#Вывод статических страниц
+#Вывод страницы "Слушать"
+RewriteRule ^listen$ index.php?do=listen [L]
 
 #Вывод новостей
 RewriteRule ^news$ index.php?do=news&show=shortnews [L]
@@ -27,6 +28,12 @@ RewriteRule ^schedule$ index.php?do=schedule [L]
 #RewriteRule ^schedule$ index.php?do=schedule&show=all [L]
 #RewriteRule ^schedule/([a-z]+)$ index.php?do=schedule&show=day&day=$1 [L]
 
+#Вывод статических страниц
+RewriteRule ^page/([a-z0-9_-]+)$ index.php?do=static&link=$1 [L]
+
 #RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
 #RewriteRule ^robots.txt$ modules/robots.txt [L]
 </IfModule>
+
+#	Not found
+ErrorDocument 404 /modules/errors/404.php

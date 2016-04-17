@@ -1,4 +1,4 @@
 <div class="block">
-<span>{time}</span>
+<span>{time} - {endtime}</span>
 <span>{title}</span>
 </div>

@@ -13,42 +13,41 @@
  if (! defined ('JRE_KEY')) {
     die ( "Hacking attempt!" );
  }
-//доделать
  include( ENGINE_DIR . '/data/db_config.php' );
- include( ENGINE_DIR . '/classes/db_connect.class.php' );
-
- $days = '<div class="schedule">
-            <span><a href="/schedule/monday">Понедельник</a></span>
-            <span><a href="/schedule/tuesday">Вторник</a></span>
-            <span><a href="/schedule/wednesday">Среда</a></span>
-            <span><a href="/schedule/thursday">Четверг</a></span>
-            <span><a href="/schedule/friday">Пятница</a></span>
-            <span><a href="/schedule/saturday">Суббота</a></span>
-            <span><a href="/schedule/sunday">Воскресенье</a></span>
-          </div>';
-
- $show = isset($_GET['show'])  ? $_GET['show'] : false;
-	switch($show)
-	{
-        case 'all':
-            $content = $days;
-            $content .= '<div class="schedule">Выберите день недели</div>';
-            $tpl -> set( "{content}", $content );
-		break;
-        
-        case 'day':
-            $day = $_GET['day'];
-            $content = $days;
-            $stmt = $pdo->prepare('SELECT * FROM jre_schedule WHERE day = :day ORDER BY time ASC');
-            $stmt->execute(array('day' => $day));
-            while($row = $stmt->fetch()){
-                $tpl -> set( "{time}", date("H:i",$row["time"]) );
-                $tpl -> set( "{title}", $row["title"] );
-                $content .= $tpl -> showmodule( "schedule.tpl" );
-            }
-            $tpl -> set( "{content}", $content );
-		break;
-	}
-    
+ include( ENGINE_DIR . '/classes/db_connect.php' );
+ 
+ $stmt = $pdo->prepare('SELECT * FROM jre_schedule WHERE day = :day ORDER BY time ASC');
+ $days = array(
+ 'monday' => 'Понедельник',
+ 'tuesday' => 'Вторник',
+ 'wednesday' => 'Среда',
+ 'thursday' => 'Четверг',
+ 'friday' => 'Пятница',
+ 'saturday' => 'Суббота',
+ 'sunday' => 'Воскресенье'
+ );
+ 
+ foreach ($days as $key => $value) {
+    $day = '<div class="day">'.$value.'</div>';
+    $stmt->execute(array('day' => $key));
+    while($row = $stmt->fetch()){
+        if (!empty ($row)){
+            $tpl -> set( "{title}", $row["title"] );
+            $tpl -> set( "{time}", date("H:i",$row["time"]) );
+            $tpl -> set( "{endtime}", date("H:i",$row["endtime"]) );
+            $blocks .= $tpl -> showmodule( "schedule.tpl" );
+        }
+    }
+    if (!empty ($blocks))
+        $content .= '<div class="day-block">'. $day . $blocks .'</div>';
+    $div = null; $blocks = null;
+ }
+ if (empty ($content)){
+    $content = '<div class="error-alert">
+    <b>Внимание! Обнаружена ошибка</b><br>
+    На данный момент у нас нет расписания, заходите позже :)
+    </div>';
+ }
+ $tpl -> set( "{content}", $content );
  $pdo = null;
 ?>

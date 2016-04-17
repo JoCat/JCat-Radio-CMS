@@ -15,7 +15,7 @@
  }
 
  include( ENGINE_DIR . '/data/db_config.php' );
- include( ENGINE_DIR . '/classes/db_connect.class.php' );
+ include( ENGINE_DIR . '/classes/db_connect.php' );
 
  $show = isset($_GET['show'])  ? $_GET['show'] : false;
 	switch($show)
@@ -35,9 +35,15 @@
             while($row = $stmt->fetch()){
                 $tpl -> set( "{title}", $row["title"] );
                 $tpl -> set( "{info}", $row["info"] );
+                $tpl -> set( "{pic}", $row["pic"] );
                 $content .= $tpl -> showmodule( "progblock.tpl" );
             }
-            
+            if (empty($content)){
+                $content = '<div class="error-alert">
+                <b>Внимание! Обнаружена ошибка</b><br>
+                На данный момент у нас нет программ или они не указаны.
+                </div>';
+            }
             //узнаем общее количество страниц и заполняем массив со ссылками
             $stmt = $pdo->query('SELECT FOUND_ROWS()');
             $rows = $stmt->fetchColumn();
@@ -51,9 +57,9 @@
                     $link .= '<span><b>'.$page.'</b></span>';
                     else
                         if ($page == 1)
-                            $link .= '<span><a href="/news">1</a></span>';
+                            $link .= '<span><a href="/programs">1</a></span>';
                         else
-                            $link .= '<span><a href="/news/'.$page.'/">'.$page.'</a></span>';
+                            $link .= '<span><a href="/programs/'.$page.'/">'.$page.'</a></span>';
                 }
                 $tpl -> set( "{navigation}", $link );
                 $content .= $tpl -> showmodule( "navigation.tpl" );
@@ -69,7 +75,6 @@
                 По данному адресу публикаций на сайте не найдено.
                 </div>';
             }
-            
             $tpl -> set( "{content}", $content );
 		break;
         

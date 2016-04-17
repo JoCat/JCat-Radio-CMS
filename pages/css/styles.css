@@ -2,39 +2,34 @@
 
 body {
  padding-top: 51px;
- padding-bottom: 0px;
  }
 
-.container{width: inherit;}
-.container, .container-fluid {
- padding-right: 50px;
- padding-left: 50px;
-}
-
-.nav>li>a {
- padding-left: 5px;
- padding-right: 5px;
-}
+h1, h2, h3, h4, h5, h6 ,p {margin:0px;}
 
 .nav a {
  font-family: 'Cuprum', sans-serif;
  font-size: 16px;
  font-weight: bold;
 }
-
-.neighborhood-guides {
+@media (min-width: 768px) {
+  .navbar-nav>li>a {
+    padding: 15px 8px;
+  }
+}
+.wrapper {
  font-family: 'Cuprum', sans-serif;
  font-size: 16px;
  background-color: #efefef;
  border-bottom: 1px solid #dbdbdb;
+ padding: 15px 0;
 }
 
-.neighborhood-guides h2 {
+.wrapper h2 {
  color: #393c3d;
  font-size: 24px;
 }
 
-.neighborhood-guides p {
+.wrapper p {
  font-size: 15px;
  margin-bottom: 4px;
 }
@@ -48,6 +43,9 @@ body {
 
 .block hr {margin: 4px -5px;}
 
+@media (max-width: 767px) {
+    .block  img{display:none;}
+}
 .left{float: left;}
 .right{float: right;}
 .min {font-size: 12px; color: #ccc;}
@@ -57,8 +55,17 @@ footer {
  font-size: 16px;
  margin:5px;
 }
-
-#js_check {
+footer .right{text-align:right;}
+@media (max-width: 767px) {
+  footer .left, footer .right {
+    float: none;
+  }
+  footer .right{
+    text-align:left;
+    margin-top: 5px;
+  }
+}
+.js_check {
  text-align: center;
  font-size: 20px;
  color: red;
@@ -70,37 +77,31 @@ footer {
  background-repeat: no-repeat;
  background-size: 100%;
  border-bottom: 1px solid #dbdbdb;
- background: url(../images/1.jpg) 50% 20% / 100%;
+ background: url(../images/1.jpg) 50% 15% / cover no-repeat;
+}
+@media (max-width: 767px) {
+    .placeholder {height: 180px;}
+    .placeholder .container {display:none;}
 }
 
 .placeholder .container {
  position: relative;
- top:250px;
+ top:276px;
 }
 
 .placeholder h1 {
  text-shadow: 0 0 10px #000;
  color: #fff;
- font-size: 60px;
+ font-size: 4em;
  font-weight: bold;
 }
 
 .placeholder p {
  text-shadow: 0 0 10px #000;
- font-size: 40px;
+ font-size: 2.3em;
  color: #fff;
 }
 
-.left-side {
- width: 250px;
- float: left;
- padding: 0px;
- margin: 0px 20px 0px 0px;
-}
-.right-side {
- width: 892px;
- float: left;
-}
 .navigation{
  text-align: center;
  margin-bottom: 20px;

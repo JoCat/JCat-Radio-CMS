@@ -7,13 +7,12 @@
 -------------------------------------
  Copyright (c) 2016 Molchanov A.I.
 =====================================
- Конфигурационный файл базы данных
+ Обработка страницы "Слушать"
 =====================================
 */
-$db_config = array (
-'host' => 'localhost',
-'user' => 'root',
-'password' => '',
-'database' => 'jre_db'
-);
+ if (! defined ('JRE_KEY')) {
+    die ( "Hacking attempt!" );
+ }
+ $page_title = 'Listen';
+ $tpl -> set( "{content}", $tpl -> showmodule( "listen.tpl" ) );
 ?>
