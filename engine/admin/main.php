@@ -14,6 +14,6 @@
     die ( "Hacking attempt!" );
  }
  include ( ENGINE_DIR . '/admin/head.html');
- echo '<div style="padding:5%;text-align:center;font-size:16px;">Добро пожаловать в панель управления JCat Radio Engine</div>';
+ echo '<h2>Добро пожаловать в панель управления JCat Radio Engine</h2>';
  include ( ENGINE_DIR . '/admin/footer.html');
 ?>

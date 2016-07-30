@@ -13,6 +13,6 @@
  if (! defined ('JRE_KEY')) {
     die ( "Hacking attempt!" );
  }
- $page_title = 'Listen';
+ $page_title = 'Слушать';
  $tpl -> set( "{content}", $tpl -> showmodule( "listen.tpl" ) );
 ?>

@@ -15,9 +15,9 @@
  }
 
  include ( ENGINE_DIR . '/data/config.php' );
- $do = isset($_GET['do'])  ? $_GET['do'] : false;
  session_start();
 
+ $do = isset($_GET['do'])  ? $_GET['do'] : false;
  if ($_SESSION['user'] == 'true'){
     switch($do)
 	{

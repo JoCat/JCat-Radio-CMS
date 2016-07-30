@@ -35,7 +35,11 @@
             while($row = $stmt->fetch()){
                 $tpl -> set( "{title}", $row["title"] );
                 $tpl -> set( "{info}", $row["info"] );
-                $tpl -> set( "{pic}", $row["pic"] );
+                if ($row["pic"]) {
+                    $tpl -> set( "{pic}", '/pages/images/programs/'.$row["pic"] );
+                }else {
+                    $tpl -> set( "{pic}", '/pages/images/no_image.png' );
+                }
                 $content .= $tpl -> showmodule( "progblock.tpl" );
             }
             if (empty($content)){

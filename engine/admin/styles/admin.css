@@ -1,8 +1,27 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,400italic,400&subset=latin,cyrillic);
+html, body {
+height: 100%;
+}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -50px;
+}
+footer, .push {
+height: 50px;
+}
+footer {
+  background-color: #ccc;
+  font-size: 14px;
+  padding: 5px;
+  box-sizing: border-box;
+}
 body{
   margin:0px;
   font-size: 12px;
   font-family: 'Open Sans', sans-serif;
+  background-color: #eee;
 }
 header{
   height:80px;
@@ -44,15 +63,9 @@ header a:hover, footer a:hover {
 }
 .left {float:left;}
 .right {float:right;}
-footer {
-  background-color: #ccc;
-  font-size: 14px;
-  padding: 5px;
-}
 .content {
   text-align: center;
   font-size: 16px;
-  background-color: #eee;
   padding: 10px;
 }
 form{

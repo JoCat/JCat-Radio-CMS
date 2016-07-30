@@ -10,7 +10,7 @@ RewriteRule ^listen$ index.php?do=listen [L]
 #Вывод новостей
 RewriteRule ^news$ index.php?do=news&show=shortnews [L]
 RewriteRule ^news/([0-9]+)/$ index.php?do=news&show=shortnews&page=$1 [L]
-#RewriteRule ^news/([a-z0-9_-]+)$ index.php?do=news&show=fullnews&link=$1 [L]
+RewriteRule ^news/([0-9]+)-([a-z0-9_-]+)$ index.php?do=news&show=fullnews&id=$1&alt=$2 [L]
 
 #Вывод ведущих
 RewriteRule ^rj$ index.php?do=rj&show=all [L]

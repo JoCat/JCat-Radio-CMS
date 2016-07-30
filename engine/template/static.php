@@ -26,7 +26,6 @@
  $tpl -> set( "{content}", $tpl -> showmodule( "static.tpl" ) );
  if (empty($row)){
     include(ROOT_DIR .'/modules/errors/404.php');
-    header("HTTP/1.1 404 Not Found");
     exit;
  }
  ?>

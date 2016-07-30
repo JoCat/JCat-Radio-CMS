@@ -9,7 +9,8 @@
     <link rel="stylesheet" type="text/css" href="/modules/player/css/jcplayer.css">
 </head>
 <body>
-    <nav class="navbar navbar-fixed-top navbar-default">
+    <div class="wrapper">
+     <nav class="navbar navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -34,21 +35,21 @@
           </ul>
         </div>
       </div>
-    </nav>
+     </nav>
     
-    <noscript class="js_check">
-    Для правильной работы сайта рекомендуем включить поддержку JavaScript на нашем сайте.<br>
-    Если вы не отключали поддержку JavaScript, то возможно ваш браузер устарел и он не поддерживает JavaScript.
-    </noscript>
+     <noscript class="js_check">
+     Для правильной работы сайта рекомендуем включить поддержку JavaScript на нашем сайте.<br>
+     Если вы не отключали поддержку JavaScript, то возможно ваш браузер устарел и он не поддерживает JavaScript.
+     </noscript>
     
-    <div class="placeholder">
+     <div class="placeholder">
       <div class="container">
         <h1>Основной шаблон</h1>
-        <p>Тестовый сайт на движке JLE</p>
+        <p>Тестовый сайт на движке JRE</p>
       </div>
-    </div>
+     </div>
     
-    <div class="wrapper">
+     <div class="content">
       <div class="container">
        <div class="row">
         <div class="col-md-4">
@@ -68,12 +69,30 @@
         <div class="col-md-8">
         {content}
         </div>
+       </div>
       </div>
      </div>
+     <div class="push"></div>
     </div>
-    
+
+    <!-- Footer -->
+    <footer class="hidden-xs">
+    <div class="container">
+      <div class="left">
+        <b>JRE</b> Template 2016. Все права защищены.<br>
+        Связаться с администрацией: <a href="mailto:{adm_mail}">{adm_mail}</a><br>
+        Дизайн и разработка: <a href="http://vk.com/johny_cat">Johny_Cat</a> (<a href="http://jcat.tk/">JCat.tk</a>)
+      </div>
+      <div class="right" style="text-align: right;">
+        counters<br>
+        <span>Работает на движке JRE v{version}</span>
+      </div>
+    </div>
+    </footer>
+    <!-- Footer End -->
+
     <div id="jcp-player"></div>
-    
+
     <!-- Script Start -->
     <script type="text/javascript" src="{dir}/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="{dir}/js/bootstrap.min.js"></script>
@@ -85,21 +104,5 @@
     tupd = 1000;    //Время обновления информации (в секундах)(Например 10)
     </script>
     <!-- Script End -->
-    
-    <!-- Footer -->
-    <footer class="hidden-xs">
-    <div class="container">
-      <div class="left">
-        <b>JLE</b> Template 2016. Все права защищены.<br>
-        Связаться с администрацией: <a href="mailto:{adm_mail}">{adm_mail}</a><br>
-        Дизайн и разработка: <a href="http://vk.com/johny_cat">Johny_Cat</a> (<a href="http://jcat.tk/">JCat.tk</a>)
-      </div>
-      <div class="right" style="text-align: right;">
-        counters<br>
-        <span>Работает на движке JRE v{version}</span>
-      </div>
-    </div>
-    </footer>
-    <!-- Footer End -->
 </body>
 </html>

@@ -15,7 +15,8 @@
  }
  include(ENGINE_DIR . '/data/db_config.php');
  include(ENGINE_DIR . '/classes/db_connect.php');
- include ( ENGINE_DIR . '/admin/head.html');
+ include(ENGINE_DIR . '/classes/url.php');
+ include(ENGINE_DIR . '/admin/head.html');
  
  if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
     $colored = true;
@@ -26,7 +27,7 @@
     else {$cur_page = 1;}
     $limit_from = ($cur_page - 1) * 25;
     //Выполняем запрос к БД с последующим выводом новостей
-    $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM jre_news ORDER BY date DESC LIMIT :limit_from,25');
+    $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM `jre_news` ORDER BY `date` DESC LIMIT :limit_from,25');
     $stmt->execute(array('limit_from' => $limit_from));
     while($row = $stmt->fetch()){
         if($colored) $block = '<tr style="background-color:#fff;">';
@@ -67,18 +68,23 @@
     if(isset($_POST['submit'])){
         $order = array("\r\n", "\n", "\r");
         $replace = '<br>';
-        $text = str_replace($order,$replace,$_POST["text"]);
-        $stmt = $pdo->prepare('INSERT INTO `jre_news`(`date`, `news`, `title`) VALUES (:date,:text,:title)');
-        $stmt->execute(array('date' => time(), 'text' => $text, 'title' => $_POST['title']));
+        $news = str_replace($order,$replace,$_POST["news"]);
+        $fullnews = str_replace($order,$replace,$_POST["fullnews"]);
+        $link = str2url($_POST['title']);
+        $stmt = $pdo->prepare('INSERT INTO `jre_news` (`date`,`news`,`fullnews`,`title`,`alt_name`) VALUES (:date,:news,:fullnews,:title,:alt_name)');
+        $stmt->execute(array('date' => time(), 'news' => $news, 'fullnews' => $fullnews, 'title' => $_POST['title'], 'alt_name' => $link));
         echo 'Новость успешно добавлена';
+        echo '<br><a href="/admin.php?do=news"><button class="button" style="width:auto;">Вернутся назад</button></a>';
     }
     else {
         $content = '<h1>Добавить новость</h1>
         <form class="news" action="" method="POST">
             <span>Заголовок новости</span><br>
             <input class="input" required type="text" name="title"><br>
+            <span>Краткое описание</span><br>
+            <textarea required style="padding:10px;" class="input" name="news"></textarea>
             <span>Текст новости</span><br>
-            <textarea required style="padding:10px;" class="input" name="text"></textarea>
+            <textarea required style="padding:10px;" class="input" name="fullnews"></textarea>
             <input class="button" type="submit" value="Добавить" name="submit">
         </form>';
     }
@@ -91,13 +97,15 @@
         if(isset($_POST['submit'])){
             $order = array("\r\n", "\n", "\r");
             $replace = '<br>';
-            $text = str_replace($order,$replace,$_POST["text"]);
-            $stmt = $pdo->prepare('UPDATE `jre_news` SET `date`=:date,`news`=:text,`title`=:title WHERE `id`=:id');
-            $stmt->execute(array('date' => time(), 'text' => $text, 'title' => $_POST['title'], 'id' => $_GET['edit']));
+            $news = str_replace($order,$replace,$_POST["news"]);
+            $fullnews = str_replace($order,$replace,$_POST["fullnews"]);
+            $stmt = $pdo->prepare('UPDATE `jre_news` SET `date`=:date,`news`=:news,`fullnews`=:fullnews,`title`=:title WHERE `id`=:id');
+            $stmt->execute(array('date' => time(), 'news' => $news, 'fullnews' => $fullnews, 'title' => $_POST['title'], 'id' => $_GET['edit']));
             echo 'Новость успешно отредактирована';
+            echo '<br><a href="/admin.php?do=news"><button class="button" style="width:auto;">Вернутся назад</button></a>';
         }
         else {
-            $stmt = $pdo->prepare('SELECT * FROM jre_news WHERE id = :id');
+            $stmt = $pdo->prepare('SELECT * FROM `jre_news` WHERE `id`=:id');
             $stmt->execute(array('id' => $_GET['edit']));
             $news = $stmt->fetch();
             if (empty($news)) {
@@ -109,8 +117,10 @@
                 <form class="news" action="" method="POST">
                     <span>Заголовок новости</span><br>
                     <input class="input" required type="text" name="title" value="'.$news['title'].'"><br>
+                    <span>Краткое описание</span><br>
+                    <textarea required style="padding:10px;" class="input" name="news">'.$news['news'].'</textarea>
                     <span>Текст новости</span><br>
-                    <textarea required style="padding:10px;" class="input" name="text">'.$news['news'].'</textarea>
+                    <textarea required style="padding:10px;" class="input" name="fullnews">'.$news['fullnews'].'</textarea>
                     <input class="button" type="submit" value="Сохранить" name="submit">
                 </form>';
             }
@@ -127,9 +137,10 @@
             $stmt = $pdo->prepare('DELETE FROM `jre_news` WHERE `id`=:id');
             $stmt->execute(array('id' => $_GET['del']));
             echo 'Новость успешно удалена';
+            echo '<br><a href="/admin.php?do=news"><button class="button" style="width:auto;">Вернутся назад</button></a>';
         }
         else {
-            $stmt = $pdo->prepare('SELECT * FROM jre_news WHERE id = :id');
+            $stmt = $pdo->prepare('SELECT * FROM `jre_news` WHERE `id`=:id');
             $stmt->execute(array('id' => $_GET['del']));
             $news = $stmt->fetch();
             if (empty($news)) {
@@ -148,5 +159,5 @@
     }
  }
  echo $content;
- include ( ENGINE_DIR . '/admin/footer.html');
+ include(ENGINE_DIR . '/admin/footer.html');
 ?>

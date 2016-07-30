@@ -1,11 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Cuprum:400,400italic,700&subset=latin,cyrillic);
-
+html, body {height: 100%;}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -78px;
+}
+.push {height: 78px;}
 body {
  padding-top: 51px;
- }
-
+ background-color: #efefef;
+}
 h1, h2, h3, h4, h5, h6 ,p {margin:0px;}
-
 .nav a {
  font-family: 'Cuprum', sans-serif;
  font-size: 16px;
@@ -16,20 +22,18 @@ h1, h2, h3, h4, h5, h6 ,p {margin:0px;}
     padding: 15px 8px;
   }
 }
-.wrapper {
+.content {
  font-family: 'Cuprum', sans-serif;
  font-size: 16px;
- background-color: #efefef;
- border-bottom: 1px solid #dbdbdb;
  padding: 15px 0;
 }
 
-.wrapper h2 {
+.content h2 {
  color: #393c3d;
  font-size: 24px;
 }
 
-.wrapper p {
+.content p {
  font-size: 15px;
  margin-bottom: 4px;
 }
@@ -53,7 +57,9 @@ h1, h2, h3, h4, h5, h6 ,p {margin:0px;}
 footer {
  font-family: 'Cuprum', sans-serif;
  font-size: 16px;
- margin:5px;
+ padding: 5px 0;
+ background-color: #fff;
+ border-top: 1px solid #dbdbdb;
 }
 footer .right{text-align:right;}
 @media (max-width: 767px) {

@@ -37,7 +37,7 @@
                 $tpl -> set( "{date}", date("d/m/Y - H:i",$row["date"]) );
                 $tpl -> set( "{title}", $row["title"] );
                 $tpl -> set( "{news}", $row["news"] );
-                //$tpl -> set( "{link}", $row["link"] );
+                $tpl -> set( "{link}", '/news/'.$row["id"].'-'.$row["alt_name"] );
                 $content .= $tpl -> showmodule( "newsblock.tpl" );
             }
             if (empty($content)){
@@ -71,7 +71,6 @@
             if ($_GET['page'] > $num_pages) $error = true;
             if ($error == true)
             {
-                $page_title = 'Ошибка';
                 $content = '<div class="error-alert">
                 <b>Внимание! Обнаружена ошибка</b><br>
                 По данному адресу публикаций на сайте не найдено.
@@ -83,17 +82,17 @@
 
         case 'fullnews':
             //выполняем запрос к БД с последующим выводом новости
-            $link = $_GET['link'];
-            $stmt = $pdo->prepare('SELECT * FROM jre_news WHERE link = :link');
-            $stmt->execute(array('link' => $link));
+            $stmt = $pdo->prepare('SELECT * FROM jre_news WHERE id = :id');
+            //$stmt = $pdo->prepare('SELECT * FROM jre_news WHERE id = :id and alt_name = :alt_name');
+            $stmt->execute(array('id' => $_GET['id']));
+            //$stmt->execute(array('id' => $_GET['id'], 'alt_name' => $_GET['alt']));
             $row = $stmt->fetch();
             $tpl -> set( "{date}", date("d/m/Y - H:i",$row["date"]) );
             $tpl -> set( "{title}", $row["title"] );
-            $tpl -> set( "{fullnews}", $row["news"] );
-            //$tpl -> set( "{fullnews}", $row["fullnews"] );
+            if (!$row["fullnews"]) { $tpl -> set( "{fullnews}", $row["news"] ); }
+            else { $tpl -> set( "{fullnews}", $row["fullnews"] ); }
             $tpl -> set( "{content}", $tpl -> showmodule( "fullnews.tpl" ) );
             $page_title = $row["title"];
-            //Temporarily not working
 		break;
 
 	}

@@ -26,7 +26,11 @@
             while($row = $stmt->fetch()){
                 $tpl -> set( "{name}", $row["name"] );
                 $tpl -> set( "{description}", $row["description"] );
-                $tpl -> set( "{pic}", $row["pic"] );
+                if ($row["pic"]) {
+                    $tpl -> set( "{pic}", '/pages/images/rj/'.$row["pic"] );
+                }else {
+                    $tpl -> set( "{pic}", '/pages/images/no_image.png' );
+                }
                 $content .= $tpl -> showmodule( "rjblock.tpl" );
             }
             if (empty($content)){
