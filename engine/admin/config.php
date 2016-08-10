@@ -3,7 +3,7 @@
 =====================================
  JCat Radio Engine
 -------------------------------------
- http://jcat.tk/
+ http://radiocms.tk
 -------------------------------------
  Copyright (c) 2016 Molchanov A.I.
 =====================================
@@ -105,7 +105,7 @@
 =====================================
  JCat Radio Engine
 -------------------------------------
- http://jcat.tk/
+ http://radiocms.tk
 -------------------------------------
  Copyright (c) 2016 Molchanov A.I.
 =====================================
@@ -124,15 +124,7 @@
 'jre_version' => '".$config['jre_version']."'
 );
 ?>";
-    chmod(ENGINE_DIR . '/data/config.php', 0777);
-    $src = fopen(ENGINE_DIR . '/data/config.php', 'w') or $error = 'Ошибка: Не удалось открыть файл конфигурации<br>';
-    fwrite($src, $write) or $error = 'Ошибка: Не удалось изменить файл конфигурации<br>';
-    fclose($src);
-    if (empty($error))
-    echo 'Настройки успешно сохранены!';
-    else
-    echo $error;
-    chmod(ENGINE_DIR . '/data/config.php', 0644);
+  file_put_contents(ENGINE_DIR . '/data/config.php', $write);
 }
  include ( ENGINE_DIR . '/admin/footer.html');
 ?>
