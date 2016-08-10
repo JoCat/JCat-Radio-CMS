@@ -21,7 +21,7 @@
 	switch($show)
 	{
         case 'all':
-            $page_title = 'Наши ведущие';
+            $page_title = 'Ведущие';
             $stmt = $pdo->query('SELECT * FROM jre_rj ORDER BY id ASC');
             while($row = $stmt->fetch()){
                 $tpl -> set( "{name}", $row["name"] );

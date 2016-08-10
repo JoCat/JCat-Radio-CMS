@@ -15,6 +15,7 @@
  }
  include( ENGINE_DIR . '/data/db_config.php' );
  include( ENGINE_DIR . '/classes/db_connect.php' );
+ $page_title = 'Расписание';
  
  $stmt = $pdo->prepare('SELECT * FROM jre_schedule WHERE day = :day ORDER BY time ASC');
  $days = array(
