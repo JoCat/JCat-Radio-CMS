@@ -276,7 +276,7 @@ HTML;
 'showprog' => '5',
 'main_page' => '1',
 'reg_key' => '".$_POST['reg_key']."',
-'jre_version' => '1.0'
+'jre_version' => '1.1'
 );
 ?>";
 
@@ -318,6 +318,7 @@ HTML;
       `date` int NOT NULL DEFAULT '0',
       `title` varchar(255) NOT NULL,
       `news` text NOT NULL,
+      `fullnews` text NOT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
 
