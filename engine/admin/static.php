@@ -15,13 +15,13 @@
  }
  include(ENGINE_DIR . '/data/db_config.php');
  include(ENGINE_DIR . '/classes/db_connect.php');
- include ( ENGINE_DIR . '/admin/head.html');
+ include(ENGINE_DIR . '/admin/head.html');
  
  if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
     $colored = true;
     $content = '<table class="news-table" cellspacing="0">';
     $content .= '<tr><th>Адрес</th><th>Описание</th><th colspan="2"><a href="/admin.php?do=static&add">Добавить страницу</a></th></tr>';
-    //Получаем номер страницы (значение лимита 25(кол-во ведущих на 1 страницу))
+    //Получаем номер страницы (значение лимита 25(кол-во страниц на 1 страницу))
     if (isset($_GET['page']) && $_GET['page'] >= 1){$cur_page = $_GET['page'];}
     else {$cur_page = 1;}
     $limit_from = ($cur_page - 1) * 25;

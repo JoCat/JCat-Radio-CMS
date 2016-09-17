@@ -276,7 +276,7 @@ HTML;
 'showprog' => '5',
 'main_page' => '1',
 'reg_key' => '".$_POST['reg_key']."',
-'jre_version' => '1.1'
+'jre_version' => '1.2'
 );
 ?>";
 
@@ -368,6 +368,24 @@ HTML;
       `link` varchar(255) NOT NULL,
       `title` varchar(255) NOT NULL,
       `content` text NOT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
+
+    $table[] = "DROP TABLE IF EXISTS `jre_static`";
+    $table[] = "CREATE TABLE IF NOT EXISTS `jre_static` (
+      `id` int NOT NULL AUTO_INCREMENT,
+      `link` varchar(255) NOT NULL,
+      `title` varchar(255) NOT NULL,
+      `content` text NOT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
+
+    $table[] = "DROP TABLE IF EXISTS `jre_widgets`";
+    $table[] = "CREATE TABLE IF NOT EXISTS `jre_widgets` (
+      `id` smallint(6) NOT NULL AUTO_INCREMENT,
+      `link` varchar(255) NOT NULL,
+      `name` varchar(128) NOT NULL,
+      `text` text NOT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
 

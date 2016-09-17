@@ -91,7 +91,7 @@ global $header, $footer;
 echo <<<HTML
     <h2>{$title}</h2>
     <div>{$text}</div>
-	<button {$back} class="btn">Продолжить</button>
+    <button {$back} class="btn">Продолжить</button>
 HTML;
   echo $footer;
   exit();
@@ -120,7 +120,7 @@ echo <<<HTML
     </script>
   <h2>Лицензионное соглашение</h2>
   <div>
-		Пожалуйста, внимательно прочитайте и примите пользовательское соглашение по использованию програмного обеспечения JCat Radio Engine.<br><br>
+        Пожалуйста, внимательно прочитайте и примите пользовательское соглашение по использованию програмного обеспечения JCat Radio Engine.<br><br>
         <div class="eula">
             <h3>Пользовательское лицензионное соглашение на использование програмного обеспечения "JCat Radio Engine"</h3>
             <p style="color:red;">Уважаемый Пользователь! Перед началом установки, копирования либо иного использования програмного обеспечения внимательно ознакомьтесь с условиями его использования, содержащимися в настоящем Соглашении. Обновление, запуск или иное начало использования програмного обеспечения означает надлежащее заключение настоящего Соглашения и Ваше полное согласие со всеми его условиями. Если Вы не согласны безоговорочно принять условия настоящего Соглашения, Вы не имеете права устанавливать и использовать програмное обеспечение и должны удалить все его компоненты со своего компьютера.</p>
@@ -131,7 +131,7 @@ echo <<<HTML
             <p>2. Запрещается сублицензирование и/или продажа копий Программного Обеспечения.</p>
             <p>ДАННОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ПРЕДОСТАВЛЯЕТСЯ «КАК ЕСТЬ», БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, ЯВНО ВЫРАЖЕННЫХ ИЛИ ПОДРАЗУМЕВАЕМЫХ, ВКЛЮЧАЯ ГАРАНТИИ ТОВАРНОЙ ПРИГОДНОСТИ, СООТВЕТСТВИЯ ПО ЕГО КОНКРЕТНОМУ НАЗНАЧЕНИЮ И ОТСУТСТВИЯ НАРУШЕНИЙ, НО НЕ ОГРАНИЧИВАЯСЬ ИМИ. НИ В КАКОМ СЛУЧАЕ АВТОРЫ ИЛИ ПРАВООБЛАДАТЕЛИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ПО КАКИМ-ЛИБО ИСКАМ, ЗА УЩЕРБ ИЛИ ПО ИНЫМ ТРЕБОВАНИЯМ, В ТОМ ЧИСЛЕ, ПРИ ДЕЙСТВИИ КОНТРАКТА, ДЕЛИКТЕ ИЛИ ИНОЙ СИТУАЦИИ, ВОЗНИКШИМ ИЗ-ЗА ИСПОЛЬЗОВАНИЯ ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ ИЛИ ИНЫХ ДЕЙСТВИЙ С ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ.</p>
         </div>
-		<br>
+        <br>
         <input type="checkbox" name="eula" id="eula" class="icheck">
         <label for="eula"> Я принимаю данное соглашение</label>
   </div>
@@ -202,7 +202,7 @@ HTML;
 'showprog' => '".$config['showprog']."',
 'main_page' => '".$config['main_page']."',
 'reg_key' => '".$config['reg_key']."',
-'jre_version' => '1.1'
+'jre_version' => '1.2'
 );
 ?>";
     chmod(ENGINE_DIR . '/data/config.php', 0777);
@@ -212,7 +212,14 @@ HTML;
     chmod(ENGINE_DIR . '/data/config.php', 0644);
 
     $table = array();
-    $table[] = "ALTER TABLE `jre_news` ADD `fullnews` TEXT NOT NULL ;";
+    $table[] = "DROP TABLE IF EXISTS `jre_widgets`";
+    $table[] = "CREATE TABLE IF NOT EXISTS `jre_widgets` (
+      `id` smallint(6) NOT NULL AUTO_INCREMENT,
+      `link` varchar(255) NOT NULL,
+      `name` varchar(128) NOT NULL,
+      `text` text NOT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
 
     include( ENGINE_DIR . '/data/db_config.php' );
     include( ENGINE_DIR . '/classes/db_connect.php' );
@@ -238,10 +245,10 @@ HTML;
 }
 else {
   include ( ENGINE_DIR.'/data/config.php' );
-	if ($config['jre_version'] == '1.1') {
-		alert( "Обновление скрипта заблокировано", "Внимание, на сервере установлена последняя версия JCat Radio Engine." );
-		die ();
-	}
+    if ($config['jre_version'] == '1.2') {
+        alert( "Обновление скрипта заблокировано", "Внимание, на сервере установлена последняя версия JCat Radio Engine." );
+        die ();
+    }
 $_SESSION['jre_install'] = true;
 echo $header;
 echo <<<HTML

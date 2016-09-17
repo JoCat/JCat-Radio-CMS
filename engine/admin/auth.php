@@ -53,7 +53,7 @@
 			//Получаем данные из таблицы
 			if(md5(md5($_POST['pass']).$rows[0]['salt']) == $rows[0]['pass'])
 			{
-                $_SESSION['user'] = true;
+        $_SESSION['user'] = true;
 				//Сбрасываем параметры
 				header('Location:http://'. $_SERVER['HTTP_HOST'] .'/admin.php');
 				exit;

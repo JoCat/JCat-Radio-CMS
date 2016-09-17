@@ -15,7 +15,7 @@
  }
  include(ENGINE_DIR . '/data/db_config.php');
  include(ENGINE_DIR . '/classes/db_connect.php');
- include ( ENGINE_DIR . '/admin/head.html');
+ include(ENGINE_DIR . '/admin/head.html');
  
  if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
     $colored = true;
