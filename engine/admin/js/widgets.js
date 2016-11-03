@@ -28,4 +28,17 @@ $(document).ready(function() {
             }
         );
     });
+
+    $('#form').on( "submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/admin.php?do=config",
+            data: $('#form').serialize(),
+            success: function(data){
+                alert(data);
+            }
+        });
+    });
 });
+

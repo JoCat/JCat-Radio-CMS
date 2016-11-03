@@ -18,8 +18,8 @@
  include( ENGINE_DIR . '/classes/db_connect.php' );
 
  $show = isset($_GET['show'])  ? $_GET['show'] : false;
-	switch($show)
-	{
+    switch($show)
+    {
         case 'all':
             $page_title = 'Ведущие';
             $stmt = $pdo->query('SELECT * FROM jre_rj ORDER BY id ASC');
@@ -40,15 +40,14 @@
                 </div>';
             }
             $tpl -> set( "{content}", $content );
-		break;
+            break;
+
         /*
         case 'rj':
             $page_title = $row["name"];
             //Temporarily not working
             $tpl -> set( "{content}", $tpl -> showmodule( "rjpage.tpl" ) );
-		break;
+        break;
         */
-	}
-    
- $pdo = null;
+    }
 ?>

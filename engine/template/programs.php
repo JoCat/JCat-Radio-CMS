@@ -18,15 +18,14 @@
  include( ENGINE_DIR . '/classes/db_connect.php' );
 
  $show = isset($_GET['show'])  ? $_GET['show'] : false;
-	switch($show)
-	{
+    switch($show)
+    {
         case 'all':
             $page_title = 'Программы';
             $per_page = $config['showprog'];
             
             //получаем номер страницы и значение для лимита
-            if (isset($_GET['page']) && $_GET['page'] >= 1){$cur_page = $_GET['page'];}
-            else {$cur_page = 1;}
+            (isset($_GET['page']) && $_GET['page'] >= 1) ? $cur_page = $_GET['page'] : $cur_page = 1;
             $limit_from = ($cur_page - 1) * $per_page;
             
             //выполняем запрос к БД с последующим выводом новостей
@@ -80,14 +79,14 @@
                 </div>';
             }
             $tpl -> set( "{content}", $content );
-		break;
-        
+            break;
+
+        /*
         case 'programs':
             $page_title = $row["name"];
             //Temporarily not working
             $tpl -> set( "{content}", $tpl -> showmodule( "fullprog.tpl" ) );
-		break;
-	}
-    
- $pdo = null;
+            break;
+        */
+    }
 ?>

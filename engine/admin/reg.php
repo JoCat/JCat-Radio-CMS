@@ -204,22 +204,23 @@
     <div class="form" style="height:455px;">
         <div class="header">Регистрация</div>
         <form action="" method="POST">
-        Логин:
-        <input class="input" required placeholder="Введите логин" type="text" name="login">
-        Пароль:
-        <input class="input" required placeholder="Введите пароль" type="password" maxlength="32" name="pass">
-        Повторите пароль:
-        <input class="input" required placeholder="Повторите пароль" type="password" maxlength="32" name="pass2">
-        E-mail:
-        <input class="input" required placeholder="Введите E-Mail" type="text" name="email">
-        Ключ защиты:
-        <input class="input" required placeholder="Введите ключ защиты" type="text" name="key">
-        <input class="button" type="submit" value="Отправить" name="submit">
-        <div style="float:left;margin:3px 10px;">
-            <a class="lostpassword" href="/admin.php">Авторизация</a><br>
-            <a class="lostpassword" href="/admin.php?do=lostpassword">Забыли пароль?</a>
-        </div>
-        <div style="clear:both;"></div>
+            Логин:
+            <input class="input" required placeholder="Введите логин" type="text" name="login">
+            Пароль:
+            <input class="input" required placeholder="Введите пароль" type="password" maxlength="32" name="pass">
+            Повторите пароль:
+            <input class="input" required placeholder="Повторите пароль" type="password" maxlength="32" name="pass2">
+            E-mail:
+            <input class="input" required placeholder="Введите E-Mail" type="text" name="email">
+            Ключ защиты:
+            <input class="input" required placeholder="Введите ключ защиты" type="text" name="key">
+            <input class="button" type="submit" value="Отправить" name="submit">
+            <div style="float:left;margin:3px 10px;">
+                <a class="lostpassword" href="/admin.php">Авторизация</a><br>
+                <a class="lostpassword" href="/admin.php?do=lostpassword">Забыли пароль?</a>
+            </div>
+            <div style="clear:both;"></div>
+        </form>
     </div>
   </body>
 </html>

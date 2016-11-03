@@ -24,10 +24,6 @@ RewriteRule ^programs/([0-9]+)/$ index.php?do=programs&show=all&page=$1 [L]
 #Вывод расписания
 RewriteRule ^schedule$ index.php?do=schedule [L]
 
-#Альтернативный вывод расписания - Убран по просьбе заказчика (но возможна реализация)
-#RewriteRule ^schedule$ index.php?do=schedule&show=all [L]
-#RewriteRule ^schedule/([a-z]+)$ index.php?do=schedule&show=day&day=$1 [L]
-
 #Вывод статических страниц
 RewriteRule ^page/([a-z0-9_-]+)$ index.php?do=static&link=$1 [L]
 

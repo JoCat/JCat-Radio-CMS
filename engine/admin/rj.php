@@ -48,7 +48,7 @@
     if ($num_pages >= 2){
         //Выводим навигацию по страницам
         $page = 0;
-        while ($page++ < $num_pages){ 
+        while ($page++ < $num_pages){
             if ($page == $cur_page)
                 $link .= '<span><b>'.$page.'</b></span>';
             elseif ($page == 1)

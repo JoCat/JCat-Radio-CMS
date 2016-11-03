@@ -41,7 +41,7 @@
     }
     if (!empty ($blocks))
         $content .= '<div class="day-block">'. $day . $blocks .'</div>';
-    $div = null; $blocks = null;
+    unset($div, $blocks);
  }
  if (empty ($content)){
     $content = '<div class="error-alert">
@@ -50,5 +50,4 @@
     </div>';
  }
  $tpl -> set( "{content}", $content );
- $pdo = null;
 ?>

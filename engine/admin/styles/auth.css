@@ -63,3 +63,12 @@ form {
   color: #888;
 }
 .lostpassword:hover {color: #000;}
+
+/*Восстановление пароля*/
+.input.disabled {
+  cursor: not-allowed;
+}
+.button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

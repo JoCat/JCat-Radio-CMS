@@ -27,27 +27,13 @@
         break;
 
         case 'config':
-            require_once ( ENGINE_DIR . '/admin/config.php');
-        break;
-
         case 'news':
-            require_once ( ENGINE_DIR . '/admin/news.php');
-        break;
-
         case 'rj':
-            require_once ( ENGINE_DIR . '/admin/rj.php');
-        break;
-
         case 'programs':
-            require_once ( ENGINE_DIR . '/admin/programs.php');
-        break;
-
         case 'schedule':
-            require_once ( ENGINE_DIR . '/admin/schedule.php');
-        break;
-
         case 'static':
-            require_once ( ENGINE_DIR . '/admin/static.php');
+        case 'widgets':
+            require_once ( ENGINE_DIR . '/admin/'.$do.'.php');
         break;
 
         default:
@@ -72,5 +58,5 @@
     }
  }
 
- echo "\n<!-- Powered by JRE " . $config['jre_version'] . " -->\r\n";
+ echo "<!-- Powered by JRE " . $config['jre_version'] . " -->";
 ?>

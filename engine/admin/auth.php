@@ -71,14 +71,15 @@
     <div class="form" style="height:244px;">
         <div class="header">Панель управления<br>JCat Radio Engine</div>
         <form action="" method="POST">
-        <input class="input" required placeholder="Логин" type="text" size="30" name="login">
-        <input class="input" required placeholder="Пароль" type="password" size="30" maxlength="20" name="pass">
-        <input class="button" type="submit" value="Войти" name="submit">
-        <div style="float:left;margin:3px 10px;">
-            <a class="lostpassword" href="/admin.php?do=reg">Регистрация</a><br>
-            <a class="lostpassword" href="/admin.php?do=lostpassword">Забыли пароль?</a>
-        </div>
-        <div style="clear:both;"></div>
+            <input class="input" required placeholder="Логин" type="text" size="30" name="login">
+            <input class="input" required placeholder="Пароль" type="password" size="30" maxlength="20" name="pass">
+            <input class="button" type="submit" value="Войти" name="submit">
+            <div style="float:left;margin:3px 10px;">
+                <a class="lostpassword" href="/admin.php?do=reg">Регистрация</a><br>
+                <a class="lostpassword" href="/admin.php?do=lostpassword">Забыли пароль?</a>
+            </div>
+            <div style="clear:both;"></div>
+        </form>
     </div>
   </body>
 </html>

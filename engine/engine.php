@@ -28,27 +28,12 @@
 		break;
 
         case 'listen':
-            require_once ( ENGINE_DIR . '/template/listen.php');
-		break;
-
         case 'news':
-            require_once ( ENGINE_DIR . '/template/news.php');
-		break;
-
         case 'rj':
-            require_once ( ENGINE_DIR . '/template/rj.php');
-		break;
-
         case 'programs':
-            require_once ( ENGINE_DIR . '/template/programs.php');
-		break;
-
         case 'schedule':
-            require_once ( ENGINE_DIR . '/template/schedule.php');
-		break;
-
         case 'static':
-            require_once ( ENGINE_DIR . '/template/static.php');
+            require_once ( ENGINE_DIR . '/template/'.$do.'.php');
 		break;
 	}
 
@@ -67,5 +52,5 @@
     $tpl -> set( "{adm_mail}", $config['admin_mail'] );
     $tpl -> set( "{version}", $config['jre_version'] );
     $tpl -> showtemplate('/main.tpl');
-    echo "\n<!-- Powered by JRE " . $config['jre_version'] . " -->\r\n";
+    echo "<!-- Powered by JRE " . $config['jre_version'] . " -->";
 ?>
