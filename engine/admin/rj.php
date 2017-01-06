@@ -10,14 +10,13 @@
  Управление ведущими
 =====================================
 */
- if (!defined('JRE_KEY')) {
-    die("Hacking attempt!");
- }
- include(ENGINE_DIR . '/data/db_config.php');
- include(ENGINE_DIR . '/classes/db_connect.php');
- include(ENGINE_DIR . '/admin/head.html');
- 
- if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
+if (!defined('JRE_KEY')) die("Hacking attempt!");
+include(ENGINE_DIR . '/data/db_config.php');
+include(ENGINE_DIR . '/classes/db_connect.php');
+include(ENGINE_DIR . '/classes/pagination.php');
+include(ENGINE_DIR . '/admin/head.html');
+
+if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
     $colored = true;
     $content = '<table class="news-table" cellspacing="0">';
     $content .= '<tr><th>Ник</th><th>Описание</th><th colspan="2"><a href="/admin.php?do=rj&add">Добавить ведущего</a></th></tr>';
@@ -29,40 +28,24 @@
     $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM jre_rj ORDER BY id DESC LIMIT :limit_from,10');
     $stmt->execute(array('limit_from' => $limit_from));
     while($row = $stmt->fetch()){
-        if($colored) $block = '<tr style="background-color:#fff;">';
-        else $block = '<tr>';
-        $block .= '<td>'.(iconv_strlen($row["name"],'utf-8')>25 ? (iconv_substr($row["name"],0,25,'utf-8')."...") : $row["name"]).'</td>';
-        $block .= '<td style="text-align:left;">'.(iconv_strlen($row["description"],'utf-8')>100 ? (iconv_substr($row["description"],0,100,'utf-8')."...") : $row["description"]).'</td>';
-        $block .= '<td><a href="/admin.php?do=rj&edit='.$row["id"].'">Редактировать</a></td>';
-        $block .= '<td><a href="/admin.php?do=rj&del='.$row["id"].'">Удалить</a></td>';
-        $block .= '</tr>';
-        $content .= $block;
+        $content .= ($colored) ? '<tr style="background-color:#fff;">' : '<tr>';
+        $content .= '<td>'.(iconv_strlen($row["name"],'utf-8')>25 ? (iconv_substr($row["name"],0,25,'utf-8')."...") : $row["name"]).'</td>
+        <td style="text-align:left;">'.(iconv_strlen($row["description"],'utf-8')>100 ? (iconv_substr($row["description"],0,100,'utf-8')."...") : $row["description"]).'</td>
+        <td><a href="/admin.php?do=rj&edit='.$row["id"].'">Редактировать</a></td>
+        <td><a href="/admin.php?do=rj&del='.$row["id"].'">Удалить</a></td>
+        </tr>';
         $colored = !$colored;
     }
     $content .= '</table>';
     //Узнаем общее количество страниц и заполняем массив со ссылками
     $stmt = $pdo->query('SELECT FOUND_ROWS()');
     $rows = $stmt->fetchColumn();
-    $num_pages = ceil($rows / 10);
-
-    if ($num_pages >= 2){
-        //Выводим навигацию по страницам
-        $page = 0;
-        while ($page++ < $num_pages){
-            if ($page == $cur_page)
-                $link .= '<span><b>'.$page.'</b></span>';
-            elseif ($page == 1)
-                $link .= '<span><a href="/admin.php?do=rj">1</a></span>';
-            else
-                $link .= '<span><a href="/admin.php?do=rj&page='.$page.'/">'.$page.'</a></span>';
-        }
-        $content .= '<div class="navigation">'.$link.'</div>';
-    }
+    $content .= Pagination::getPagination('rj', $rows, 10, $cur_page);
     //Проверяем 'пустые' страницы и выдаём оповещение
-    if ($_GET['page'] > $num_pages) $error = true;
-    if ($error == true) $content = 'Ошибка: Ведущих не найдено';
- }
- if (isset($_GET['add'])){
+    if (isset($_GET['page']) && $_GET['page'] > $num_pages) $error = true;
+    if (isset($error) && $error == true) $content = 'Ошибка: Ведущих не найдено';
+}
+if (isset($_GET['add'])){
     if(isset($_POST['submit'])){
         $order = array("\r\n", "\n", "\r");
         $replace = '<br>';
@@ -83,8 +66,8 @@
             <input class="button" type="submit" value="Добавить" name="submit">
         </form>';
     }
- }
- if (isset($_GET['edit'])){
+}
+if (isset($_GET['edit'])){
     if (empty($_GET['edit'])){
         echo 'Ошибка: Не выбран ведущий';
     }
@@ -120,8 +103,8 @@
 
         }
     }
- }
- if (isset($_GET['del'])) {
+}
+if (isset($_GET['del'])) {
     if (empty($_GET['del'])){
         echo 'Ошибка: Не выбран ведущий';
     }
@@ -149,7 +132,7 @@
             }
         }
     }
- }
- echo $content;
- include ( ENGINE_DIR . '/admin/footer.html');
+}
+echo $content;
+include(ENGINE_DIR . '/admin/footer.html');
 ?>

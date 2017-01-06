@@ -10,14 +10,11 @@
  Вывод программ
 =====================================
 */
- if (! defined ('JRE_KEY')) {
-    die ( "Hacking attempt!" );
- }
+if (! defined ('JRE_KEY')) ("Hacking attempt!");
+include( ENGINE_DIR . '/data/db_config.php' );
+include( ENGINE_DIR . '/classes/db_connect.php' );
 
- include( ENGINE_DIR . '/data/db_config.php' );
- include( ENGINE_DIR . '/classes/db_connect.php' );
-
- $show = isset($_GET['show'])  ? $_GET['show'] : false;
+$show = isset($_GET['show'])  ? $_GET['show'] : false;
     switch($show)
     {
         case 'all':

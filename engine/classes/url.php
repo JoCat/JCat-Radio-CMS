@@ -10,15 +10,13 @@
  Класс генерации URL
 =====================================
 */
-if (! defined ('JRE_KEY')) {
-    die ( "Hacking attempt!" );
-}
-function str2url($string)
+if (!defined('JRE_KEY')) die("Hacking attempt!");
+function str2url($str)
 {
     // Перевод в нижний регистр
-    $str = strtolower($string);
+    $str = mb_strtolower($str, 'UTF-8');
     // Словарь замены
-    $converter = array(
+    $converter = [
         'а' => 'a',   'б' => 'b',   'в' => 'v',
         'г' => 'g',   'д' => 'd',   'е' => 'e',
         'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
@@ -30,13 +28,8 @@ function str2url($string)
         'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
         'ь' => '',    'ы' => 'i',   'ъ' => '',
         'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
-    );
+    ];
     $str = strtr($str, $converter);
-    
-    // заменям все ненужное нам на "-"
     $str = preg_replace('~[^-a-z0-9_]+~u', '-', $str);
-    // удаляем начальные и конечные '-'
-    $string = trim($str, "-");
-    return $string;
+    return trim($str, "-");
 }
-?>

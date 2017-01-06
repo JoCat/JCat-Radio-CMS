@@ -10,10 +10,8 @@
  Класс шаблонизатора
 =====================================
 */
-if (! defined ('JRE_KEY')) {
-    die ( "Hacking attempt!" );
-}
-class jre_tpl
+if (!defined('JRE_KEY')) die("Hacking attempt!");
+class Template
 {
     private $vars = array();
     public $template;
@@ -45,5 +43,4 @@ class jre_tpl
         echo $tpl;
     }
 }
-$tpl = new jre_tpl;
-?>
+$tpl = new Template;

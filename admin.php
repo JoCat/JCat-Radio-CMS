@@ -11,10 +11,10 @@
 =====================================
 */
 
-@error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
-@ini_set ( 'display_errors', true );
-@ini_set ( 'html_errors', false );
-@ini_set ( 'error_reporting', E_ALL ^ E_WARNING ^ E_NOTICE );
+/* Debug */
+@error_reporting (E_ALL);
+@ini_set ('display_errors', true);
+// @error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
 
 define ( 'JRE_KEY', true );
 define ( 'ROOT_DIR', dirname ( __FILE__ ) );

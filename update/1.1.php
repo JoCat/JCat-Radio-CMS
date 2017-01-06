@@ -98,9 +98,9 @@ HTML;
 }
 
 if($_REQUEST['action'] == "eula") {
-    if ( !$_SESSION['jre_install'] ) alert( "Ошибка", "Обновление скрипта было начато не с начала. Вернитесь на начальную страницу обновления скрипта.", true );
+    if ( !$_SESSION['jre_update '] ) alert( "Ошибка", "Обновление скрипта было начато не с начала. Вернитесь на начальную страницу обновления скрипта.", true );
     echo $header;
-    
+
 echo <<<HTML
 <form id="check-eula" method="get" action="">
     <input type=hidden name=action value="function_check">
@@ -139,7 +139,7 @@ echo <<<HTML
 </form>
 HTML;
 } elseif($_REQUEST['action'] == "function_check") {
-    if ( !$_SESSION['jre_install'] ) alert( "Ошибка", "Обновление скрипта было начато не с начала. Вернитесь на начальную страницу обновления скрипта.", true );
+    if ( !$_SESSION['jre_update '] ) alert( "Ошибка", "Обновление скрипта было начато не с начала. Вернитесь на начальную страницу обновления скрипта.", true );
     if ( $_REQUEST['eula'] != 'on') alert( "Ошибка", "Вы не согласились с пользовательским соглашением. Вернитесь назад для согласия с пользовательским соглашением.<br>Если Вы не согласны безоговорочно принять условия пользовательского соглашения, Вы не имеете права устанавливать и использовать програмное обеспечение и должны удалить все его компоненты со своего компьютера.", false );
     echo $header;
     
@@ -154,7 +154,7 @@ HTML;
     </tr>
 HTML;
     
-    $status = phpversion() < '5.3' ? '<font color=red><b>Нет</b></font>' : '<font color=green><b>Да</b></font>';
+    $status = version_compare(PHP_VERSION, '5.3', '>=') ? '<font color=green><b>Да</b></font>' : '<font color=red><b>Нет</b></font>' ;
 
    echo "<tr>
          <td>Версия PHP 5.3 и выше</td>
@@ -178,7 +178,7 @@ echo <<<HTML
 </form>
 HTML;
 } elseif($_REQUEST['action'] == "update") {
-    if ( !$_SESSION['jre_install'] ) alert( "Ошибка", "Обновление скрипта было начато не с начала. Вернитесь на начальную страницу обновления скрипта.", true );
+    if ( !$_SESSION['jre_update '] ) alert( "Ошибка", "Обновление скрипта было начато не с начала. Вернитесь на начальную страницу обновления скрипта.", true );
 
     include ( ENGINE_DIR.'/data/config.php' );
     $write = "<?php
@@ -205,11 +205,7 @@ HTML;
 'jre_version' => '1.1'
 );
 ?>";
-    chmod(ENGINE_DIR . '/data/config.php', 0777);
-    $src = fopen(ENGINE_DIR . '/data/config.php', 'w');
-    fwrite($src, $write);
-    fclose($src);
-    chmod(ENGINE_DIR . '/data/config.php', 0644);
+    file_put_contents(ENGINE_DIR . '/data/config.php', $write);
 
     $table = array();
     $table[] = "ALTER TABLE `jre_news` ADD `fullnews` TEXT NOT NULL ;";
@@ -238,11 +234,11 @@ HTML;
 }
 else {
   include ( ENGINE_DIR.'/data/config.php' );
-	if ($config['jre_version'] == '1.1') {
+	if (version_compare($config['jre_version'], '1.1', '>=')) {
 		alert( "Обновление скрипта заблокировано", "Внимание, на сервере установлена последняя версия JCat Radio Engine." );
 		die ();
 	}
-$_SESSION['jre_install'] = true;
+$_SESSION['jre_update'] = true;
 echo $header;
 echo <<<HTML
 <form method="get" action="">

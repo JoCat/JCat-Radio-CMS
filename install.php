@@ -153,11 +153,11 @@ HTML;
     <td>Текущее значение</td>
     </tr>
 HTML;
-    
-    $status = phpversion() < '5.3' ? '<font color=red><b>Нет</b></font>' : '<font color=green><b>Да</b></font>';
+
+    $status = version_compare(PHP_VERSION, '5.4', '>=') ? '<font color=green><b>Да</b></font>' : '<font color=red><b>Нет</b></font>' ;
 
    echo "<tr>
-         <td>Версия PHP 5.3 и выше</td>
+         <td>Версия PHP 5.4 и выше</td>
          <td colspan=2>$status</td>
          </tr>";
 
@@ -165,6 +165,13 @@ HTML;
 
    echo "<tr>
          <td>Поддержка PDO</td>
+         <td colspan=2>$status</td>
+         </tr>";
+
+    $status = defined('PDO::MYSQL_ATTR_INIT_COMMAND') ? '<font color=green><b>Да</b></font>' : '<font color=red><b>Нет</b></font>';
+
+   echo "<tr>
+         <td>Драйвер PDO_MYSQL</td>
          <td colspan=2>$status</td>
          </tr>";
 
@@ -256,18 +263,7 @@ HTML;
     //Солим пароль
     $reg_password = md5(md5($_POST['reg_password1']).$salt);
     $config = "<?php
-/*
-=====================================
- JCat Radio Engine
--------------------------------------
- http://radiocms.tk
--------------------------------------
- Copyright (c) 2016 Molchanov A.I.
-=====================================
- Конфигурационный файл
-=====================================
-*/
-\$config = array (
+\$config = [
 'title' => 'JRE Template - JCat Radio Engine',
 'description' => 'Test site for JRE',
 'keywords' => 'JRE, Default Template, Radio Engine',
@@ -276,41 +272,22 @@ HTML;
 'showprog' => '5',
 'main_page' => '1',
 'reg_key' => '".$_POST['reg_key']."',
-'jre_version' => '1.2'
-);
+'jre_version' => '1.2.1'
+];
 ?>";
-
     $db_config = "<?php
-/*
-=====================================
- JCat Radio Engine
--------------------------------------
- http://radiocms.tk
--------------------------------------
- Copyright (c) 2016 Molchanov A.I.
-=====================================
- Конфигурационный файл базы данных
-=====================================
-*/
-\$db_config = array (
+\$db_config = [
 'host' => '".$_POST['dbhost']."',
 'user' => '".$_POST['dbuser']."',
 'password' => '".$_POST['dbpasswd']."',
 'database' => '".$_POST['dbname']."'
-);
+];
 ?>";
-    mkdir(ENGINE_DIR . '/data', 0644);
-    $src = fopen(ENGINE_DIR . '/data/config.php', 'w');
-    fwrite($src, $config);
-    fclose($src);
-    @chmod(ENGINE_DIR . '/data/config.php', 0644);
+    mkdir(ENGINE_DIR . '/data', 0755);
+    file_put_contents(ENGINE_DIR . '/data/config.php', $config);
+    file_put_contents(ENGINE_DIR . '/data/db_config.php', $db_config);
     
-    $src = fopen(ENGINE_DIR . '/data/db_config.php', 'w');
-    fwrite($src, $db_config);
-    fclose($src);
-    @chmod(ENGINE_DIR . '/data/db_config.php', 0644);
-    
-    $table = array();
+    $table = [];
 
     $table[] = "DROP TABLE IF EXISTS `jre_news`";
     $table[] = "CREATE TABLE IF NOT EXISTS `jre_news` (
@@ -397,7 +374,7 @@ HTML;
     }
     unset($value);
 
-    $sql = 'INSERT INTO `jre_users` VALUES( "", :login, :pass, :email, :salt, "'. md5($salt) .'", 1)';
+    $sql = 'INSERT INTO `jre_users` VALUES("", :login, :pass, :email, :salt, "'. md5($salt) .'", 1)';
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':login', $_POST['reg_username'], PDO::PARAM_STR);
     $stmt->bindValue(':email', $_POST['reg_email'], PDO::PARAM_STR);
@@ -409,7 +386,7 @@ HTML;
     echo <<<HTML
     <h2>Установка завершена</h2>
     <div>
-    Поздравляю Вас, JCat Radio Engine был успешно установлен на Ваш сервер. Теперь Вы можете зайти на главную <a href="index.php">страницу вашего сайта</a>  и посмотреть возможности скрипта.
+    Поздравляю Вас, JCat Radio Engine был успешно установлен на Ваш сервер. Теперь Вы можете зайти на <a href="index.php">главную страницу вашего сайта</a>  и посмотреть возможности скрипта.
     Также Вы можете <a href="admin.php">зайти в панель управления</a> JCat Radio Engine и изменить другие настройки системы, добавить парочку новостей, программ, ведущих и т.д.
     <br><br>
     <font color="red">Внимание: при установке скрипта создается структура базы данных, создается аккаунт администратора, а также прописываются основные настройки системы, поэтому после успешной установки удалите файл <b>install.php</b> во избежание повторной установки скрипта!</font>
@@ -423,7 +400,7 @@ HTML;
 else {
 	if (@file_exists(ENGINE_DIR.'/data/config.php')) {
 		alert( "Установка скрипта заблокирована", "Внимание, на сервере обнаружена уже установленная копия JCat Radio Engine. Если Вы хотите еще раз произвести установку скрипта, то Вам необходимо вручную удалить файл <b>/engine/data/config.php</b>, используя FTP протокол." );
-		die ();
+		exit();
 	}
 $_SESSION['jre_install'] = true;
 echo $header;

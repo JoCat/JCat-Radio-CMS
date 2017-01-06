@@ -10,17 +10,15 @@
  Обработчик Админпанели
 =====================================
 */
- if (! defined ('JRE_KEY')) {
-    die ( "Hacking attempt!" );
- }
+if (!defined('JRE_KEY')) die("Hacking attempt!");
+include(ENGINE_DIR . '/data/config.php');
+session_start();
 
- include ( ENGINE_DIR . '/data/config.php' );
- session_start();
-
- $do = isset($_GET['do'])  ? $_GET['do'] : false;
- if ($_SESSION['user'] == 'true'){
+$do = isset($_GET['do']) ? $_GET['do'] : false;
+if (isset($_SESSION['auth']) && $_SESSION['auth'] == 'true')
+{
     switch($do)
-	{
+    {
         case 'exit':
             session_destroy();
             header('Location:http://'. $_SERVER['HTTP_HOST']);
@@ -33,30 +31,23 @@
         case 'schedule':
         case 'static':
         case 'widgets':
-            require_once ( ENGINE_DIR . '/admin/'.$do.'.php');
+            require_once(ENGINE_DIR . '/admin/'. $do .'.php');
         break;
 
         default:
-			require_once ( ENGINE_DIR . '/admin/main.php');
-		break;
+    		require_once(ENGINE_DIR . '/admin/main.php');
+    	break;
     }
- }
-  else {
+} else {
     switch($do)
-	{
-        default:
-            require_once ( ENGINE_DIR . '/admin/auth.php');
-        break;
-
+    {
         case 'reg':
-            require_once ( ENGINE_DIR . '/admin/reg.php');
+        case 'lostpassword':
+            require_once(ENGINE_DIR . '/admin/'. $do .'.php');
         break;
 
-        case 'lostpassword':
-            require_once ( ENGINE_DIR . '/admin/lostpassword.php');
+        default:
+            require_once(ENGINE_DIR . '/admin/auth.php');
         break;
     }
- }
-
- echo "<!-- Powered by JRE " . $config['jre_version'] . " -->";
-?>
+}

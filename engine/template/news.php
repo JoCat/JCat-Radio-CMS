@@ -10,17 +10,14 @@
  Вывод новостей
 =====================================
 */
- if (! defined ('JRE_KEY')) {
-    die ( "Hacking attempt!" );
- }
+if (!defined('JRE_KEY')) die("Hacking attempt!");
+include(ENGINE_DIR . '/data/db_config.php');
+include(ENGINE_DIR . '/classes/db_connect.php');
 
- include( ENGINE_DIR . '/data/db_config.php' );
- include( ENGINE_DIR . '/classes/db_connect.php' );
-
- $show = isset($_GET['show'])  ? $_GET['show'] : false;
-    switch($show)
-    {
-        case 'shortnews':
+$show = isset($_GET['show']) ? $_GET['show'] : false;
+switch($show)
+{
+    case 'shortnews':
         //Присваиваем основные значения
         $page_title = 'Новости';
         $per_page = $config['shownews'];
@@ -34,11 +31,11 @@
         $stmt->execute(array('limit_from' => $limit_from,'per_page' => $per_page));
         while($row = $stmt->fetch())
         {
-            $tpl -> set( "{date}", date("d/m/Y - H:i",$row["date"]) );
-            $tpl -> set( "{title}", $row["title"] );
-            $tpl -> set( "{news}", $row["news"] );
-            $tpl -> set( "{link}", '/news/'.$row["id"].'-'.$row["alt_name"] );
-            $content .= $tpl -> showmodule( "newsblock.tpl" );
+            $tpl->set("{date}", date("d/m/Y - H:i",$row["date"]));
+            $tpl->set("{title}", $row["title"]);
+            $tpl->set("{news}", $row["news"]);
+            $tpl->set("{link}", '/news/'. $row["id"] .'-'. $row["alt_name"]);
+            $content .= $tpl->showmodule("newsblock.tpl");
         }
         if (empty($content))
         {
@@ -51,23 +48,25 @@
         $stmt = $pdo->query('SELECT FOUND_ROWS()');
         $rows = $stmt->fetchColumn();
         $num_pages = ceil($rows / $per_page);
-        
-        if ($num_pages >= 2){
+
+        if ($num_pages >= 2)
+        {
             //Выводим навигацию по страницам
             $page = 0;
-            while ($page++ < $num_pages){ 
+            while ($page++ < $num_pages)
+            { 
                 if ($page == $cur_page)
-                $link .= '<span><b>'.$page.'</b></span>';
+                $link .= '<span><b>'. $page .'</b></span>';
                 else
                     if ($page == 1)
                         $link .= '<span><a href="/news">1</a></span>';
                     else
                         $link .= '<span><a href="/news/'.$page.'/">'.$page.'</a></span>';
             }
-            $tpl -> set( "{navigation}", $link );
-            $content .= $tpl -> showmodule( "navigation.tpl" );
+            $tpl->set("{navigation}", $link);
+            $content .= $tpl->showmodule("navigation.tpl");
         }
-        
+
         //Проверяем 'пустые' страницы и выдаём оповещение
         if ($_GET['page'] > $num_pages) $error = true;
         if ($error == true)
@@ -77,9 +76,8 @@
             По данному адресу публикаций на сайте не найдено.
             </div>';
         }
-        
-        $tpl -> set( "{content}", $content );
-        break;
+        $tpl->set("{content}", $content);
+    break;
 
     case 'fullnews':
         //выполняем запрос к БД с последующим выводом новости
@@ -88,15 +86,14 @@
         $row = $stmt->fetch();
         if (empty($row))
         {
-           include(ROOT_DIR .'/modules/errors/404.php');
+            include(ROOT_DIR .'/modules/errors/404.php');
             exit;
         }
-        $tpl -> set( "{date}", date("d/m/Y - H:i",$row["date"]) );
-        $tpl -> set( "{title}", $row["title"] );
-        if (!$row["fullnews"]) { $tpl -> set( "{fullnews}", $row["news"] ); }
-        else { $tpl -> set( "{fullnews}", $row["fullnews"] ); }
-        $tpl -> set( "{content}", $tpl -> showmodule( "fullnews.tpl" ) );
+        $tpl->set("{date}", date("d/m/Y - H:i",$row["date"]));
+        $tpl->set("{title}", $row["title"]);
+        if (!$row["fullnews"]) $tpl->set("{fullnews}", $row["news"]);
+        else $tpl->set("{fullnews}", $row["fullnews"]);
+        $tpl->set("{content}", $tpl->showmodule("fullnews.tpl"));
         $page_title = $row["title"];
-        break;
-    }
-?>
+    break;
+}

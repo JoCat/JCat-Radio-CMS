@@ -1,65 +1,55 @@
 <?php
-/*
-==================================
-Файл с пользовательскими функциями
-==================================
-*/
- 
-  /**функция вывода ошибок
-  * @param array  $data
-  */
- function showErrorMessage($data)
- {
-	if(is_array($data))
-	{
-		foreach($data as $val)
-			$err .= '<span style="color:red;background-color:white;padding:2px;">'. $val .'</span><br>';
-	}
-	else
-		$err .= '<span style="color:red;background-color:white;padding:2px;">'. $data .'</span><br>';
-
-    return $err;
- }
- 
-  function showMessage($data)
- {
-	if(is_array($data))
-	{
-		foreach($data as $val)
-			$err .= '<span style="background-color:white;padding:2px;">'. $val .'</span><br>';
-	}
-	else
-		$err .= '<span style="background-color:white;padding:2px;">'. $data .'</span><br>';
-    return $err;
- }
- 
- 
- /**Простой генератор соли
- * @param string  $sql
+/**
+ * 
  */
- function salt()
- {
-	$salt = substr(md5(uniqid()), -8);
-	return $salt;
- }
+class Helpers
+{
+    public $msg;
 
-/** Проверка валидации email
-* @param string $email
-* return boolian
-*/
- function emailValid($email){
-  if(function_exists('filter_var')){
-    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-      return true;
-    }else{
-      return false;
+    /**
+     * Функция добавления сообщений/ошибок на вывод
+     * @param array $data
+     */
+    public function addMessage($data, $error = false)
+    {
+        $this->msg[] = '<span style="'. (($error == true) ? 'color:red;' : '') .'background-color:white;padding:2px;">'. $data .'</span><br>';
     }
-  }else{
-    if(!preg_match("/^[a-z0-9_.-]+@([a-z0-9]+\.)+[a-z]{2,6}$/i", $email)){
-      return false;
-    }else{
-      return true;
+
+    /**
+     * Функция вывода сообщений/ошибок
+     * @param array $data
+     */
+    public function showMessage()
+    {
+        if (!empty($this->msg)) {
+            foreach($this->msg as $val)
+            {
+                echo $val;
+            }
+        }
     }
-  }      
- }
-?>
+
+    /**
+     * Простой генератор соли
+     * @param string $sql
+     */
+    public function salt()
+    {
+        return substr(md5(uniqid()), -8);
+    }
+
+    /**
+     * Проверка валидации email
+     * @param string $email
+     * return boolean
+     */
+    public function emailValid($email)
+    {
+        if (function_exists('filter_var')){
+            return (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false;
+        } else {
+            return (!preg_match("/^[a-z0-9_.-]+@([a-z0-9]+\.)+[a-z]{2,6}$/i", $email)) ? false : true;
+        }      
+    }
+}
+$helpers = new Helpers;

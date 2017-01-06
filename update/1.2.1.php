@@ -153,11 +153,11 @@ HTML;
     <td>Текущее значение</td>
     </tr>
 HTML;
-    
-    $status = version_compare(PHP_VERSION, '5.3', '>=') ? '<font color=green><b>Да</b></font>' : '<font color=red><b>Нет</b></font>' ;
+
+    $status = version_compare(PHP_VERSION, '5.4', '>=') ? '<font color=green><b>Да</b></font>' : '<font color=red><b>Нет</b></font>' ;
 
    echo "<tr>
-         <td>Версия PHP 5.3 и выше</td>
+         <td>Версия PHP 5.4 и выше</td>
          <td colspan=2>$status</td>
          </tr>";
 
@@ -165,6 +165,13 @@ HTML;
 
    echo "<tr>
          <td>Поддержка PDO</td>
+         <td colspan=2>$status</td>
+         </tr>";
+
+    $status = defined('PDO::MYSQL_ATTR_INIT_COMMAND') ? '<font color=green><b>Да</b></font>' : '<font color=red><b>Нет</b></font>';
+
+   echo "<tr>
+         <td>Драйвер PDO_MYSQL</td>
          <td colspan=2>$status</td>
          </tr>";
 
@@ -182,17 +189,6 @@ HTML;
 
     include ( ENGINE_DIR.'/data/config.php' );
     $write = "<?php
-/*
-=====================================
- JCat Radio Engine
--------------------------------------
- http://jcat.tk/
--------------------------------------
- Copyright (c) 2016 Molchanov A.I.
-=====================================
- Конфигурационный файл
-=====================================
-*/
 \$config = array (
 'title' => '".$config['title']."',
 'description' => '".$config['description']."',
@@ -202,36 +198,16 @@ HTML;
 'showprog' => '".$config['showprog']."',
 'main_page' => '".$config['main_page']."',
 'reg_key' => '".$config['reg_key']."',
-'jre_version' => '1.2'
+'jre_version' => '1.2.1'
 );
 ?>";
     file_put_contents(ENGINE_DIR . '/data/config.php', $write);
-
-    $table = array();
-    $table[] = "DROP TABLE IF EXISTS `jre_widgets`";
-    $table[] = "CREATE TABLE IF NOT EXISTS `jre_widgets` (
-      `id` smallint(6) NOT NULL AUTO_INCREMENT,
-      `link` varchar(255) NOT NULL,
-      `name` varchar(128) NOT NULL,
-      `text` text NOT NULL,
-      PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
-
-    include( ENGINE_DIR . '/data/db_config.php' );
-    include( ENGINE_DIR . '/classes/db_connect.php' );
-
-    foreach($table as $value) {
-        $pdo->query($value);
-    }
-    unset($value);
 
     echo $header;
     echo <<<HTML
     <h2>Обновление завершено</h2>
     <div>
     Поздравляю Вас, JCat Radio Engine был успешно обновлён.
-    <br><br>
-    <font color="red">Внимание: при обновлении скрипта изменяется структура базы данных, поэтому после успешного обновления удалите папку <b>update</b> во избежание повторного обновления скрипта!</font>
     <br><br>
     Приятной Вам работы,<br>
     Molchanov A.I.
@@ -241,7 +217,7 @@ HTML;
 }
 else {
   include ( ENGINE_DIR.'/data/config.php' );
-    if (version_compare($config['jre_version'], '1.2', '>=')) {
+    if (version_compare($config['jre_version'], '1.2.1', '>=')) {
         alert( "Обновление скрипта заблокировано", "Внимание, на сервере установлена последняя версия JCat Radio Engine." );
         die ();
     }
@@ -255,7 +231,7 @@ echo <<<HTML
         Добро пожаловать в мастер обновления JCat Radio Engine. Данный мастер поможет Вам обновить скрипт до последней версии.<br><br>
         Прежде чем начать обновление убедитесь, что все файлы дистрибутива загружены на сервер.<br>
         Обращаем Ваше внимание на то, что JCat Radio Engine работает с ЧПУ, а для этого необходимо, чтобы был установлен модуль <b>modrewrite</b> и его использование было разрешено.<br><br>
-        <font color="red">Внимание: Перед обновлением рекомендуется создать резервную копию базы данных и всех файлов скрипта на сервере!</font><br><br>
+        <font color="red">Внимание: Перед обновлением рекомендуется создать резервную копию всех файлов скрипта на сервере!</font><br><br>
         Приятной Вам работы,<br>
         Molchanov A.I.
     </div>
