@@ -251,7 +251,7 @@ HTML;
 } elseif($_REQUEST['action'] == "install")
 {
     if ( !$_SESSION['jre_install'] ) alert( "Ошибка", "Установка скрипта была начата не с начала. Вернитесь на начальную страницу установки скрипта.", true );
-    if(!$_POST['reg_username'] or !$_POST['reg_email'] or !$_POST['reg_password1'] or !$_POST['reg_password2'] or !$_POST['dbhost'] or !$_POST['dbname'] or !$_POST['dbuser'] or !$_POST['dbpasswd'] or !$_POST['reg_key']){ alert("Ошибка!!!" ,"Заполните необходимые поля!", false); }
+    //if(!$_POST['reg_username'] or !$_POST['reg_email'] or !$_POST['reg_password1'] or !$_POST['reg_password2'] or !$_POST['dbhost'] or !$_POST['dbname'] or !$_POST['dbuser'] or !$_POST['dbpasswd'] or !$_POST['reg_key']){ alert("Ошибка!!!" ,"Заполните необходимые поля!", false); }
     if($_POST['reg_password1'] != $_POST['reg_password2']) { alert("Ошибка!!!" ,"Введённые пароли не совпадают!", false); }
 	if (preg_match("/[\||\'|\<|\>|\[|\]|\"|\!|\?|\$|\@|\#|\/|\\\|\&\~\*\{\+]/", $_POST['reg_username']))
 	{
@@ -259,7 +259,7 @@ HTML;
 	}
     include( ENGINE_DIR . '/classes/auth_functions.php' );
     //Получаем ХЕШ соли
-    $salt = salt();
+    $salt = $helpers->salt();
     //Солим пароль
     $reg_password = md5(md5($_POST['reg_password1']).$salt);
     $config = "<?php
@@ -374,7 +374,7 @@ HTML;
     }
     unset($value);
 
-    $sql = 'INSERT INTO `jre_users` VALUES("", :login, :pass, :email, :salt, "'. md5($salt) .'", 1)';
+    $sql = 'INSERT INTO `jre_users` VALUES(1, :login, :pass, :email, :salt, "'. md5($salt) .'", 1)';
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':login', $_POST['reg_username'], PDO::PARAM_STR);
     $stmt->bindValue(':email', $_POST['reg_email'], PDO::PARAM_STR);
