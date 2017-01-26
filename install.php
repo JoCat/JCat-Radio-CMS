@@ -251,7 +251,7 @@ HTML;
 } elseif($_REQUEST['action'] == "install")
 {
     if ( !$_SESSION['jre_install'] ) alert( "Ошибка", "Установка скрипта была начата не с начала. Вернитесь на начальную страницу установки скрипта.", true );
-    //if(!$_POST['reg_username'] or !$_POST['reg_email'] or !$_POST['reg_password1'] or !$_POST['reg_password2'] or !$_POST['dbhost'] or !$_POST['dbname'] or !$_POST['dbuser'] or !$_POST['dbpasswd'] or !$_POST['reg_key']){ alert("Ошибка!!!" ,"Заполните необходимые поля!", false); }
+    if(!$_POST['reg_username'] or !$_POST['reg_email'] or !$_POST['reg_password1'] or !$_POST['reg_password2'] or !$_POST['dbhost'] or !$_POST['dbname'] or !$_POST['dbuser'] or !$_POST['dbpasswd'] or !$_POST['reg_key']){ alert("Ошибка!!!" ,"Заполните необходимые поля!", false); }
     if($_POST['reg_password1'] != $_POST['reg_password2']) { alert("Ошибка!!!" ,"Введённые пароли не совпадают!", false); }
 	if (preg_match("/[\||\'|\<|\>|\[|\]|\"|\!|\?|\$|\@|\#|\/|\\\|\&\~\*\{\+]/", $_POST['reg_username']))
 	{
