@@ -4,7 +4,7 @@
 */
 class Pagination
 {
-    public static function getPagination($catalog, $rows, $per_page, $cur_page = 1)
+    public static function get($catalog, $rows, $per_page, $cur_page = 1)
     {
         $num_pages = ceil($rows/$per_page);
         if ($num_pages >= 2){
@@ -19,8 +19,10 @@ class Pagination
                     $link .= '<span><a href="/admin.php?do='.$catalog.'&page='.$page.'/">'.$page.'</a></span>';
                 }
             }
-            return '<div class="navigation">'.$link.'</div>';
+            return [
+                'content' => '<div class="navigation">'.$link.'</div>',
+                'num_pages' => $num_pages
+            ];
         }
     }
 }
-?>
