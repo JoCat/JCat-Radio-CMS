@@ -109,7 +109,6 @@ MSG;
         }
     }
 }
-$tpl->set("{messages}", $helpers->msg);
 ?>
 <div class="header">Регистрация</div>
 <form action="" method="POST">
