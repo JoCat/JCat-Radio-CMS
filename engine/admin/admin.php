@@ -30,11 +30,11 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
-              <?= $_SESSION['auth']['username'] ?>
+              <?= $user->get('username') ?>
               <span class="glyphicon glyphicon-chevron-down"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><span><?= $_SESSION['auth']['usergroup'] ?></span></li>
+                <li><span><?= $user->get('usergroup') ?></span></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/">На сайт</a></li>
                 <li><a href="#">Управление аккаунтом</a></li>

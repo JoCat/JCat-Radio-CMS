@@ -29,22 +29,21 @@
             <li><a href="/schedule">Расписание</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
-            <?php if (isset($_SESSION['auth'])): ?>
-              <?// if (is_user_authed()): ?>
-              <li class="dropdown userinfo">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
-                <span class="username"><?= $_SESSION['username'] ?></span>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="/admin.php">Админпанель</a></li>
-                  <li><a href="#">Профиль</a></li>
-                  <li><a href="#">Управление аккаунтом</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/logout">Выход</a></li>
-                </ul>
-              </li>
+            <?php if ($user->is_user_authed()): ?>
+            <li class="dropdown userinfo">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
+              <span class="username"><?= $user->get('username') ?></span>
+              <span class="glyphicon glyphicon-chevron-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/admin.php">Админпанель</a></li>
+                <li><a href="/user/<?= mb_strtolower($user->get('username')) ?>">Профиль</a></li>
+                <li><a href="#">Управление аккаунтом</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/logout">Выход</a></li>
+              </ul>
+            </li>
             <?php else: ?>
             <li><a href="/auth">Авторизация</a></li>
             <li><a href="/reg">Регистрация</a></li>

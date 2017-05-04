@@ -12,7 +12,7 @@
 */
 if (!defined ('JRE_KEY')) die ("Hacking attempt!");
 include(ENGINE_DIR . '/classes/db_connect.php');
-include(ENGINE_DIR . '/classes/auth_functions.php');
+include(ENGINE_DIR . '/classes/helpers.php');
 
 if (isset($_GET['status']) && $_GET['status'] == 'ok') $helpers->addMessage('Вы успешно зарегистрировались! Пожалуйста активируйте свой аккаунт!');
 if (isset($_GET['active']) && $_GET['active'] == 'ok')
@@ -86,7 +86,7 @@ if (isset($_POST['submit']))
   </head>
   <body>
     <p>Для активации Вашего аккаунта пройдите по ссылке: </p>
-    <a href="'. $url .'">Активация аккаунта</a>
+    <a href="$url">Активация аккаунта</a>
   </body>
 </html>
 MSG;
@@ -109,20 +109,4 @@ MSG;
         }
     }
 }
-?>
-<div class="header">Регистрация</div>
-<form action="" method="POST">
-    Логин:
-    <input required placeholder="Введите логин" type="text" name="login">
-    Пароль:
-    <input required placeholder="Введите пароль" type="password" name="pass">
-    Повторите пароль:
-    <input required placeholder="Повторите пароль" type="password" name="pass2">
-    E-mail:
-    <input required placeholder="Введите E-Mail" type="text" name="email">
-    <button type="submit" name="submit">Отправить</button>
-    <div class="links">
-        <a href="/admin.php">Авторизация</a><br>
-        <a href="/admin.php?do=lostpassword">Забыли пароль?</a>
-    </div>
-</form>
+include $template . '/reg.php';
