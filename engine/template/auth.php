@@ -31,7 +31,8 @@ if (!empty($_POST))
             if (password_verify($_POST['pass'], $row['password'])) {
                 $_SESSION['user_data'] = [
                     'username' => $row['login'],
-                    'usergroup' => $row['name']
+                    'usergroup' => $row['name'],
+                    'image' => $row['image']
                 ];
                 header('Location:http://' . $_SERVER['HTTP_HOST']);
                 exit;

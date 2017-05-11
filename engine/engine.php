@@ -15,10 +15,10 @@ include (ENGINE_DIR . '/classes/config_loader.php');
 session_start();
 ob_start();
 
-include (ENGINE_DIR . '/classes/user.php');
 $config = ConfigLoader::load('config');
 $db_config = ConfigLoader::load('db_config');
 $template = ROOT_DIR . '/template/' . $config->tpl_dir;
+include (ENGINE_DIR . '/classes/user.php');
 
 $do = isset($_GET['do']) ? $_GET['do'] : false;
 switch($do)

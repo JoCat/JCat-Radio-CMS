@@ -90,7 +90,8 @@ aside>.user-panel>.info>p {
 }
 .content {
     margin-left: 215px;
+    margin-top: 50px;
     min-height: 100%;
-    padding-top: 50px;
     background-color: #fff;
+    padding: 20px;
 }
