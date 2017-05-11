@@ -25,8 +25,8 @@ if (empty($result = $stmt->fetch())) {
         'username' => $result['login'],
         'usergroup' => $result['name'],
         'image' => empty($result['image']) ?
-            '/template/' . $config->tpl_dir . '/images/no_image.png' :
-            '/uploads/images/users/' . $data["image"]
+            '/template/' . $config->tpl_dir . '/images/no_avatar.png' :
+            '/uploads/images/users/' . $result["image"]
     ];
 }
 include $template . '/userpage.php';

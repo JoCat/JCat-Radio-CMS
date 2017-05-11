@@ -61,18 +61,23 @@ switch($_GET['show'])
         include $template . '/programs.php';
         break;
 
-/*    case 'programs':
+    case 'programs':
         $stmt = $pdo->prepare('SELECT * FROM `programs` WHERE alt_name = :alt');
         $stmt->execute(['alt' => $_GET['alt']]);
-        if (empty($data = $stmt->fetch())) {
+        if (empty($result = $stmt->fetch())) {
             include(ROOT_DIR .'/modules/errors/404.php');
             exit;
         }
-        $tpl->set('{title}', $data['title']);
-        $tpl->set('{description}', $data['description']);
-        $tpl->set('{content}', $tpl->show('fullprog'));
-        $seo_title = $data['seo_title'];
-        $seo_description = $data['seo_description'];
-        $seo_keywords = $data['seo_keywords'];
-        break;*/
+        $data = [
+            'title' => $result['title'],
+            'description' => $result['description'],
+            'image' => empty($result["image"]) ?
+                '/template/' . $config->tpl_dir . '/images/no_image.png' :
+                '/uploads/images/programs/' . $row["image"]
+        ];
+        include $template . '/fullprog.php';
+        $seo_title = $result['seo_title'];
+        $seo_description = $result['seo_description'];
+        $seo_keywords = $result['seo_keywords'];
+        break;
 }

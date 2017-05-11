@@ -32,7 +32,7 @@
             <?php if ($user->is_user_authed()): ?>
             <li class="dropdown userinfo">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
+              <img src="<?= $user->get_avatar() ?>" alt="" class="img-circle user-img">
               <span class="username"><?= $user->get('username') ?></span>
               <span class="glyphicon glyphicon-chevron-down"></span>
               </a>
