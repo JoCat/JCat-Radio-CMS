@@ -45,5 +45,16 @@ class Helpers
     {
         return date('H:i', strtotime($time));
     }
+
+    public function get_error($reason)
+    {
+        return '<div class="error-alert">
+          <p>
+            <b>Внимание! Обнаружена ошибка.</b><br>
+            '.$reason.'
+          </p>
+          <button onclick="history.go(-1);" class="btn btn-danger">Вернутся назад</button>
+        </div>';
+    }
 }
 $helpers = new Helpers;

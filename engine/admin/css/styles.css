@@ -51,7 +51,7 @@ html, body {
     height: 25px;
 }
 aside {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     padding-top: 50px;
@@ -60,19 +60,6 @@ aside {
     background-color: #f2f2f2;
     border-right: 1px solid #ddd;
 }
-/* aside>.user-panel {
-    margin: 10px;
-}
-aside>.user-panel .user-img {
-    width: 50px;
-    height: 50px;
-}
-aside>.user-panel>.info {
-    margin: 5px;
-}
-aside>.user-panel>.info>p {
-    margin-bottom: 5px;
-} */
 .sidebar-menu>li>a {
     display: block;
     padding: 20px 50px;
@@ -90,8 +77,14 @@ aside>.user-panel>.info>p {
 }
 .content {
     margin-left: 215px;
-    margin-top: 50px;
     min-height: 100%;
     background-color: #fff;
-    padding: 20px;
+    padding: 70px 20px 20px;
 }
+.error-alert {
+  padding: 10px;
+  background-color: #ff9999;
+  border: #ff6666 solid 1px;
+  font-size: 16px;
+}
+.tac {text-align: center;}
