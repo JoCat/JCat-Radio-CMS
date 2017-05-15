@@ -35,4 +35,4 @@ $menu->set_sidebar_menu([
     ],
 ], 'admin.php');
 ?>
-<h2 style="text-align: center;">Добро пожаловать в панель управления JCat Radio Engine</h2>
+<h2 class="tac">Добро пожаловать в панель управления JCat Radio Engine</h2>
