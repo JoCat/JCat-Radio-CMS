@@ -23,8 +23,6 @@ RewriteRule ^user/([a-z0-9_-]+)$ index.php?do=user&username=$1 [L]
 #Вывод статических страниц
 RewriteRule ^page/([a-z0-9_-]+)$ index.php?do=static&link=$1 [L]
 
-RewriteRule ^logout$ index.php?do=logout [L]
-
 #RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
 #RewriteRule ^robots.txt$ modules/robots.txt [L]
 </IfModule>

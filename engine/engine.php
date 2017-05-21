@@ -12,20 +12,15 @@
 */
 if (!defined('JRE_KEY')) die("Hacking attempt!");
 include (ENGINE_DIR . '/classes/config_loader.php');
-session_start();
-ob_start();
+include (ENGINE_DIR . '/classes/template.php');
 
 $config = ConfigLoader::load('config');
 $db_config = ConfigLoader::load('db_config');
-$template = ROOT_DIR . '/template/' . $config->tpl_dir;
+$tpl = new Template($config->tpl_dir);
 
 $do = isset($_GET['do']) ? $_GET['do'] : false;
 switch($do)
 {
-    default:
-        require_once(ENGINE_DIR . '/template/index.php');
-    break;
-
     case 'news':
     case 'programs':
     case 'schedule':
@@ -34,18 +29,18 @@ switch($do)
         require_once(ENGINE_DIR . '/template/'. $do .'.php');
     break;
 
-    case 'logout':
-        session_destroy();
-        header('Location:http://'. $_SERVER['HTTP_HOST']);
+    default:
+        require_once(ENGINE_DIR . '/template/index.php');
     break;
 }
-$content = ob_get_clean();
 
 $head = empty($seo_title) ? '<title>'. $config->title .'</title>' : '<title>'. $seo_title .'</title>';
 $head .= empty($seo_description) ? '<meta name="description" content="' . $config->description . '">' : '<meta name="description" content="' . $seo_description . '">';
 $head .= empty($seo_keywords) ? '<meta name="keywords" content="' . $config->keywords . '">' : '<meta name="keywords" content="' . $seo_keywords . '">';
+$tpl->set("{head}", $head);
+$tpl->set("{dir}", '/template/' . $config->tpl_dir);
 if (!isset($_SERVER['HTTP_X_PJAX'])) {
-    include $template . '/main.php';
+    die($tpl->show('main'));
 } else {
-    include $template . '/ajax.php';
+    die($tpl->show('ajax'));
 }

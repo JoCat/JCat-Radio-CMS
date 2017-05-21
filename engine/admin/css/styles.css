@@ -73,18 +73,12 @@ aside>.user-panel>.info {
 aside>.user-panel>.info>p {
     margin-bottom: 5px;
 } */
-.sidebar-menu>li>a {
-    display: block;
+.sidebar-menu li {
     padding: 20px 50px;
     font-size: 18px;
     border-bottom: 1px solid #ddd;
-    color: #333;
-    text-decoration: none;
 }
-.sidebar-menu>li>a:focus, .sidebar-menu>li>a:hover {
-    background-color: #ddd;
-}
-.sidebar-menu>li.active {
+.sidebar-menu li.active {
     background-color: #fff;
     width: 215px;
 }
@@ -95,65 +89,65 @@ aside>.user-panel>.info>p {
     background-color: #fff;
 }
 .auth-form {
-    width: 328px;
+  width: 328px;
 }
 .auth-form form {
-    border: solid 1px white;
-    background-color: #fff;
-    padding: 15px 20px;
+  border: solid 1px white;
+  background-color: #fff;
+  padding: 15px 20px;
 }
 .auth-form form:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 .auth-form .header {
-    background-color: #0099ff;
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    color: white;
-    padding: 10px;
+  background-color: #0099ff;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  padding: 10px;
 }
 .auth-form input {
-    border: solid 1px #ccc;
-    border-radius: 3px;
-    width: 100%;
-    height: 40px;
-    margin-bottom: 10px;
-    padding: 0 10px;
-    font-size: 16px;
-    box-sizing: border-box;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 .auth-form button {
-    border: solid 1px #ccc;
-    background-color: #0099ff;
-    border-radius: 3px;
-    width: 104px;
-    height: 44px;
-    color: white;
-    float: left;
+  border: solid 1px #ccc;
+  background-color: #0099ff;
+  border-radius: 3px;
+  width: 104px;
+  height: 44px;
+  color: white;
+  float: left;
 }
 .auth-form button:hover {
-    cursor: pointer;
-    background-color: #00bbff;
+  cursor: pointer;
+  background-color: #00bbff;
 }
 .auth-form .links {
-    float: left;
-    margin: 3px 10px;
+  float: left;
+  margin: 3px 10px;
 }
 .auth-form .links a {
-    text-decoration: none;
-    font-size: 14px;
-    color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  color: #888;
 }
 .auth-form .links a:hover {color: #000;}
 
 /*Восстановление пароля*/
 .auth-form input.disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 .auth-form button.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }

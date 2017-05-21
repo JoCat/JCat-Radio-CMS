@@ -19,6 +19,6 @@ switch ($config->main_page) {
 	
 	case 1:
 	default:
-        include $template . '/index.php';
+		$tpl->set('{content}', $tpl->show('index'));
 		break;
 }
