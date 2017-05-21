@@ -15,7 +15,6 @@ include (ENGINE_DIR . '/classes/config_loader.php');
 session_start();
 ob_start();
 
-include (ENGINE_DIR . '/classes/user.php');
 $config = ConfigLoader::load('config');
 $db_config = ConfigLoader::load('db_config');
 $template = ROOT_DIR . '/template/' . $config->tpl_dir;
@@ -32,8 +31,6 @@ switch($do)
     case 'schedule':
     case 'static':
     case 'user':
-    case 'auth':
-    case 'reg':
         require_once(ENGINE_DIR . '/template/'. $do .'.php');
     break;
 

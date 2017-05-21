@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {head}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <?= $head ?>
-    <link rel="shortcut icon" href="/template/default/images/radio.ico" />
-    <link rel="stylesheet" type="text/css" href="/template/default/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/template/default/css/styles.css">
+    <link rel="shortcut icon" href="{dir}/images/radio.ico" />
+    <link rel="stylesheet" type="text/css" href="{dir}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{dir}/css/styles.css">
 </head>
 <body>
     <div class="wrapper">
@@ -29,26 +29,10 @@
             <li><a href="/schedule">Расписание</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
-            <?php if (isset($_SESSION['auth'])): ?>
-              <?// if (is_user_authed()): ?>
-              <li class="dropdown userinfo">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
-                <span class="username"><?= $_SESSION['username'] ?></span>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="/admin.php">Админпанель</a></li>
-                  <li><a href="#">Профиль</a></li>
-                  <li><a href="#">Управление аккаунтом</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/logout">Выход</a></li>
-                </ul>
-              </li>
-            <?php else: ?>
-            <li><a href="/auth">Авторизация</a></li>
-            <li><a href="/reg">Регистрация</a></li>
-            <?php endif; ?>
+            <li>
+              <b>JoCat</b>
+              <img src="{dir}/images/user_pic.jpg" class="img-circle" style="width: 40px; height: 40px; margin: 5px;">
+            </li>
           </ul>
         </div>
       </div>
@@ -81,7 +65,7 @@
           </div>
         </div>
         <div class="col-md-8" id="pjax-container">
-        <?= $content ?>
+        {content}
         </div>
        </div>
       </div>
@@ -104,10 +88,10 @@
     <!-- Footer End -->
 
     <!-- Script Start -->
-    <script src="/template/default/js/jquery-2.1.4.min.js"></script>
-    <script src="/template/default/js/jquery.pjax.js"></script>
-    <script src="/template/default/js/bootstrap.min.js"></script>
-    <script src="/template/default/js/background-slide.js"></script>
+    <script src="{dir}/js/jquery-2.1.4.min.js"></script>
+    <script src="{dir}/js/jquery.pjax.js"></script>
+    <script src="{dir}/js/bootstrap.min.js"></script>
+    <script src="{dir}/js/background-slide.js"></script>
     <!-- Script End -->
 </body>
 </html>

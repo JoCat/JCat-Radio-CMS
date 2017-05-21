@@ -86,8 +86,8 @@ footer .right{text-align:right;}
   background: url(../images/1.jpg) 50% 15% / cover no-repeat;
 }
 @media (max-width: 767px) {
-  .placeholder {height: 180px;}
-  .placeholder .container {display:none;}
+    .placeholder {height: 180px;}
+    .placeholder .container {display:none;}
 }
 
 .placeholder .container {
@@ -135,14 +135,10 @@ footer .right{text-align:right;}
   margin-left: 34px;
 }
 .userinfo .glyphicon {
-  font-size: 14px;
-  top: 2px;
+    font-size: 14px;
+    top: 2px;
 }
 .userinfo .dropdown-menu span {
-  display: block;
-  padding: 3px 20px;
-}
-.title {
-  text-align: center;
-  padding-bottom: 10px;
+    display: block;
+    padding: 3px 20px;
 }

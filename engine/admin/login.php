@@ -12,7 +12,7 @@
 */
 if (!defined('JRE_KEY')) die ("Hacking attempt!");
 include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/helpers.php');
+include (ENGINE_DIR . '/classes/auth_functions.php');
 
 if (!empty($_POST))
 {
@@ -29,11 +29,11 @@ if (!empty($_POST))
             $helpers->addMessage('Логин <b>' . htmlentities($_POST['login']) . '</b> не найден!', true);
         } else {
             if (password_verify($_POST['pass'], $row['password'])) {
-                $_SESSION['user_data'] = [
+                $_SESSION['auth'] = [
                     'username' => $row['login'],
                     'usergroup' => $row['name']
                 ];
-                header('Location:http://' . $_SERVER['HTTP_HOST']);
+                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/admin.php');
                 exit;
             } else {
                 $helpers->addMessage('Неверный пароль!', true);
@@ -41,4 +41,14 @@ if (!empty($_POST))
         }
     }
 }
-include $template . '/auth.php';
+?>
+<div class="header">Панель управления<br>JCat Radio Engine</div>
+<form action="" method="POST">
+    <input required placeholder="Логин" type="text" name="login">
+    <input required placeholder="Пароль" type="password" name="pass">
+    <button type="submit">Войти</button>
+    <div class="links">
+        <a href="/admin.php?do=reg">Регистрация</a><br>
+        <a href="/admin.php?do=lostpassword">Забыли пароль?</a>
+    </div>
+</form>

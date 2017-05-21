@@ -28,22 +28,5 @@ class Helpers
             return (!preg_match("/^[a-z0-9_.-]+@([a-z0-9]+\.)+[a-z]{2,6}$/i", $email)) ? false : true;
         }      
     }
-
-    public function get_date($date)
-    {
-        $timestamp = strtotime($date);
-        if (date('dmy', $timestamp) == date('dmy')) {
-            return 'Сегодня в ' . date('H:i', $timestamp);
-        } elseif (date('dmy', $timestamp) == date('dmy', time()-86400)) {
-            return 'Вчера в ' . date('H:i', $timestamp);
-        } else {
-            return date('d/m/Y - H:i', $timestamp);
-        }
-    }
-
-    public function get_time($time)
-    {
-        return date('H:i', strtotime($time));
-    }
 }
 $helpers = new Helpers;

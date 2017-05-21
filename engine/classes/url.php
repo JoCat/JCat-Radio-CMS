@@ -10,9 +10,10 @@
  Класс генерации URL
 =====================================
 */
+if (!defined('JRE_KEY')) die("Hacking attempt!");
 class Url
 {
-    public static function str2url($string)
+    public function str2url($string)
     {
         // Перевод в нижний регистр
         $str = mb_strtolower($string);

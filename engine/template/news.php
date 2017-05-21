@@ -13,7 +13,6 @@
 if (!defined('JRE_KEY')) die("Hacking attempt!");
 include (ENGINE_DIR . '/classes/db_connect.php');
 include (ENGINE_DIR . '/classes/pagination.php');
-include (ENGINE_DIR . '/classes/helpers.php');
 
 switch($_GET['show'])
 {
@@ -21,6 +20,7 @@ switch($_GET['show'])
         //Присваиваем основные значения
         $seo_title = 'Новости &raquo; '. $config->title;
         $per_page = $config->shownews;
+        $content = '';
 
         //получаем номер страницы и значение для лимита
         (isset($_GET['page']) && $_GET['page'] >= 1) ? $cur_page = $_GET['page'] : $cur_page = 1;
@@ -29,38 +29,36 @@ switch($_GET['show'])
         //выполняем запрос к БД с последующим выводом новостей
         $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `show` = 1 ORDER BY date DESC LIMIT :limit_from, :per_page');
         $stmt->execute(['limit_from' => $limit_from, 'per_page' => $per_page]);
-        while($row = $stmt->fetch()) {
-            $data[] = [
-                'title' => $row["title"],
-                'date' => $helpers->get_date($row["date"]),
-                'short_text' => $row["short_text"],
-                'link' => '/news/'. $row['id'] .'-'. $row['alt_name']
-            ];
+
+        while ($row = $stmt->fetch()) {
+            $tpl->set('{date}', $row['date']);
+            $tpl->set('{title}', $row['title']);
+            $tpl->set('{news}', $row['short_text']);
+            $tpl->set('{link}', '/news/'. $row['id'] .'-'. $row['alt_name']);
+            $content .= $tpl->show('newsblock');
         }
-        if (empty($data)) {
-            $error = '<div class="error-alert">
+        if (empty($content)) {
+            $content = '<div class="error-alert">
             <b>Внимание! Обнаружена ошибка.</b><br>
             На данный момент у нас нет новостей, заходите позже :)
             </div>';
         }
-
         //узнаем общее количество страниц и заполняем массив со ссылками
         $stmt = $pdo->query('SELECT COUNT(*) FROM `news` WHERE `show` = 1');
         $rows = $stmt->fetchColumn();
         $pagination = Pagination::get('news', $rows, 25, $cur_page);
+        $content .= $pagination['content'];
         //Проверяем 'пустые' страницы и выдаём оповещение
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
-            $error = '<div class="error-alert">
+            $content = '<div class="error-alert">
             <b>Внимание! Обнаружена ошибка.</b><br>
             По данному адресу публикаций на сайте не найдено.
             </div>';
         }
-        $pagination = $pagination['content'];
-
-        include $template . '/news.php';
+        $tpl->set("{content}", $content);
         break;
 
-/*    case 'fullnews':
+    case 'fullnews':
         //выполняем запрос к БД с последующим выводом новости
         $stmt = $pdo->prepare('SELECT * FROM `news` JOIN `users` ON news.author_id = users.id WHERE news.id = :id and news.alt_name = :alt');
         $stmt->execute(['id' => $_GET['id'], 'alt' => $_GET['alt']]);
@@ -77,5 +75,5 @@ switch($_GET['show'])
         $seo_title = $data['seo_title'];
         $seo_description = $data['seo_description'];
         $seo_keywords = $data['seo_keywords'];
-        break;*/
+        break;
 }

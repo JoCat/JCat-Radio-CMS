@@ -19,49 +19,51 @@ switch($_GET['show'])
     case 'all':
         $seo_title = 'Программы &raquo; '. $config->title;
         $per_page = $config->showprog;
+        $content = '';
         
         //получаем номер страницы и значение для лимита
         (isset($_GET['page']) && $_GET['page'] >= 1) ? $cur_page = $_GET['page'] : $cur_page = 1;
         $limit_from = ($cur_page - 1) * $per_page;
         
         //выполняем запрос к БД с последующим выводом новостей
-        $stmt = $pdo->prepare('SELECT * FROM programs WHERE `show` = 1 ORDER BY id DESC LIMIT :limit_from, :per_page');
+        $stmt = $pdo->prepare('SELECT * FROM programs /*WHERE `show` = 1*/ ORDER BY id DESC LIMIT :limit_from, :per_page');
         $stmt->execute(['limit_from' => $limit_from, 'per_page' => $per_page]);
         while($row = $stmt->fetch()) {
-            $data[] = [
-                'title' => $row["title"],
-                'description' => $row["description"],
-                'link' => '/programs/'. $row['alt_name'],
-                'image' => empty($row["image"]) ?
-                    '/template/' . $config->tpl_dir . '/images/no_image.png' :
-                    '/uploads/images/programs/' . $row["image"]
-            ];
+            $tpl->set("{title}", $row["title"]);
+            $tpl->set("{description}", $row["description"]);
+            $tpl->set('{link}', '/programs/'. $row['alt_name']);
+            if ($row["image"]) {
+                $tpl->set("{image}", '/uploads/images/programs/' . $row["image"]);
+            } else {
+                $tpl->set("{image}", '/template/' . $config->tpl_dir . '/images/no_image.png');
+            }
+            $content .= $tpl->show("progblock");
         }
-        if (empty($data)) {
-            $error = '<div class="error-alert">
+        if (empty($content)) {
+            $content = '<div class="error-alert">
             <b>Внимание! Обнаружена ошибка</b><br>
             На данный момент у нас нет программ или они не указаны.
             </div>';
         }
-
         //узнаем общее количество страниц и заполняем массив со ссылками
-        $stmt = $pdo->query('SELECT COUNT(*) FROM `programs` WHERE `show` = 1');
+
+        $stmt = $pdo->query('SELECT COUNT(*) FROM `programs` /*WHERE `show` = 1*/');
         $rows = $stmt->fetchColumn();
         $pagination = Pagination::get('programs', $rows, 25, $cur_page);
+        $content .= $pagination['content'];
+
         //Проверяем 'пустые' страницы и выдаём оповещение
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
             $page_title = 'Ошибка';
-            $error = '<div class="error-alert">
+            $content = '<div class="error-alert">
             <b>Внимание! Обнаружена ошибка</b><br>
             По данному адресу публикаций на сайте не найдено.
             </div>';
         }
-        $pagination .= $pagination['content'];
-
-        include $template . '/programs.php';
+        $tpl->set("{content}", $content);
         break;
 
-/*    case 'programs':
+    case 'programs':
         $stmt = $pdo->prepare('SELECT * FROM `programs` WHERE alt_name = :alt');
         $stmt->execute(['alt' => $_GET['alt']]);
         if (empty($data = $stmt->fetch())) {
@@ -74,5 +76,5 @@ switch($_GET['show'])
         $seo_title = $data['seo_title'];
         $seo_description = $data['seo_description'];
         $seo_keywords = $data['seo_keywords'];
-        break;*/
+        break;
 }

@@ -21,25 +21,26 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="#">Управление сайтом</a></li>
-            <li><a href="#">Панель ведущих</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Explore</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
             <li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a></li>
             <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
-              <?= $_SESSION['auth']['username'] ?>
+              {username}
               <span class="glyphicon glyphicon-chevron-down"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><span><?= $_SESSION['auth']['usergroup'] ?></span></li>
+                <li><span>{usergroup}</span></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/">На сайт</a></li>
-                <li><a href="#">Управление аккаунтом</a></li>
+                <li><a href="#">Settings</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/admin.php?do=logout">Выход</a></li>
+                <li><a href="/admin.php?do=logout">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -48,15 +49,15 @@
     </nav>
     <aside>
       <ul class="sidebar-menu list-unstyled">
-        <li class="active"><a href="">Главная</a></li>
-        <li><a href="">Новости</a></li>
-        <li><a href="">Программы</a></li>
-        <li><a href="">Расписание</a></li>
-        <li><a href="">Статические страницы</a></li>
+        <li class="active">Главная</li>
+        <li>Новости</li>
+        <li>Программы</li>
+        <li>Расписание</li>
+        <li>Статические страницы</li>
       </ul>
     </aside>
     <div class="content">
-      <?= $content ?>
+      {content}
     </div>
     <!-- Scripts -->
     <script src="/engine/admin/js/jquery-2.1.4.min.js"></script>

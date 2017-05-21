@@ -94,3 +94,66 @@ aside>.user-panel>.info>p {
     padding-top: 50px;
     background-color: #fff;
 }
+.auth-form {
+    width: 328px;
+}
+.auth-form form {
+    border: solid 1px white;
+    background-color: #fff;
+    padding: 15px 20px;
+}
+.auth-form form:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.auth-form .header {
+    background-color: #0099ff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    padding: 10px;
+}
+.auth-form input {
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.auth-form button {
+    border: solid 1px #ccc;
+    background-color: #0099ff;
+    border-radius: 3px;
+    width: 104px;
+    height: 44px;
+    color: white;
+    float: left;
+}
+.auth-form button:hover {
+    cursor: pointer;
+    background-color: #00bbff;
+}
+.auth-form .links {
+    float: left;
+    margin: 3px 10px;
+}
+.auth-form .links a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #888;
+}
+.auth-form .links a:hover {color: #000;}
+
+/*Восстановление пароля*/
+.auth-form input.disabled {
+    cursor: not-allowed;
+}
+.auth-form button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

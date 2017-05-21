@@ -12,35 +12,39 @@
 */
 if (!defined('JRE_KEY')) die("Hacking attempt!");
 include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/helpers.php');
 
 $page_title = 'Расписание &raquo; '. $config->title;
+$content = '';
 
-$stmt = $pdo->prepare('SELECT * FROM `schedule` WHERE `day` = :day AND `show` = 1 ORDER BY start_time ASC');
+$stmt = $pdo->prepare('SELECT * FROM `schedule` WHERE day = :day ORDER BY start_time ASC');
 $days = [
-    'monday' => 'Понедельник',
-    'tuesday' => 'Вторник',
-    'wednesday' => 'Среда',
-    'thursday' => 'Четверг',
-    'friday' => 'Пятница',
-    'saturday' => 'Суббота',
-    'sunday' => 'Воскресенье'
+'monday' => 'Понедельник',
+'tuesday' => 'Вторник',
+'wednesday' => 'Среда',
+'thursday' => 'Четверг',
+'friday' => 'Пятница',
+'saturday' => 'Суббота',
+'sunday' => 'Воскресенье'
 ];
 
 foreach ($days as $key => $value) {
+    $blocks = '';
+    $day = '<div class="day">' . $value . '</div>';
     $stmt->execute(['day' => $key]);
     while($row = $stmt->fetch()) {
-        $data[$key][] = [
-            'title' => $row["title"],
-            'start_time' => $row["start_time"],
-            'end_time' => $row["end_time"],
-        ];
+        if (!empty($row)) {
+            $tpl->set("{title}", $row["title"]);
+            $tpl->set("{start_time}", $row["start_time"]);
+            $tpl->set("{end_time}", $row["end_time"]);
+            $blocks .= $tpl->show("schedule");
+        }
     }
+    if (!empty($blocks)) $content .= '<div class="day-block">'. $day . $blocks .'</div>';
 }
-if (empty($data)){
-    $error = '<div class="error-alert">
+if (empty($content)){
+    $content = '<div class="error-alert">
     <b>Внимание! Обнаружена ошибка.</b><br>
     На данный момент у нас нет расписания, заходите позже :)
     </div>';
 }
-include $template . '/schedule.php';
+$tpl->set("{content}", $content);
