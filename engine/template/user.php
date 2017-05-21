@@ -13,7 +13,7 @@
 if (!defined('JRE_KEY')) die("Hacking attempt!");
 include (ENGINE_DIR . '/classes/db_connect.php');
 
-$stmt = $pdo->prepare('SELECT * FROM `users` JOIN `user_groups` ON users.usergroup_id = user_groups.id WHERE users.login = :login');
+$stmt = $pdo->prepare('SELECT * FROM `users` INNER JOIN `user_groups` ON users.usergroup_id = user_groups.id WHERE users.login = :login');
 $stmt->execute(['login' => $_GET['username']]);
 if (empty($data = $stmt->fetch())) {
     $content = '<div class="error-alert">
@@ -23,11 +23,6 @@ if (empty($data = $stmt->fetch())) {
 } else {
     $tpl->set('{username}', $data['login']);
     $tpl->set('{usergroup}', $data['name']);
-    if ($data["image"]) {
-        $tpl->set("{image}", '/uploads/images/users/' . $data["image"]);
-    } else {
-        $tpl->set("{image}", '/template/' . $config->tpl_dir . '/images/no_image.png');
-    }
     $content = $tpl->show('userpage');
 }
 
