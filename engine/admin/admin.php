@@ -21,15 +21,15 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="admin.php">Управление сайтом</a></li>
-            <li><a href="admin.php?do=rj">Панель ведущих</a></li>
+            <li><a href="#">Управление сайтом</a></li>
+            <li><a href="#">Панель ведущих</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a></li>
             <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <img src="<?= $user->get_avatar() ?>" alt="" class="img-circle user-img">
+              <img src="/template/default/images/user_pic.jpg" alt="" class="img-circle user-img">
               <?= $user->get('username') ?>
               <span class="glyphicon glyphicon-chevron-down"></span>
               </a>
@@ -47,7 +47,13 @@
       </div>
     </nav>
     <aside>
-      <?= $menu->get_sidebar_menu() ?>
+      <ul class="sidebar-menu list-unstyled">
+        <li class="active"><a href="">Главная</a></li>
+        <li><a href="">Новости</a></li>
+        <li><a href="">Программы</a></li>
+        <li><a href="">Расписание</a></li>
+        <li><a href="">Статические страницы</a></li>
+      </ul>
     </aside>
     <div class="content">
       <?= $content ?>

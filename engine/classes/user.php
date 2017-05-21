@@ -20,12 +20,5 @@ class User
     public function get($value) {
         return $this->user_data[$value];
     }
-
-    public function get_avatar() {
-        global $config;
-        return empty($this->user_data['image']) ?
-            '/template/' . $config->tpl_dir . '/images/no_avatar.png' :
-            '/uploads/images/users/' . $this->user_data["image"];
-    }
 }
 $user = new User;

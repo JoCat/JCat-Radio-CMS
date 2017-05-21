@@ -15,7 +15,7 @@
   <div class="form-group">
     <div class="col-xs-offset-2 col-xs-10">
       <button type="submit" class="btn btn-default">Войти</button>
-      <!-- <a href="/admin.php?do=lostpassword">Забыли пароль?</a> -->
+      <a href="/admin.php?do=lostpassword">Забыли пароль?</a>
     </div>
   </div>
 </form>

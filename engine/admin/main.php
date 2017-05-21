@@ -11,28 +11,5 @@
 =======================================
 */
 if (!defined('JRE_KEY')) die ("Hacking attempt!");
-$menu->set_sidebar_menu([
-    [
-        'name' => 'Главная',
-        'link' => '',
-        'active' => true,
-    ],
-    [
-        'name' => 'Новости',
-        'link' => '?do=news',
-    ],
-    [
-        'name' => 'Программы',
-        'link' => '?do=programs',
-    ],
-    [
-        'name' => 'Расписание',
-        'link' => '?do=schedule',
-    ],
-    [
-        'name' => 'Статические страницы',
-        'link' => '?do=static',
-    ],
-], 'admin.php');
 ?>
 <h2 style="text-align: center;">Добро пожаловать в панель управления JCat Radio Engine</h2>

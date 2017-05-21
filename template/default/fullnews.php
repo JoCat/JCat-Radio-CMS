@@ -1,7 +1,7 @@
 <div class="block">
-    <b class="right"><?= $data['date'] ?></b>
-    <h1><?= $data['title'] ?></h1><hr>
-    <div><?= $data['full_text'] ?></div>
+    <b class="right">{date}</b>
+    <h1>{title}</h1><hr>
+    <div>{fullnews}</div>
     <hr>
-    Автор: <b><?= $data['author'] ?></b>
+    Автор: <b>{author}</b>
 </div>

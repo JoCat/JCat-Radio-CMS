@@ -60,24 +60,22 @@ switch($_GET['show'])
         include $template . '/news.php';
         break;
 
-    case 'fullnews':
+/*    case 'fullnews':
         //выполняем запрос к БД с последующим выводом новости
         $stmt = $pdo->prepare('SELECT * FROM `news` JOIN `users` ON news.author_id = users.id WHERE news.id = :id and news.alt_name = :alt');
         $stmt->execute(['id' => $_GET['id'], 'alt' => $_GET['alt']]);
-        if (empty($result = $stmt->fetch())) {
+        if (empty($data = $stmt->fetch())) {
             include(ROOT_DIR .'/modules/errors/404.php');
             exit;
         }
-        $data = [
-            'title' => $result["title"],
-            'date' => $helpers->get_date($result["date"]),
-            'full_text' => empty($result['full_text']) ? $result['short_text'] : $result["full_text"],
-            'author' => '<a href="/user/' . strtolower($result['login']) . '">' . $result['login'] . '</a>'
-
-        ];
-        include $template . '/fullnews.php';
-        $seo_title = $result['seo_title'];
-        $seo_description = $result['seo_description'];
-        $seo_keywords = $result['seo_keywords'];
-        break;
+        $tpl->set('{date}', $data['date']);
+        $tpl->set('{title}', $data['title']);
+        if (!$data['full_text']) $tpl->set('{fullnews}', $data['short_text']);
+        else $tpl->set('{fullnews}', $data['full_text']);
+        $tpl->set('{author}', '<a href="/user/' . strtolower($data['login']) . '">' . $data['login'] . '</a>');
+        $tpl->set('{content}', $tpl->show('fullnews'));
+        $seo_title = $data['seo_title'];
+        $seo_description = $data['seo_description'];
+        $seo_keywords = $data['seo_keywords'];
+        break;*/
 }
