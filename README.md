@@ -1,8 +1,8 @@
 ## JCat Radio Engine - CMS for online radio site (JCat Radio CMS)
 #### JCat Radio Engine - CMS для сайта онлайн радио (JCat Radio CMS)
 
-### Ветка разработки
-#### Последняя версия v2.0_dev170515
+### Релизная ветка
+#### Последняя версия v2.0_beta_1+dev170522
 
 #### Движок использует следующие инструменты:
 * Apache2
