@@ -21,31 +21,25 @@ $db_config = ConfigLoader::load('db_config');
 $template = ENGINE_DIR . "/admin/";
 include (ENGINE_DIR . '/classes/user.php');
 
-if (isset($_SESSION['auth']))
+$do = isset($_GET['do']) ? $_GET['do'] : false;
+switch($do)
 {
-    $do = isset($_GET['do']) ? $_GET['do'] : false;
-    switch($do)
-    {
-        default:
-            require_once(ENGINE_DIR . '/admin/main.php');
-        break;
+    default:
+        require_once(ENGINE_DIR . '/admin/main.php');
+    break;
 
-        case 'logout':
-            session_destroy();
-            header('Location:http://'. $_SERVER['HTTP_HOST']);
-        break;
+    case 'logout':
+        session_destroy();
+        header('Location:http://'. $_SERVER['HTTP_HOST']);
+    break;
 
-        case 'news':
-        case 'programs':
-        case 'schedule':
-        case 'static':
-        case 'settings':
-            require_once(ENGINE_DIR . '/admin/'. $do .'.php');
-        break;
-    }
-    $content = ob_get_clean();
-    include $template . 'admin.php';
-} else {
-    header("HTTP/1.1 404 Not Found");
-    exit();
+    case 'news':
+    case 'programs':
+    case 'schedule':
+    case 'static':
+    case 'settings':
+        require_once(ENGINE_DIR . '/admin/'. $do .'.php');
+    break;
 }
+$content = ob_get_clean();
+include $template . 'admin.php';

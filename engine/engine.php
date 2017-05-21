@@ -24,7 +24,7 @@ $do = isset($_GET['do']) ? $_GET['do'] : false;
 switch($do)
 {
     default:
-        require_once(ENGINE_DIR . '/frontend/index.php');
+        require_once(ENGINE_DIR . '/template/index.php');
     break;
 
     case 'news':
@@ -34,7 +34,7 @@ switch($do)
     case 'user':
     case 'auth':
     case 'reg':
-        require_once(ENGINE_DIR . '/frontend/'. $do .'.php');
+        require_once(ENGINE_DIR . '/template/'. $do .'.php');
     break;
 
     case 'logout':
