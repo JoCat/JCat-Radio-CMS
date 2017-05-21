@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `news` (
   `seo_keywords` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `author_id` (`author_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -59,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `programs` (
   `seo_description` text,
   `seo_keywords` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -75,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `end_time` time NOT NULL,
   `show` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -94,7 +91,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usergroup_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usergroup_id` (`usergroup_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -107,7 +103,6 @@ CREATE TABLE IF NOT EXISTS `user_groups` (
   `name` varchar(64) NOT NULL,
   `is_admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
