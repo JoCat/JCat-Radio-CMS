@@ -6,6 +6,7 @@
     <li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab">Главное</a></li>
     <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Адрес и Мета-теги</a></li>
   </ul>
+
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="general">
@@ -30,7 +31,7 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="meta">
       <div class="form-group">
-        <label for="alt_name">Ссылка на страницу</label>
+        <label for="alt_name">Ссылка на новость</label>
         <input type="text" class="form-control" name="alt_name" id="alt_name">
         <p class="help-block">Оставьте поле пустым для автоматической генерации адреса</p>
       </div>
@@ -51,14 +52,14 @@
   <button type="submit" class="btn btn-success" name="submit">Добавить</button>
 </form>
 <script>
-  CKEDITOR.replace('short_text');
-  CKEDITOR.replace('full_text');
-  document.addEventListener("DOMContentLoaded", function() { 
-    $('#alt-title').on('keypress', function (e) {
-        var key = e.keyCode || e.charCode;
-        var char = String.fromCharCode(key);
-        var reg = /[a-z0-9-]/;
-        return 8 === key || reg.test(char);
+    CKEDITOR.replace('short_text');
+    CKEDITOR.replace('full_text');
+    document.addEventListener("DOMContentLoaded", function() { 
+      $('#alt-title').on('keypress', function (e) {
+          var key = e.keyCode || e.charCode;
+          var char = String.fromCharCode(key);
+          var reg = /[a-z0-9-]/;
+          return 8 === key || reg.test(char);
+      });
     });
-  });
 </script>

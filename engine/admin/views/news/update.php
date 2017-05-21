@@ -31,7 +31,7 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="meta">
       <div class="form-group">
-        <label for="alt_name">Ссылка на страницу</label>
+        <label for="alt_name">Ссылка на новость</label>
         <input type="text" class="form-control" name="alt_name" id="alt_name" value="<?= $news['alt_name'] ?>">
         <p class="help-block">Оставьте поле пустым для автоматической генерации адреса</p>
       </div>
@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-success" name="submit">Сохранить</button>
+  <button type="submit" class="btn btn-success" name="submit">Добавить</button>
 </form>
 <script>
     CKEDITOR.replace('short_text');

@@ -16,7 +16,7 @@ include (ENGINE_DIR . '/classes/helpers.php');
 
 $page_title = 'Расписание &raquo; '. $config->title;
 
-$stmt = $pdo->prepare('SELECT * FROM `schedule` JOIN `programs` ON schedule.program_id = programs.id WHERE schedule.day = :day AND schedule.show = 1 ORDER BY schedule.start_time ASC');
+$stmt = $pdo->prepare('SELECT * FROM `schedule` WHERE `day` = :day AND `show` = 1 ORDER BY start_time ASC');
 $days = [
     'monday' => 'Понедельник',
     'tuesday' => 'Вторник',

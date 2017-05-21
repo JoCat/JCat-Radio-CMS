@@ -13,7 +13,6 @@
 if (!defined('JRE_KEY')) die ("Hacking attempt!");
 include (ENGINE_DIR . '/classes/db_connect.php');
 include (ENGINE_DIR . '/classes/pagination.php');
-include (ENGINE_DIR . '/classes/purifier.php');
 include (ENGINE_DIR . '/classes/helpers.php');
 include (ENGINE_DIR . '/classes/url.php');
 
@@ -52,75 +51,69 @@ if (isset($_GET['create'])) {
             $stmt->execute(['login' => $user->get('username')]);
             $author_id = $stmt->fetch();
             $stmt = $pdo->prepare('INSERT INTO `news`(`title`, `alt_name`, `short_text`, `full_text`, `show`, `author_id`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:title, :alt_name, :short_text, :full_text, :show, :author_id, :seo_title, :seo_description, :seo_keywords)');
-            $purifier = load_htmlpurifier($allowed);
             $stmt->execute([
-                'title' => $purifier->purify($_POST['title']),
-                'alt_name' => $purifier->purify($alt_name),
-                'short_text' => $purifier->purify($_POST['short_text']),
-                'full_text' => $purifier->purify($_POST['full_text']),
-                'show' => $_POST['show'],
+                'title' => $_POST['title'],
+                'alt_name' => $alt_name,
+                'short_text' => $_POST["short_text"],
+                'full_text' => $_POST["full_text"],
+                'show' => $_POST["show"],
                 'author_id' => $author_id['id'],
-                'seo_title' => $purifier->purify($seo_title),
-                'seo_description' => $purifier->purify($_POST['seo_description']),
-                'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
+                'seo_title' => $seo_title,
+                'seo_description' => $_POST["seo_description"],
+                'seo_keywords' => $_POST["seo_keywords"]
             ]);
             echo '<p>Новость успешно добавлена<br></p>
             <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
-        include $template . 'views/news/create.php';
+        include $template . '/views/news/create.php';
     }
 } elseif (isset($_GET['update'])) {
     if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана новость.');
     elseif (isset($_POST['submit'])) {
-        if (empty($_POST['title'])) echo $helpers->get_error('Не указано название новости.');
-        elseif (empty($_POST['short_text'])) echo $helpers->get_error('Не указано краткое содержание новости.');
-        else {
-            $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
-            $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
-            $stmt = $pdo->prepare('UPDATE `news` SET `title`=:title,`alt_name`=:alt_name,`short_text`=:short_text,`full_text`=:full_text,`show`=:show,`seo_title`=:seo_title,`seo_description`=:seo_description,`seo_keywords`=:seo_keywords WHERE `id`=:id');
-            $purifier = load_htmlpurifier($allowed);
-            $stmt->execute([
-                'id' => $_GET['update'],
-                'title' => $purifier->purify($_POST['title']),
-                'alt_name' => $purifier->purify($alt_name),
-                'short_text' => $purifier->purify($_POST['short_text']),
-                'full_text' => $purifier->purify($_POST['full_text']),
-                'show' => $_POST['show'],
-                'seo_title' => $purifier->purify($seo_title),
-                'seo_description' => $purifier->purify($_POST['seo_description']),
-                'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
-            ]);
-            echo '<p>Новость успешно отредактирована<br></p>
-            <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
-        }
+        $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
+        $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
+        $stmt = $pdo->prepare('UPDATE `news` SET `title`=:title,`alt_name`=:alt_name,`short_text`=:short_text,`full_text`=:full_text,`show`=:show,`seo_title`=:seo_title,`seo_description`=:seo_description,`seo_keywords`=:seo_keywords WHERE `id`=:id');
+        $stmt->execute([
+            'id' => $_GET['update'],
+            'title' => $_POST['title'],
+            'alt_name' => $alt_name,
+            'short_text' => $_POST["short_text"],
+            'full_text' => $_POST["full_text"],
+            'show' => $_POST["show"],
+            'seo_title' => $seo_title,
+            'seo_description' => $_POST["seo_description"],
+            'seo_keywords' => $_POST["seo_keywords"],
+        ]);
+        echo '<p>Новость успешно отредактирована<br></p>
+        <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
     } else {
-        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id` = :id');
+        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id`=:id');
         $stmt->execute(['id' => $_GET['update']]);
         $news = $stmt->fetch();
         if (empty($news)) echo $helpers->get_error('Новость не найдена.');
         else {
-            include $template . 'views/news/update.php';
+            include $template . '/views/news/update.php';
         }
     }
 } elseif (isset($_GET['delete'])) {
     if (empty($_GET['delete'])) echo $helpers->get_error('Не выбрана новость.');
     elseif (isset($_POST['submit'])) {
-        $stmt = $pdo->prepare('DELETE FROM `news` WHERE `id` = :id');
+        $stmt = $pdo->prepare('DELETE FROM `news` WHERE `id`=:id');
         $stmt->execute(['id' => $_GET['delete']]);
         echo '<p>Новость успешно удалена<br></p>
         <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
     } else {
-        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id` = :id');
+        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id`=:id');
         $stmt->execute(['id' => $_GET['delete']]);
         $news = $stmt->fetch();
         if (empty($news)) echo $helpers->get_error('Новость не найдена.');
         else {
-            include $template . 'views/news/delete.php';
+            include $template . '/views/news/delete.php';
         }
     }
 } else {
-    //Получаем номер страницы (значение лимита 20(кол-во новостей на 1 страницу))
+    //Получаем номер страницы (значение лимита 25(кол-во новостей на 1 страницу))
     $cur_page = (isset($_GET['page']) && $_GET['page'] >= 1) ? $_GET['page'] : 1;
     $limit_from = ($cur_page - 1) * 20;
     //Выполняем запрос к БД с последующим выводом новостей
@@ -132,10 +125,10 @@ if (isset($_GET['create'])) {
             'title' => iconv_strlen($row['title'], 'utf-8') > 25 ?
                 iconv_substr($row['title'], 0, 25, 'utf-8') . '...' :
                 $row['title'],
-            'date' => $helpers->get_date($row['date']),
-            'short_text' => iconv_strlen($row['short_text'], 'utf-8') > 100 ?
-                iconv_substr($row['short_text'], 0, 100, 'utf-8') . '...' :
-                $row['short_text']
+            'date' => $helpers->get_date($row["date"]),
+            'short_text' => iconv_strlen($row["short_text"], 'utf-8') > 100 ?
+                iconv_substr($row["short_text"], 0, 100, 'utf-8') . '...' :
+                $row["short_text"]
         ];
     }
     //узнаем общее количество страниц и заполняем массив со ссылками
@@ -146,7 +139,7 @@ if (isset($_GET['create'])) {
     if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
         echo $helpers->get_error('Публикации не найдены.');
     } else {
-        include $template . 'views/news/index.php';
+        include $template . '/views/news/index.php';
         echo $pagination['content'];
     }
 }
