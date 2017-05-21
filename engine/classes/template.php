@@ -13,34 +13,34 @@
 if (!defined('JRE_KEY')) die("Hacking attempt!");
 class Template
 {
-    private $vars = [];
+    private $vars = array();
     public $template;
 
-    public function __construct($tpl_dir)
-    {
-        $this->template = ROOT_DIR . "/template/$tpl_dir";
-    }
-
-    public function set($name, $value)
+    function set($name, $value)
     {
         $this->vars[$name] = $value;
     }
 
-    public function show($tmp)
+    function showmodule($tmp)
     {
-        $tpl = $this->template . "/$tmp.tpl";
-        if (!file_exists($tpl)) die("Template $tpl not found!");
+        $tpl = $this->template ."/". $tmp;
+        if (!file_exists($tpl)) die("Template module ". $tpl ." not found!");
         $tpl = file_get_contents($tpl);
-        if (count($this->vars) > 0) {
-            foreach($this->vars as $name => $value) {
+        if (count($this->vars) > 0)
+            foreach($this->vars as $name => $value)
                 $tpl = str_replace($name, $value, $tpl);
-            }
-        }
         return $tpl;
     }
 
-    public function showtemplate()
+    function showtemplate($tplt)
     {
-        die($this->show('main'));
+        $tpl = $this->template . $tplt;
+        if (!file_exists($tpl)) die("Template ". $tpl ." not found!");
+        $tpl = file_get_contents($tpl);
+        if (count($this->vars) > 0)
+            foreach($this->vars as $name => $value)
+                $tpl = str_replace($name, $value, $tpl);
+        echo $tpl;
     }
 }
+$tpl = new Template;

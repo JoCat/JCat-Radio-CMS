@@ -1,79 +1,99 @@
 <?php
 /*
-=======================================
+=====================================
  JCat Radio Engine
----------------------------------------
- *site*
----------------------------------------
- Copyright (c) 2016-2017 Molchanov A.I.
-=======================================
+-------------------------------------
+ http://radiocms.tk
+-------------------------------------
+ Copyright (c) 2016 Molchanov A.I.
+=====================================
  Вывод новостей
-=======================================
+=====================================
 */
 if (!defined('JRE_KEY')) die("Hacking attempt!");
-include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/pagination.php');
+include(ENGINE_DIR . '/data/db_config.php');
+include(ENGINE_DIR . '/classes/db_connect.php');
 
-switch($_GET['show'])
+$show = isset($_GET['show']) ? $_GET['show'] : false;
+switch($show)
 {
     case 'shortnews':
         //Присваиваем основные значения
-        $seo_title = 'Новости &raquo; '. $config->title;
-        $per_page = $config->shownews;
-        $content = '';
+        $page_title = 'Новости';
+        $per_page = $config['shownews'];
 
         //получаем номер страницы и значение для лимита
         (isset($_GET['page']) && $_GET['page'] >= 1) ? $cur_page = $_GET['page'] : $cur_page = 1;
         $limit_from = ($cur_page - 1) * $per_page;
 
         //выполняем запрос к БД с последующим выводом новостей
-        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `show` = 1 ORDER BY date DESC LIMIT :limit_from, :per_page');
-        $stmt->execute(['limit_from' => $limit_from, 'per_page' => $per_page]);
-
-        while ($row = $stmt->fetch()) {
-            $tpl->set('{date}', $row['date']);
-            $tpl->set('{title}', $row['title']);
-            $tpl->set('{news}', $row['short_text']);
-            $tpl->set('{link}', '/news/'. $row['id'] .'-'. $row['alt_name']);
-            $content .= $tpl->show('newsblock');
+        $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM `jre_news` ORDER BY date DESC LIMIT :limit_from, :per_page');
+        $stmt->execute(array('limit_from' => $limit_from,'per_page' => $per_page));
+        while($row = $stmt->fetch())
+        {
+            $tpl->set("{date}", date("d/m/Y - H:i",$row["date"]));
+            $tpl->set("{title}", $row["title"]);
+            $tpl->set("{news}", $row["news"]);
+            $tpl->set("{link}", '/news/'. $row["id"] .'-'. $row["alt_name"]);
+            $content .= $tpl->showmodule("newsblock.tpl");
         }
-        if (empty($content)) {
+        if (empty($content))
+        {
             $content = '<div class="error-alert">
-            <b>Внимание! Обнаружена ошибка.</b><br>
+            <b>Внимание! Обнаружена ошибка</b><br>
             На данный момент у нас нет новостей, заходите позже :)
             </div>';
         }
         //узнаем общее количество страниц и заполняем массив со ссылками
-        $stmt = $pdo->query('SELECT COUNT(*) FROM `news` WHERE `show` = 1');
+        $stmt = $pdo->query('SELECT FOUND_ROWS()');
         $rows = $stmt->fetchColumn();
-        $pagination = Pagination::get('news', $rows, 25, $cur_page);
-        $content .= $pagination['content'];
+        $num_pages = ceil($rows / $per_page);
+
+        if ($num_pages >= 2)
+        {
+            //Выводим навигацию по страницам
+            $page = 0;
+            while ($page++ < $num_pages)
+            { 
+                if ($page == $cur_page)
+                $link .= '<span><b>'. $page .'</b></span>';
+                else
+                    if ($page == 1)
+                        $link .= '<span><a href="/news">1</a></span>';
+                    else
+                        $link .= '<span><a href="/news/'.$page.'/">'.$page.'</a></span>';
+            }
+            $tpl->set("{navigation}", $link);
+            $content .= $tpl->showmodule("navigation.tpl");
+        }
+
         //Проверяем 'пустые' страницы и выдаём оповещение
-        if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
+        if ($_GET['page'] > $num_pages) $error = true;
+        if ($error == true)
+        {
             $content = '<div class="error-alert">
-            <b>Внимание! Обнаружена ошибка.</b><br>
+            <b>Внимание! Обнаружена ошибка</b><br>
             По данному адресу публикаций на сайте не найдено.
             </div>';
         }
         $tpl->set("{content}", $content);
-        break;
+    break;
 
     case 'fullnews':
         //выполняем запрос к БД с последующим выводом новости
-        $stmt = $pdo->prepare('SELECT * FROM `news` JOIN `users` ON news.author_id = users.id WHERE news.id = :id and news.alt_name = :alt');
-        $stmt->execute(['id' => $_GET['id'], 'alt' => $_GET['alt']]);
-        if (empty($data = $stmt->fetch())) {
+        $stmt = $pdo->prepare('SELECT * FROM jre_news WHERE id = :id and alt_name = :alt_name');
+        $stmt->execute(array('id' => $_GET['id'], 'alt_name' => $_GET['alt']));
+        $row = $stmt->fetch();
+        if (empty($row))
+        {
             include(ROOT_DIR .'/modules/errors/404.php');
             exit;
         }
-        $tpl->set('{date}', $data['date']);
-        $tpl->set('{title}', $data['title']);
-        if (!$data['full_text']) $tpl->set('{fullnews}', $data['short_text']);
-        else $tpl->set('{fullnews}', $data['full_text']);
-        $tpl->set('{author}', $data['login']);
-        $tpl->set('{content}', $tpl->show('fullnews'));
-        $seo_title = $data['seo_title'];
-        $seo_description = $data['seo_description'];
-        $seo_keywords = $data['seo_keywords'];
-        break;
+        $tpl->set("{date}", date("d/m/Y - H:i",$row["date"]));
+        $tpl->set("{title}", $row["title"]);
+        if (!$row["fullnews"]) $tpl->set("{fullnews}", $row["news"]);
+        else $tpl->set("{fullnews}", $row["fullnews"]);
+        $tpl->set("{content}", $tpl->showmodule("fullnews.tpl"));
+        $page_title = $row["title"];
+    break;
 }
