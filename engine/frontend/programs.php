@@ -73,7 +73,7 @@ switch($_GET['show'])
             'description' => $result['description'],
             'image' => empty($result["image"]) ?
                 '/template/' . $config->tpl_dir . '/images/no_image.png' :
-                '/uploads/images/programs/' . $row["image"]
+                '/uploads/images/programs/' . $result["image"]
         ];
         include $template . '/fullprog.php';
         $seo_title = $result['seo_title'];

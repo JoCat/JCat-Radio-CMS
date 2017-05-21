@@ -46,6 +46,10 @@ class Helpers
         return date('H:i', strtotime($time));
     }
 
+    /**
+     * Функция вывода сообщений об ошибке
+     * @param  string  $reason  Причина ошибки
+     */
     public function get_error($reason)
     {
         return '<div class="error-alert">

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>JRE Admin Panel</title>
     <link rel="stylesheet" href="/engine/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/engine/admin/css/bootstrap-clockpicker.min.css">
     <link rel="stylesheet" href="/engine/admin/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -17,12 +18,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">JRE Admin Panel</a>
+          <a class="navbar-brand" href="/admin.php">JRE Admin Panel</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="admin.php">Управление сайтом</a></li>
-            <li><a href="admin.php?do=rj">Панель ведущих</a></li>
+            <li><a href="/admin.php">Управление сайтом</a></li>
+            <!-- <li><a href="/admin.php?do=rj">Панель ведущих</a></li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a></li>
@@ -55,5 +56,6 @@
     <!-- Scripts -->
     <script src="/engine/admin/js/jquery-2.1.4.min.js"></script>
     <script src="/engine/admin/js/bootstrap.min.js"></script>
+    <script src="/engine/admin/js/bootstrap-clockpicker.min.js"></script>
   </body>
 </html>

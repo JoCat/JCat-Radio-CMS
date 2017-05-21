@@ -49,7 +49,8 @@ if (isset($_POST['submit']))
     if (empty($_POST['pass2'])) $helpers->addMessage('Поле подтверждения пароля не может быть пустым', true);
     if (empty($helpers->msg))
     {
-        if ($_POST['pass'] != $_POST['pass2']) $helpers->addMessage('Пароли не совподают', true);
+        if ($_POST['pass'] != $_POST['pass2']) $helpers->addMessage('Пароли не совпадают', true);
+        if (!preg_match("/\w*/", $_POST['login'])) $helpers->addMessage('Логин может состоять только из русских и/или латинских букв, цифр, знака подчеркивания', true);
         if (empty($helpers->msg))
         {
             $stmt = $pdo->prepare('SELECT `login` FROM `users` WHERE `login` = :login');
