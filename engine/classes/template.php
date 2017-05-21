@@ -38,4 +38,9 @@ class Template
         }
         return $tpl;
     }
+
+    public function showtemplate()
+    {
+        die($this->show('main'));
+    }
 }

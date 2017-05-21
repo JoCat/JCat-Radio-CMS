@@ -54,17 +54,20 @@
       <div class="container">
        <div class="row">
         <div class="col-md-4">
+          <div class="block">
+            <div><b>Информация</b></div><hr>
+            <div id="jsi-info">Информация о потоке :3</div>            
+          </div>
           <div class="block hidden-xs hidden-sm">
-            <div><b>Плеер</b></div><hr>
-            <div id="jcp-player"></div>
-            <div id="jsi-info">Загрузка...</div>
+            <div><b>Информационный блок</b></div><hr>
+            <div>Контент информационного блока</div>            
           </div>
           <div class="block hidden-xs hidden-sm">
             <div><b>Информационный блок</b></div><hr>
             <div>Например социальный виджет (Сообщество в ВК)</div>            
           </div>
         </div>
-        <div class="col-md-8" id="pjax-container">
+        <div class="col-md-8">
         {content}
         </div>
        </div>
@@ -87,11 +90,12 @@
     </footer>
     <!-- Footer End -->
 
+    <div id="jcp-player"></div>
+
     <!-- Script Start -->
-    <script src="{dir}/js/jquery-2.1.4.min.js"></script>
-    <script src="{dir}/js/jquery.pjax.js"></script>
-    <script src="{dir}/js/bootstrap.min.js"></script>
-    <script src="{dir}/js/background-slide.js"></script>
+    <script type="text/javascript" src="{dir}/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="{dir}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{dir}/js/background-slide.js"></script>
     <!-- Script End -->
 </body>
 </html>

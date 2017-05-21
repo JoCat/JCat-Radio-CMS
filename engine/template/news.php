@@ -70,7 +70,7 @@ switch($_GET['show'])
         $tpl->set('{title}', $data['title']);
         if (!$data['full_text']) $tpl->set('{fullnews}', $data['short_text']);
         else $tpl->set('{fullnews}', $data['full_text']);
-        $tpl->set('{author}', '<a href="/user/' . strtolower($data['login']) . '">' . $data['login'] . '</a>');
+        $tpl->set('{author}', $data['login']);
         $tpl->set('{content}', $tpl->show('fullnews'));
         $seo_title = $data['seo_title'];
         $seo_description = $data['seo_description'];

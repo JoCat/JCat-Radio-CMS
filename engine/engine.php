@@ -39,8 +39,4 @@ $head .= empty($seo_description) ? '<meta name="description" content="' . $confi
 $head .= empty($seo_keywords) ? '<meta name="keywords" content="' . $config->keywords . '">' : '<meta name="keywords" content="' . $seo_keywords . '">';
 $tpl->set("{head}", $head);
 $tpl->set("{dir}", '/template/' . $config->tpl_dir);
-if (!isset($_SERVER['HTTP_X_PJAX'])) {
-    die($tpl->show('main'));
-} else {
-    die($tpl->show('ajax'));
-}
+$tpl->showtemplate();
