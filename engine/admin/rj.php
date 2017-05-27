@@ -7,7 +7,7 @@
 -------------------------------------
  Copyright (c) 2016 Molchanov A.I.
 =====================================
- Управление программами
+ Управление ведущими
 =====================================
 */
 if (!defined('JRE_KEY')) die("Hacking attempt!");
@@ -19,20 +19,20 @@ include(ENGINE_DIR . '/admin/head.html');
 if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
     $colored = true;
     $content = '<table class="news-table" cellspacing="0">';
-    $content .= '<tr><th>Программа</th><th>Описание</th><th colspan="2"><a href="/admin.php?do=programs&add">Добавить программу</a></th></tr>';
-    //Получаем номер страницы (значение лимита 20(кол-во программ на 1 страницу))
+    $content .= '<tr><th>Ник</th><th>Описание</th><th colspan="2"><a href="/admin.php?do=rj&add">Добавить ведущего</a></th></tr>';
+    //Получаем номер страницы (значение лимита 10(кол-во ведущих на 1 страницу))
     if (isset($_GET['page']) && $_GET['page'] >= 1){$cur_page = $_GET['page'];}
     else {$cur_page = 1;}
-    $limit_from = ($cur_page - 1) * 20;
+    $limit_from = ($cur_page - 1) * 10;
     //Выполняем запрос к БД с последующим выводом новостей
-    $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM jre_programs ORDER BY id DESC LIMIT :limit_from,20');
-    $stmt->execute(['limit_from' => $limit_from]);
+    $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM jre_rj ORDER BY id DESC LIMIT :limit_from,10');
+    $stmt->execute(array('limit_from' => $limit_from));
     while($row = $stmt->fetch()){
         $content .= ($colored) ? '<tr style="background-color:#fff;">' : '<tr>';
-        $content .= '<td>'.(iconv_strlen($row["title"],'utf-8')>25 ? (iconv_substr($row["title"],0,25,'utf-8')."...") : $row["title"]).'</td>
-        <td style="text-align:left;">'.(iconv_strlen($row["info"],'utf-8')>100 ? (iconv_substr($row["info"],0,100,'utf-8')."...") : $row["info"]).'</td>
-        <td><a href="/admin.php?do=programs&edit='.$row["id"].'">Редактировать</a></td>
-        <td><a href="/admin.php?do=programs&del='.$row["id"].'">Удалить</a></td>
+        $content .= '<td>'.(iconv_strlen($row["name"],'utf-8')>25 ? (iconv_substr($row["name"],0,25,'utf-8')."...") : $row["name"]).'</td>
+        <td style="text-align:left;">'.(iconv_strlen($row["description"],'utf-8')>100 ? (iconv_substr($row["description"],0,100,'utf-8')."...") : $row["description"]).'</td>
+        <td><a href="/admin.php?do=rj&edit='.$row["id"].'">Редактировать</a></td>
+        <td><a href="/admin.php?do=rj&del='.$row["id"].'">Удалить</a></td>
         </tr>';
         $colored = !$colored;
     }
@@ -40,24 +40,24 @@ if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add'])){
     //Узнаем общее количество страниц и заполняем массив со ссылками
     $stmt = $pdo->query('SELECT FOUND_ROWS()');
     $rows = $stmt->fetchColumn();
-    $content .= Pagination::getPagination('programs', $rows, 20, $cur_page);
+    $content .= Pagination::getPagination('rj', $rows, 10, $cur_page);
     //Проверяем 'пустые' страницы и выдаём оповещение
     if (isset($_GET['page']) && $_GET['page'] > $num_pages) $error = true;
-    if (isset($error) && $error == true) $content = 'Ошибка: Программы не найдены';
+    if (isset($error) && $error == true) $content = 'Ошибка: Ведущих не найдено';
 }
 if (isset($_GET['add'])){
     if(isset($_POST['submit'])){
-        $order = ["\r\n", "\n", "\r"];
+        $order = array("\r\n", "\n", "\r");
         $replace = '<br>';
         $text = str_replace($order,$replace,$_POST["text"]);
-        $stmt = $pdo->prepare('INSERT INTO `jre_programs`(`title`, `info`, `pic`) VALUES (:title,:info,:pic)');
-        $stmt->execute(['info' => $text, 'title' => $_POST['title'], 'pic' => $_POST['pic']]);
-        echo 'Программа успешно добавлена';
+        $stmt = $pdo->prepare('INSERT INTO `jre_rj`(`name`, `description`, `pic`) VALUES (:name,:description,:pic)');
+        $stmt->execute(array('description' => $text, 'name' => $_POST['title'], 'pic' => $_POST['pic']));
+        echo 'Ведущий успешно добавлен';
     }
     else {
-        $content = '<h1>Добавить программу</h1>
+        $content = '<h1>Добавить ведущего</h1>
         <form class="news" action="" method="POST">
-            <span>Название</span><br>
+            <span>Ник</span><br>
             <input class="input" required type="text" name="title"><br>
             <span>Полное название изображения</span><br>
             <input class="input" required type="text" name="pic"><br>
@@ -69,34 +69,34 @@ if (isset($_GET['add'])){
 }
 if (isset($_GET['edit'])){
     if (empty($_GET['edit'])){
-        echo 'Ошибка: Не выбрана программа';
+        echo 'Ошибка: Не выбран ведущий';
     }
     else {
         if(isset($_POST['submit'])){
-            $order = ["\r\n", "\n", "\r"];
+            $order = array("\r\n", "\n", "\r");
             $replace = '<br>';
             $text = str_replace($order,$replace,$_POST["text"]);
-            $stmt = $pdo->prepare('UPDATE `jre_programs` SET `title`=:title,`info`=:info,`pic`=:pic WHERE `id`=:id');
-            $stmt->execute(['info' => $text, 'title' => $_POST['title'], 'pic' => $_POST['pic'], 'id' => $_GET['edit']]);
-            echo 'Программа успешно отредактирована';
+            $stmt = $pdo->prepare('UPDATE `jre_rj` SET `name`=:name,`description`=:description,`pic`=:pic WHERE `id`=:id');
+            $stmt->execute(array('description' => $text, 'name' => $_POST['title'], 'pic' => $_POST['pic'], 'id' => $_GET['edit']));
+            echo 'Ведущий успешно отредактирован';
         }
         else {
-            $stmt = $pdo->prepare('SELECT * FROM jre_programs WHERE id = :id');
-            $stmt->execute(['id' => $_GET['edit']]);
+            $stmt = $pdo->prepare('SELECT * FROM jre_rj WHERE id = :id');
+            $stmt->execute(array('id' => $_GET['edit']));
             $rj = $stmt->fetch();
             if (empty($rj)) {
-                echo 'Ошибка: Программа не найдена';
+                echo 'Ошибка: Ведущий не найден';
             }
             else {
-                $rj['info'] = str_replace('<br>',PHP_EOL,$rj['info']);
-                $content = '<h1>Редактировать программу</h1>
+                $rj['description'] = str_replace('<br>',PHP_EOL,$rj['description']);
+                $content = '<h1>Редактировать ведущего</h1>
                 <form class="news" action="" method="POST">
-                    <span>Название</span><br>
-                    <input class="input" required type="text" name="title" value="'.$rj['title'].'"><br>
+                    <span>Ник</span><br>
+                    <input class="input" required type="text" name="title" value="'.$rj['name'].'"><br>
                     <span>Полное название изображения</span><br>
                     <input class="input" required type="text" name="pic" value="'.$rj['pic'].'"><br>
                     <span>Краткое описание</span><br>
-                    <textarea required style="padding:10px;" class="input" name="text">'.$rj['info'].'</textarea>
+                    <textarea required style="padding:10px;" class="input" name="text">'.$rj['description'].'</textarea>
                     <input class="button" type="submit" value="Сохранить" name="submit">
                 </form>';
             }
@@ -106,25 +106,25 @@ if (isset($_GET['edit'])){
 }
 if (isset($_GET['del'])) {
     if (empty($_GET['del'])){
-        echo 'Ошибка: Не выбрана программа';
+        echo 'Ошибка: Не выбран ведущий';
     }
     else {
         if(isset($_POST['submit'])){
-            $stmt = $pdo->prepare('DELETE FROM `jre_programs` WHERE `id`=:id');
-            $stmt->execute(['id' => $_GET['del']]);
-            echo 'Программа успешно удалена';
+            $stmt = $pdo->prepare('DELETE FROM `jre_rj` WHERE `id`=:id');
+            $stmt->execute(array('id' => $_GET['del']));
+            echo 'Ведущий успешно удален';
         }
         else {
-            $stmt = $pdo->prepare('SELECT * FROM jre_programs WHERE id = :id');
-            $stmt->execute(['id' => $_GET['del']]);
+            $stmt = $pdo->prepare('SELECT * FROM jre_rj WHERE id = :id');
+            $stmt->execute(array('id' => $_GET['del']));
             $rj = $stmt->fetch();
             if (empty($rj)) {
-                echo 'Ошибка: Программа не найдена';
+                echo 'Ошибка: Ведущий не найден';
             }
             else {
-                $content = '<h1>Удаление программы</h1>
+                $content = '<h1>Удаление ведущего</h1>
                 <form style="text-align:center;" action="" method="POST">
-                    <h3 style="margin:1em 0 0;">Вы действительно хотите удалить программу?</h3>
+                    <h3 style="margin:1em 0 0;">Вы действительно хотите удалить ведущего?</h3>
                     <input class="button" style="width:auto;" type="button" value="Вернутся назад" onClick="javascript:history.back();">
                     <input class="button" style="width:auto;" type="submit" value="Да, удалить" name="submit">
                 </form>

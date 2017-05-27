@@ -1,25 +1,24 @@
 <?php
 /*
-=======================================
+=====================================
  JCat Radio Engine
----------------------------------------
- *site*
----------------------------------------
- Copyright (c) 2016-2017 Molchanov A.I.
-=======================================
+-------------------------------------
+ http://radiocms.tk
+-------------------------------------
+ Copyright (c) 2016 Molchanov A.I.
+=====================================
  Главная страница
-=======================================
+=====================================
 */
 
-// Debug
-@error_reporting(E_ALL);
-@ini_set('display_errors', true);
+@error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
+@ini_set ( 'display_errors', true );
+@ini_set ( 'html_errors', false );
+@ini_set ( 'error_reporting', E_ALL ^ E_WARNING ^ E_NOTICE );
 
-//Release
-//@error_reporting(E_ERROR);
+define ( 'JRE_KEY', true );
+define ( 'ROOT_DIR', dirname ( __FILE__ ) );
+define ( 'ENGINE_DIR', ROOT_DIR . '/engine' );
 
-define('JRE_KEY', true);
-define('ROOT_DIR', __DIR__);
-define('ENGINE_DIR', ROOT_DIR . '/engine');
-
-require_once(ENGINE_DIR . '/engine.php');
+require_once ( ENGINE_DIR . '/engine.php' );
+?>

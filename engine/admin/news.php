@@ -1,152 +1,152 @@
 <?php
 /*
-=======================================
+=====================================
  JCat Radio Engine
----------------------------------------
- *site*
----------------------------------------
- Copyright (c) 2016-2017 Molchanov A.I.
-=======================================
+-------------------------------------
+ http://radiocms.tk
+-------------------------------------
+ Copyright (c) 2016 Molchanov A.I.
+=====================================
  Управление новостями
-=======================================
+=====================================
 */
-if (!defined('JRE_KEY')) die ("Hacking attempt!");
-include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/pagination.php');
-include (ENGINE_DIR . '/classes/purifier.php');
-include (ENGINE_DIR . '/classes/helpers.php');
-include (ENGINE_DIR . '/classes/url.php');
+if (!defined('JRE_KEY')) die("Hacking attempt!");
+include(ENGINE_DIR . '/data/db_config.php');
+include(ENGINE_DIR . '/classes/db_connect.php');
+include(ENGINE_DIR . '/classes/url.php');
+include(ENGINE_DIR . '/classes/pagination.php');
+include(ENGINE_DIR . '/admin/head.html');
 
-$menu->set_sidebar_menu([
-    [
-        'name' => 'Главная',
-        'link' => '',
-    ],
-    [
-        'name' => 'Новости',
-        'link' => '?do=news',
-        'active' => true,
-    ],
-    [
-        'name' => 'Программы',
-        'link' => '?do=programs',
-    ],
-    [
-        'name' => 'Расписание',
-        'link' => '?do=schedule',
-    ],
-    [
-        'name' => 'Статические страницы',
-        'link' => '?do=static',
-    ],
-], 'admin.php');
-
-if (isset($_GET['create'])) {
-    if (isset($_POST['submit'])) {
-        if (empty($_POST['title'])) echo $helpers->get_error('Не указано название новости.');
-        elseif (empty($_POST['short_text'])) echo $helpers->get_error('Не указано краткое содержание новости.');
-        else {
-            $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
-            $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
-            $stmt = $pdo->prepare('SELECT `id` FROM `users` WHERE login = :login');
-            $stmt->execute(['login' => $user->get('username')]);
-            $author_id = $stmt->fetch();
-            $stmt = $pdo->prepare('INSERT INTO `news`(`title`, `alt_name`, `short_text`, `full_text`, `show`, `author_id`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:title, :alt_name, :short_text, :full_text, :show, :author_id, :seo_title, :seo_description, :seo_keywords)');
-            $purifier = load_htmlpurifier($allowed);
-            $stmt->execute([
-                'title' => $purifier->purify($_POST['title']),
-                'alt_name' => $purifier->purify($alt_name),
-                'short_text' => $purifier->purify($_POST['short_text']),
-                'full_text' => $purifier->purify($_POST['full_text']),
-                'show' => $_POST['show'],
-                'author_id' => $author_id['id'],
-                'seo_title' => $purifier->purify($seo_title),
-                'seo_description' => $purifier->purify($_POST['seo_description']),
-                'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
-            ]);
-            echo '<p>Новость успешно добавлена<br></p>
-            <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
-        }
-    } else {
-        include $template . 'views/news/create.php';
-    }
-} elseif (isset($_GET['update'])) {
-    if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана новость.');
-    elseif (isset($_POST['submit'])) {
-        if (empty($_POST['title'])) echo $helpers->get_error('Не указано название новости.');
-        elseif (empty($_POST['short_text'])) echo $helpers->get_error('Не указано краткое содержание новости.');
-        else {
-            $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
-            $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
-            $stmt = $pdo->prepare('UPDATE `news` SET `title`=:title,`alt_name`=:alt_name,`short_text`=:short_text,`full_text`=:full_text,`show`=:show,`seo_title`=:seo_title,`seo_description`=:seo_description,`seo_keywords`=:seo_keywords WHERE `id`=:id');
-            $purifier = load_htmlpurifier($allowed);
-            $stmt->execute([
-                'id' => $_GET['update'],
-                'title' => $purifier->purify($_POST['title']),
-                'alt_name' => $purifier->purify($alt_name),
-                'short_text' => $purifier->purify($_POST['short_text']),
-                'full_text' => $purifier->purify($_POST['full_text']),
-                'show' => $_POST['show'],
-                'seo_title' => $purifier->purify($seo_title),
-                'seo_description' => $purifier->purify($_POST['seo_description']),
-                'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
-            ]);
-            echo '<p>Новость успешно отредактирована<br></p>
-            <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
-        }
-    } else {
-        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id` = :id');
-        $stmt->execute(['id' => $_GET['update']]);
-        $news = $stmt->fetch();
-        if (empty($news)) echo $helpers->get_error('Новость не найдена.');
-        else {
-            include $template . 'views/news/update.php';
-        }
-    }
-} elseif (isset($_GET['delete'])) {
-    if (empty($_GET['delete'])) echo $helpers->get_error('Не выбрана новость.');
-    elseif (isset($_POST['submit'])) {
-        $stmt = $pdo->prepare('DELETE FROM `news` WHERE `id` = :id');
-        $stmt->execute(['id' => $_GET['delete']]);
-        echo '<p>Новость успешно удалена<br></p>
-        <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
-    } else {
-        $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id` = :id');
-        $stmt->execute(['id' => $_GET['delete']]);
-        $news = $stmt->fetch();
-        if (empty($news)) echo $helpers->get_error('Новость не найдена.');
-        else {
-            include $template . 'views/news/delete.php';
-        }
-    }
-} else {
-    //Получаем номер страницы (значение лимита 20(кол-во новостей на 1 страницу))
+if (!isset($_GET['edit']) && !isset($_GET['del']) && !isset($_GET['add']))
+{
+    $colored = true;
+    $content = '<table class="news-table" cellspacing="0"><tr><th>Дата создания</th><th>Заголовок</th><th>Описание</th><th colspan="2"><a href="/admin.php?do=news&add">Добавить новость</a></th></tr>';
+    //Получаем номер страницы (значение лимита 25(кол-во новостей на 1 страницу))
     $cur_page = (isset($_GET['page']) && $_GET['page'] >= 1) ? $_GET['page'] : 1;
-    $limit_from = ($cur_page - 1) * 20;
+    $limit_from = ($cur_page - 1) * 25;
     //Выполняем запрос к БД с последующим выводом новостей
-    $stmt = $pdo->prepare('SELECT * FROM `news` ORDER BY date DESC LIMIT :limit_from,20');
+    $stmt = $pdo->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM `jre_news` ORDER BY `date` DESC LIMIT :limit_from,25');
     $stmt->execute(['limit_from' => $limit_from]);
     while($row = $stmt->fetch()){
-        $data[] = [
-            'id' => $row['id'],
-            'title' => iconv_strlen($row['title'], 'utf-8') > 25 ?
-                iconv_substr($row['title'], 0, 25, 'utf-8') . '...' :
-                $row['title'],
-            'date' => $helpers->get_date($row['date']),
-            'short_text' => iconv_strlen($row['short_text'], 'utf-8') > 100 ?
-                iconv_substr($row['short_text'], 0, 100, 'utf-8') . '...' :
-                $row['short_text']
-        ];
+        $content .= ($colored) ? '<tr style="background-color:#fff;">' : '<tr>';
+        $content .= '<td>'.date("d/m/Y - H:i",$row["date"]).'</td>
+        <td>'.(iconv_strlen($row["title"],'utf-8')>25 ? (iconv_substr($row["title"],0,25,'utf-8')."...") : $row["title"]).'</td>
+        <td style="text-align:left;">'.(iconv_strlen($row["news"],'utf-8')>100 ? (iconv_substr($row["news"],0,100,'utf-8')."...") : $row["news"]).'</td>
+        <td><a href="/admin.php?do=news&edit='.$row["id"].'">Редактировать</a></td>
+        <td><a href="/admin.php?do=news&del='.$row["id"].'">Удалить</a></td>
+        </tr>';
+        $colored = !$colored;
     }
-    //узнаем общее количество страниц и заполняем массив со ссылками
-    $stmt = $pdo->query('SELECT COUNT(*) FROM `news`');
+    $content .= '</table>';
+    //Узнаем общее количество страниц и заполняем массив со ссылками
+    $stmt = $pdo->query('SELECT FOUND_ROWS()');
     $rows = $stmt->fetchColumn();
-    $pagination = Pagination::get('news', $rows, 20, $cur_page);
+    $content .= Pagination::getPagination('news', $rows, 25, $cur_page);
     //Проверяем 'пустые' страницы и выдаём оповещение
-    if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
-        echo $helpers->get_error('Публикации не найдены.');
-    } else {
-        include $template . 'views/news/index.php';
-        echo $pagination['content'];
+    if (isset($_GET['page']) && $_GET['page'] > $num_pages) $error = true;
+    if (isset($error) && $error == true) $content = 'Ошибка: Публикаций не найдено';
+}
+if (isset($_GET['add'])){
+    if(isset($_POST['submit'])){
+        $news = str_replace(["\r\n", "\n", "\r"],'<br>',$_POST["news"]);
+        $fullnews = str_replace(["\r\n", "\n", "\r"],'<br>',$_POST["fullnews"]);
+        $link = str2url($_POST['title']);
+        $stmt = $pdo->prepare('INSERT INTO `jre_news` (`date`,`news`,`fullnews`,`title`,`alt_name`) VALUES (:date,:news,:fullnews,:title,:alt_name)');
+        $stmt->execute([
+            'date' => time(),
+            'news' => $news,
+            'fullnews' => $fullnews,
+            'title' => $_POST['title'],
+            'alt_name' => $link
+        ]);
+        echo 'Новость успешно добавлена<br><a href="/admin.php?do=news"><button class="button" style="width:auto;">Вернутся назад</button></a>';
+    }
+    else {
+        $content = '<h1>Добавить новость</h1>
+        <form class="news" action="" method="POST">
+            <span>Заголовок новости</span><br>
+            <input class="input" required type="text" name="title"><br>
+            <span>Краткое описание</span><br>
+            <textarea required style="padding:10px;" class="input" name="news"></textarea>
+            <span>Текст новости</span><br>
+            <textarea required style="padding:10px;" class="input" name="fullnews"></textarea>
+            <input class="button" type="submit" value="Добавить" name="submit">
+        </form>';
     }
 }
+if (isset($_GET['edit'])){
+    if (empty($_GET['edit'])){
+        echo 'Ошибка: Не выбрана новость';
+    }
+    else {
+        if(isset($_POST['submit'])){
+            $news = str_replace(["\r\n", "\n", "\r"],'<br>',$_POST["news"]);
+            $fullnews = str_replace(["\r\n", "\n", "\r"],'<br>',$_POST["fullnews"]);
+            $stmt = $pdo->prepare('UPDATE `jre_news` SET `date`=:date,`news`=:news,`fullnews`=:fullnews,`title`=:title WHERE `id`=:id');
+            $stmt->execute([
+                'date' => time(),
+                'news' => $news,
+                'fullnews' => $fullnews,
+                'title' => $_POST['title'],
+                'id' => $_GET['edit']
+            ]);
+            echo 'Новость успешно отредактирована';
+            echo '<br><a href="/admin.php?do=news"><button class="button" style="width:auto;">Вернутся назад</button></a>';
+        }
+        else {
+            $stmt = $pdo->prepare('SELECT * FROM `jre_news` WHERE `id`=:id');
+            $stmt->execute(['id' => $_GET['edit']]);
+            $news = $stmt->fetch();
+            if (empty($news)) {
+                echo 'Ошибка: Новость не найдена';
+            }
+            else {
+                $news['news'] = str_replace('<br>',PHP_EOL,$news['news']);
+                $content = '<h1>Редактировать новость</h1>
+                <form class="news" action="" method="POST">
+                    <span>Заголовок новости</span><br>
+                    <input class="input" required type="text" name="title" value="'.$news['title'].'"><br>
+                    <span>Краткое описание</span><br>
+                    <textarea required style="padding:10px;" class="input" name="news">'.$news['news'].'</textarea>
+                    <span>Текст новости</span><br>
+                    <textarea required style="padding:10px;" class="input" name="fullnews">'.$news['fullnews'].'</textarea>
+                    <input class="button" type="submit" value="Сохранить" name="submit">
+                </form>';
+            }
+
+        }
+    }
+}
+if (isset($_GET['del'])) {
+    if (empty($_GET['del'])){
+        echo 'Ошибка: Не выбрана новость';
+    }
+    else {
+        if(isset($_POST['submit'])){
+            $stmt = $pdo->prepare('DELETE FROM `jre_news` WHERE `id`=:id');
+            $stmt->execute(['id' => $_GET['del']]);
+            echo 'Новость успешно удалена';
+            echo '<br><a href="/admin.php?do=news"><button class="button" style="width:auto;">Вернутся назад</button></a>';
+        }
+        else {
+            $stmt = $pdo->prepare('SELECT * FROM `jre_news` WHERE `id`=:id');
+            $stmt->execute(['id' => $_GET['del']]);
+            $news = $stmt->fetch();
+            if (empty($news)) {
+                echo 'Ошибка: Новость не найдена';
+            }
+            else {
+                $content = '<h1>Удаление новости</h1>
+                <form style="text-align:center;" action="" method="POST">
+                    <h3 style="margin:1em 0 0;">Вы действительно хотите удалить новость?</h3>
+                    <input class="button" style="width:auto;" type="button" value="Вернутся назад" onClick="javascript:history.back();">
+                    <input class="button" style="width:auto;" type="submit" value="Да, удалить" name="submit">
+                </form>
+                ';
+            }
+        }
+    }
+}
+echo $content;
+include(ENGINE_DIR . '/admin/footer.html');
+?>

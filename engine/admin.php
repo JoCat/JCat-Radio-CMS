@@ -1,51 +1,53 @@
 <?php
 /*
-=======================================
+=====================================
  JCat Radio Engine
----------------------------------------
- *site*
----------------------------------------
- Copyright (c) 2016-2017 Molchanov A.I.
-=======================================
+-------------------------------------
+ http://radiocms.tk
+-------------------------------------
+ Copyright (c) 2016 Molchanov A.I.
+=====================================
  Обработчик Админпанели
-=======================================
+=====================================
 */
 if (!defined('JRE_KEY')) die("Hacking attempt!");
-include (ENGINE_DIR . '/classes/config_loader.php');
-include (ENGINE_DIR . '/classes/menu.php');
+include(ENGINE_DIR . '/data/config.php');
 session_start();
-ob_start();
 
-$config = ConfigLoader::load('config');
-$db_config = ConfigLoader::load('db_config');
-$template = ENGINE_DIR . "/admin/";
-include (ENGINE_DIR . '/classes/user.php');
-
-if (isset($_SESSION['auth']))
+$do = isset($_GET['do']) ? $_GET['do'] : false;
+if (isset($_SESSION['auth']) && $_SESSION['auth'] == 'true')
 {
-    $do = isset($_GET['do']) ? $_GET['do'] : false;
     switch($do)
     {
-        default:
-            require_once(ENGINE_DIR . '/admin/main.php');
-        break;
-
-        case 'logout':
+        case 'exit':
             session_destroy();
             header('Location:http://'. $_SERVER['HTTP_HOST']);
         break;
 
+        case 'config':
         case 'news':
+        case 'rj':
         case 'programs':
         case 'schedule':
         case 'static':
-        case 'settings':
+        case 'widgets':
             require_once(ENGINE_DIR . '/admin/'. $do .'.php');
         break;
+
+        default:
+    		require_once(ENGINE_DIR . '/admin/main.php');
+    	break;
     }
-    $content = ob_get_clean();
-    include $template . 'admin.php';
 } else {
-    header("HTTP/1.1 404 Not Found");
-    exit();
+    switch($do)
+    {
+        case 'reg':
+        case 'lostpassword':
+            require_once(ENGINE_DIR . '/admin/'. $do .'.php');
+        break;
+
+        default:
+            require_once(ENGINE_DIR . '/admin/auth.php');
+        break;
+    }
 }
