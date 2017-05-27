@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 22 2017 г., 01:07
+-- Время создания: Май 27 2017 г., 21:06
 -- Версия сервера: 5.5.45-log
 -- Версия PHP: 5.6.12
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `seo_keywords` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `author_id` (`author_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,23 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `show` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `program_id` (`program_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `static_page`
+--
+
+CREATE TABLE IF NOT EXISTS `static_page` (
+  `id` int(11) unsigned NOT NULL,
+  `url` varchar(128) NOT NULL,
+  `content` text NOT NULL,
+  `seo_title` varchar(128) DEFAULT NULL,
+  `seo_description` text,
+  `seo_keywords` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

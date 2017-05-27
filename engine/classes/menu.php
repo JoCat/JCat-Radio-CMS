@@ -8,12 +8,16 @@ class Menu
 
     public function get_sidebar_menu()
     {
-        return $this->sidebar_menu;
+        return '<ul class="sidebar-menu list-unstyled">' . $this->sidebar_menu . '</ul>';
+    }
+
+    public function get_custom_menu($classes = null)
+    {
+        return '<ul class="' . $classes . '">' . $this->sidebar_menu . '</ul>';
     }
 
     public function set_sidebar_menu($list, $link_prefix = null)
     {
-        $this->sidebar_menu = '<ul class="sidebar-menu list-unstyled">';
         $this->set($this->sidebar_menu, $list, $link_prefix);
     }
 
@@ -26,7 +30,6 @@ class Menu
                 .(isset($link_prefix) ? $link_prefix : '').$val['link'].
                 '">'.$val['name'].'</a></li>';
         }
-        $value .= '</ul>';
     }
 }
 $menu = new Menu;

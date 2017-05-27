@@ -89,3 +89,26 @@ aside {
 }
 .tac {text-align: center;}
 .mb10 {margin-bottom: 10px;}
+@media (max-width: 767px) {
+    aside {
+        display: none;
+    }
+    .content {
+        margin-left: 0;
+    }
+    .dropdown-menu {
+        padding: 0;
+    }
+    .navbar-nav {
+        margin: 0px -15px;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: #fff;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>.active>a, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover {
+        color: #333;
+        background-color: #efefef;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+}

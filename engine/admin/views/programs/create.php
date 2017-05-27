@@ -41,7 +41,7 @@
       </div>
       <div class="form-group">
         <label for="seo_description">SEO Описание</label>
-        <input type="text" class="form-control" name="seo_description" id="seo_description">
+        <textarea class="form-control" name="seo_description" id="seo_description"></textarea>
       </div>
       <div class="form-group">
         <label for="seo_keywords">Ключевые слова</label>
