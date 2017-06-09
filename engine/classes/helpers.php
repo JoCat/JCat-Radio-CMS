@@ -60,5 +60,26 @@ class Helpers
           <button onclick="history.go(-1);" class="btn btn-danger">Вернутся назад</button>
         </div>';
     }
+
+    public function get_templates()
+    {
+      $tpl_dir = ROOT_DIR . '/template/';
+      $dirs = scandir($tpl_dir);
+      unset($dirs[0], $dirs[1]);
+      foreach ($dirs as $value) {
+        if (is_dir($tpl_dir . $value)) {
+          $links[] = $value;
+        }
+      }
+      return $links;
+    }
+
+    public function text_cut($text, $lenght)
+    {
+      return mb_strlen($text) > $lenght ?
+        mb_substr($text, 0, $lenght) . '...' :
+        $text;
+    }
+
 }
 $helpers = new Helpers;

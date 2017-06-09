@@ -55,7 +55,7 @@ if (isset($_GET['create'])) {
                 'seo_description' => $purifier->purify($_POST['seo_description']),
                 'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
             ]);
-            echo '<p>Страница успешно добавлена<br></p>
+            echo '<p>Страница успешно добавлена</p>
             <a href="/admin.php?do=static" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
@@ -77,7 +77,7 @@ if (isset($_GET['create'])) {
                 'seo_description' => $purifier->purify($_POST['seo_description']),
                 'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
             ]);
-            echo '<p>Страница успешно отредактирована<br></p>
+            echo '<p>Страница успешно отредактирована</p>
             <a href="/admin.php?do=static" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
@@ -94,7 +94,7 @@ if (isset($_GET['create'])) {
     elseif (isset($_POST['submit'])) {
         $stmt = $pdo->prepare('DELETE FROM `static_page` WHERE `id` = :id');
         $stmt->execute(['id' => $_GET['delete']]);
-        echo '<p>Страница успешно удалена<br></p>
+        echo '<p>Страница успешно удалена</p>
         <a href="/admin.php?do=static" class="btn btn-success">Вернутся назад</a>';
     } else {
         $stmt = $pdo->prepare('SELECT * FROM `static_page` WHERE `id` = :id');

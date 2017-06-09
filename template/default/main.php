@@ -39,7 +39,7 @@
               <ul class="dropdown-menu">
                 <li><a href="/admin.php">Админпанель</a></li>
                 <li><a href="/user/<?= mb_strtolower($user->get('username')) ?>">Профиль</a></li>
-                <li><a href="#">Управление аккаунтом</a></li>
+                <li class="disabled"><a href="#">Управление аккаунтом</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/logout">Выход</a></li>
               </ul>

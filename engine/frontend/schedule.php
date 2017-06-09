@@ -14,7 +14,7 @@ if (!defined('JRE_KEY')) die("Hacking attempt!");
 include (ENGINE_DIR . '/classes/db_connect.php');
 include (ENGINE_DIR . '/classes/helpers.php');
 
-$page_title = 'Расписание &raquo; '. $config->title;
+$seo_title = 'Расписание &raquo; '. $config->title;
 
 $stmt = $pdo->prepare('SELECT * FROM `schedule` JOIN `programs` ON schedule.program_id = programs.id WHERE schedule.day = :day AND schedule.show = 1 ORDER BY schedule.start_time ASC');
 $days = [

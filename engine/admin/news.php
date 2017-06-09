@@ -54,17 +54,17 @@ if (isset($_GET['create'])) {
             $stmt = $pdo->prepare('INSERT INTO `news`(`title`, `alt_name`, `short_text`, `full_text`, `show`, `author_id`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:title, :alt_name, :short_text, :full_text, :show, :author_id, :seo_title, :seo_description, :seo_keywords)');
             $purifier = load_htmlpurifier($allowed);
             $stmt->execute([
-                'title' => $purifier->purify($_POST['title']),
-                'alt_name' => $purifier->purify($alt_name),
+                'title' => strip_tags($_POST['title']),
+                'alt_name' => strip_tags($alt_name),
                 'short_text' => $purifier->purify($_POST['short_text']),
                 'full_text' => $purifier->purify($_POST['full_text']),
                 'show' => $_POST['show'],
-                'author_id' => $author_id['id'],
-                'seo_title' => $purifier->purify($seo_title),
-                'seo_description' => $purifier->purify($_POST['seo_description']),
-                'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
+                'author_id' => $author_id->id,
+                'seo_title' => strip_tags($seo_title),
+                'seo_description' => strip_tags($_POST['seo_description']),
+                'seo_keywords' => strip_tags($_POST['seo_keywords'])
             ]);
-            echo '<p>Новость успешно добавлена<br></p>
+            echo '<p>Новость успешно добавлена</p>
             <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
@@ -82,16 +82,16 @@ if (isset($_GET['create'])) {
             $purifier = load_htmlpurifier($allowed);
             $stmt->execute([
                 'id' => $_GET['update'],
-                'title' => $purifier->purify($_POST['title']),
-                'alt_name' => $purifier->purify($alt_name),
+                'title' => strip_tags($_POST['title']),
+                'alt_name' => strip_tags($alt_name),
                 'short_text' => $purifier->purify($_POST['short_text']),
                 'full_text' => $purifier->purify($_POST['full_text']),
                 'show' => $_POST['show'],
-                'seo_title' => $purifier->purify($seo_title),
-                'seo_description' => $purifier->purify($_POST['seo_description']),
-                'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
+                'seo_title' => strip_tags($seo_title),
+                'seo_description' => strip_tags($_POST['seo_description']),
+                'seo_keywords' => strip_tags($_POST['seo_keywords'])
             ]);
-            echo '<p>Новость успешно отредактирована<br></p>
+            echo '<p>Новость успешно отредактирована</p>
             <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
@@ -108,7 +108,7 @@ if (isset($_GET['create'])) {
     elseif (isset($_POST['submit'])) {
         $stmt = $pdo->prepare('DELETE FROM `news` WHERE `id` = :id');
         $stmt->execute(['id' => $_GET['delete']]);
-        echo '<p>Новость успешно удалена<br></p>
+        echo '<p>Новость успешно удалена</p>
         <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
     } else {
         $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `id` = :id');
@@ -126,18 +126,7 @@ if (isset($_GET['create'])) {
     //Выполняем запрос к БД с последующим выводом новостей
     $stmt = $pdo->prepare('SELECT * FROM `news` ORDER BY date DESC LIMIT :limit_from,20');
     $stmt->execute(['limit_from' => $limit_from]);
-    while($row = $stmt->fetch()){
-        $data[] = [
-            'id' => $row['id'],
-            'title' => iconv_strlen($row['title'], 'utf-8') > 25 ?
-                iconv_substr($row['title'], 0, 25, 'utf-8') . '...' :
-                $row['title'],
-            'date' => $helpers->get_date($row['date']),
-            'short_text' => iconv_strlen($row['short_text'], 'utf-8') > 100 ?
-                iconv_substr($row['short_text'], 0, 100, 'utf-8') . '...' :
-                $row['short_text']
-        ];
-    }
+    $data = $stmt->fetchAll();
     //узнаем общее количество страниц и заполняем массив со ссылками
     $stmt = $pdo->query('SELECT COUNT(*) FROM `news`');
     $rows = $stmt->fetchColumn();

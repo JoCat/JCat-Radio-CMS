@@ -30,8 +30,8 @@
             <!-- <li><a href="/admin.php?do=rj">Панель ведущих</a></li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="hidden-xs"><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
-            <li class="visible-xs"><a href="#">Настройки сайта</a></li>
+            <li class="hidden-xs"><a href="/admin.php?do=settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+            <li class="visible-xs"><a href="/admin.php?do=settings">Настройки сайта</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <img src="<?= $user->get_avatar() ?>" alt="" class="img-circle user-img">
@@ -39,10 +39,14 @@
               <span class="glyphicon glyphicon-chevron-down"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><span><?= $user->get('usergroup') ?></span></li>
+                <li>
+                  <img src="<?= $user->get_avatar() ?>" alt="" class="img-circle user-img-big center-block">
+                  <span class="tac"><?= $user->get('username') ?></span>
+                  <span class="tac"><?= $user->get('usergroup') ?></span>
+                </li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/">На сайт</a></li>
-                <li><a href="#">Управление аккаунтом</a></li>
+                <li><a href="/" target="_blank">Просмотр сайта</a></li>
+                <li class="disabled"><a href="#">Управление аккаунтом</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/admin.php?do=logout">Выход</a></li>
               </ul>

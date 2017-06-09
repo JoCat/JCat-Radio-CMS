@@ -12,40 +12,40 @@
     <div role="tabpanel" class="tab-pane active" id="general">
       <div class="form-group">
         <label for="title">Заголовок новости</label>
-        <input type="text" required class="form-control" name="title" id="title" value="<?= $news['title'] ?>">
+        <input type="text" required class="form-control" name="title" id="title" value="<?= $news->title ?>">
       </div>
       <div class="form-group">
         <label for="short_text">Краткое описание</label>
-        <textarea name="short_text" id="short_text"><?= $news['short_text'] ?></textarea>
+        <textarea name="short_text" id="short_text"><?= $news->short_text ?></textarea>
       </div>
       <div class="form-group">
         <label for="full_text">Полное описание</label>
-        <textarea name="full_text" id="full_text"><?= $news['full_text'] ?></textarea>
+        <textarea name="full_text" id="full_text"><?= $news->full_text ?></textarea>
       </div>
       <div class="checkbox">
         <label>
           <input type="hidden" name="show" value="0">
-          <input type="checkbox" name="show" value="1"<?php if ($news['show']) echo " checked"; ?>>Отображать новость на сайте
+          <input type="checkbox" name="show" value="1"<?php if ($news->show) echo " checked"; ?>>Отображать новость на сайте
         </label>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="meta">
       <div class="form-group">
         <label for="alt_name">Ссылка на страницу</label>
-        <input type="text" class="form-control" name="alt_name" id="alt_name" value="<?= $news['alt_name'] ?>">
+        <input type="text" class="form-control" name="alt_name" id="alt_name" value="<?= $news->alt_name ?>">
         <p class="help-block">Оставьте поле пустым для автоматической генерации адреса</p>
       </div>
       <div class="form-group">
         <label for="seo_title">Заголовок страницы</label>
-        <input type="text" class="form-control" name="seo_title" id="seo_title" value="<?= $news['seo_title'] ?>">
+        <input type="text" class="form-control" name="seo_title" id="seo_title" value="<?= $news->seo_title ?>">
       </div>
       <div class="form-group">
         <label for="seo_description">SEO Описание</label>
-        <textarea class="form-control" name="seo_description" id="seo_description"><?= $news['seo_description'] ?></textarea>
+        <textarea class="form-control" name="seo_description" id="seo_description"><?= $news->seo_description ?></textarea>
       </div>
       <div class="form-group">
         <label for="seo_keywords">Ключевые слова</label>
-        <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?= $news['seo_keywords'] ?>">
+        <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?= $news->seo_keywords ?>">
       </div>
     </div>
   </div>
