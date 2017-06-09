@@ -47,8 +47,15 @@ html, body {
     background-color: rgba(0, 0, 0, 0.2);
 }
 .navbar .user-img {
-    width: 25px;
-    height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+}
+.navbar .user-img-big {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 5px auto;
+    border: 4px solid #fff;
+    box-shadow: 0px 0px 5px 2px #ccc;
 }
 aside {
     position: fixed;
@@ -89,6 +96,24 @@ aside {
 }
 .tac {text-align: center;}
 .mb10 {margin-bottom: 10px;}
+.settings td:last-child {
+    width: 300px;
+}
+.header {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+.visits-table {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Mobile Fix */
+@media (max-width: 1023px) {
+    .settings td:last-child {
+        width: 200px;
+    }
+}
 @media (max-width: 767px) {
     aside {
         display: none;
@@ -110,5 +135,11 @@ aside {
         background-color: #efefef;
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
+    }
+    .panel {
+        overflow: auto;
+    }
+    .settings td:last-child {
+        width: 150px;
     }
 }

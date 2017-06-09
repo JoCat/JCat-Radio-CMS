@@ -8,7 +8,7 @@ class UploadImage
     public $errorCode;
     public $filePath;
 
-    function __construct($foo = null)
+    function __construct()
     {
         $this->uploadDir = ROOT_DIR . '/uploads/images/';
     }

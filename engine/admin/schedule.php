@@ -63,7 +63,7 @@ if (isset($_GET['create'])) {
                 'end_time' => $_POST['end_time'],
                 'show' => $_POST['show']
             ]);
-            echo '<p>Эфир успешно добавлен<br></p>
+            echo '<p>Эфир успешно добавлен</p>
             <a href="/admin.php?do=schedule" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
@@ -86,7 +86,7 @@ if (isset($_GET['create'])) {
                 'end_time' => $_POST['end_time'],
                 'show' => $_POST['show']
             ]);
-            echo '<p>Эфир успешно изменён<br></p>
+            echo '<p>Эфир успешно изменён</p>
             <a href="/admin.php?do=schedule" class="btn btn-success">Вернутся назад</a>';
         }
     } else {
@@ -105,7 +105,7 @@ if (isset($_GET['create'])) {
     elseif (isset($_POST['submit'])) {
         $stmt = $pdo->prepare('DELETE FROM `schedule` WHERE `id` = :id');
         $stmt->execute(['id' => $_GET['delete']]);
-        echo '<p>Эфир успешно удалён<br></p>
+        echo '<p>Эфир успешно удалён</p>
         <a href="/admin.php?do=schedule" class="btn btn-success">Вернутся назад</a>';
     } else {
         $stmt = $pdo->prepare('SELECT * FROM `schedule` WHERE `id` = :id');

@@ -1,12 +1,1 @@
-{
-	"title" : "JRE Template - JCat Radio Engine",
-	"description" : "Test site for JRE",
-	"keywords" : "JRE, Default Template, Radio Engine",
-	"admin_mail" : "777andrey3d@rambler.ru",
-	"shownews" : "5",
-	"showprog" : "5",
-	"main_page" : "1",
-	"reg_key" : "MSRbsaq515QM8S1D",
-	"jre_version" : "2.0",
-	"tpl_dir" : "default"
-}
+{"title":"Title","description":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0441\u0430\u0439\u0442\u0430","keywords":"\u041a\u043b\u044e\u0447\u0435\u0432\u044b\u0435 \u0441\u043b\u043e\u0432\u0430","admin_mail":"admin@local.domain","main_page":"1","tpl_dir":"default","news_num":"5","prog_num":"5"}

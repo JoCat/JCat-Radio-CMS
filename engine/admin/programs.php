@@ -48,7 +48,7 @@ if (isset($_GET['create'])) {
         elseif (empty($_POST['description'])) echo $helpers->get_error('Не указано описание программы.');
         else {
             $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
-            $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
+            $seo_title = empty($_POST['seo_title']) ? strip_tags($_POST['title']) . ' &raquo; '. $config->title : $_POST['seo_title'];
             if (empty($_FILES['image']['name'])) {
                 $image = null;
             } else {
@@ -62,16 +62,16 @@ if (isset($_GET['create'])) {
                 $stmt = $pdo->prepare('INSERT INTO `programs`(`title`, `alt_name`, `description`, `image`, `show`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:title, :alt_name, :description, :image, :show, :seo_title, :seo_description, :seo_keywords)');
                 $purifier = load_htmlpurifier($allowed);
                 $stmt->execute([
-                    'title' => $purifier->purify($_POST['title']),
-                    'alt_name' => $purifier->purify($alt_name),
+                    'title' => strip_tags($_POST['title']),
+                    'alt_name' => strip_tags($alt_name),
                     'description' => $purifier->purify($_POST['description']),
                     'image' => $image,
                     'show' => $_POST['show'],
-                    'seo_title' => $purifier->purify($seo_title),
-                    'seo_description' => $purifier->purify($_POST['seo_description']),
-                    'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
+                    'seo_title' => strip_tags($seo_title),
+                    'seo_description' => strip_tags($_POST['seo_description']),
+                    'seo_keywords' => strip_tags($_POST['seo_keywords'])
                 ]);
-                echo '<p>Программа успешно добавлена<br></p>
+                echo '<p>Программа успешно добавлена</p>
                 <a href="/admin.php?do=programs" class="btn btn-success">Вернутся назад</a>';
             }
         }
@@ -85,7 +85,7 @@ if (isset($_GET['create'])) {
         elseif (empty($_POST['description'])) echo $helpers->get_error('Не указано описание программы.');
         else {
             $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
-            $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
+            $seo_title = empty($_POST['seo_title']) ? strip_tags($_POST['title']) . ' &raquo; '. $config->title : $_POST['seo_title'];
             if (empty($_FILES['image']['name'])) {
                 if (isset($_POST['old_image'])) {
                     $image = $_POST['old_image'];
@@ -104,16 +104,16 @@ if (isset($_GET['create'])) {
                 $purifier = load_htmlpurifier($allowed);
                 $stmt->execute([
                     'id' => $_GET['update'],
-                    'title' => $purifier->purify($_POST['title']),
-                    'alt_name' => $purifier->purify($alt_name),
+                    'title' => strip_tags($_POST['title']),
+                    'alt_name' => strip_tags($alt_name),
                     'description' => $purifier->purify($_POST['description']),
                     'image' => $image,
                     'show' => $_POST['show'],
-                    'seo_title' => $purifier->purify($seo_title),
-                    'seo_description' => $purifier->purify($_POST['seo_description']),
-                    'seo_keywords' => $purifier->purify($_POST['seo_keywords'])
+                    'seo_title' => strip_tags($seo_title),
+                    'seo_description' => strip_tags($_POST['seo_description']),
+                    'seo_keywords' => strip_tags($_POST['seo_keywords'])
                 ]);
-                echo '<p>Программа успешно отредактирована<br></p>
+                echo '<p>Программа успешно отредактирована</p>
                 <a href="/admin.php?do=programs" class="btn btn-success">Вернутся назад</a>';
             }
         }
@@ -135,13 +135,13 @@ if (isset($_GET['create'])) {
         if (empty($programs)) echo $helpers->get_error('Программа не найдена.');
         else {
             if (isset($_POST['submit'])) {
-                if (!empty($programs['image'])) {
+                if (!empty($programs->image)) {
                     $uploadImage = new UploadImage;
-                    $uploadImage->imageDelete('programs', $programs['image']);
+                    $uploadImage->imageDelete('programs', $programs->image);
                 }
                 $stmt = $pdo->prepare('DELETE FROM `programs` WHERE `id` = :id');
                 $stmt->execute(['id' => $_GET['delete']]);
-                echo '<p>Программа успешно удалена<br></p>
+                echo '<p>Программа успешно удалена</p>
                 <a href="/admin.php?do=programs" class="btn btn-success">Вернутся назад</a>';
             } else {
                 include $template . 'views/programs/delete.php';
@@ -155,17 +155,7 @@ if (isset($_GET['create'])) {
     //Выполняем запрос к БД с последующим выводом программ
     $stmt = $pdo->prepare('SELECT * FROM `programs` ORDER BY id DESC LIMIT :limit_from,20');
     $stmt->execute(['limit_from' => $limit_from]);
-    while($row = $stmt->fetch()){
-        $data[] = [
-            'id' => $row['id'],
-            'title' => iconv_strlen($row['title'], 'utf-8') > 25 ?
-                iconv_substr($row['title'], 0, 25, 'utf-8') . '...' :
-                $row['title'],
-            'description' => iconv_strlen($row['description'], 'utf-8') > 100 ?
-                iconv_substr($row['description'], 0, 100, 'utf-8') . '...' :
-                $row['description']
-        ];
-    }
+    $data = $stmt->fetchAll();
     //узнаем общее количество страниц и заполняем массив со ссылками
     $stmt = $pdo->query('SELECT COUNT(*) FROM `programs`');
     $rows = $stmt->fetchColumn();

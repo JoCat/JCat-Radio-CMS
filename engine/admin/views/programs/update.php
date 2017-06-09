@@ -12,13 +12,13 @@
     <div role="tabpanel" class="tab-pane active" id="general">
       <div class="form-group">
         <label for="title">Заголовок новости</label>
-        <input type="text" required class="form-control" name="title" id="title" value="<?= $programs['title'] ?>">
+        <input type="text" required class="form-control" name="title" id="title" value="<?= $programs->title ?>">
       </div>
       <div class="form-group">
         <label for="description">Описание</label>
-        <textarea name="description" id="description"><?= $programs['description'] ?></textarea>
+        <textarea name="description" id="description"><?= $programs->description ?></textarea>
       </div>
-      <?php if (empty($programs['image'])): ?>
+      <?php if (empty($programs->image)): ?>
       <div class="form-group">
         <label for="image">Загрузить изображение</label>
         <input type="file" id="image" name="image">
@@ -27,11 +27,11 @@
       <?php else: ?>
       <div class="form-group">
         <label for="old_image">Изображение</label>
-        <input type="hidden" id="old_image" name="old_image" value="<?= $programs['image'] ?>">
+        <input type="hidden" id="old_image" name="old_image" value="<?= $programs->image ?>">
         <div class="row">
           <div class="col-xs-12 col-md-6">
             <div class="thumbnail">
-              <img src="/uploads/images/programs/<?= $programs['image'] ?>" alt="">
+              <img src="/uploads/images/programs/<?= $programs->image ?>" alt="">
             </div>
           </div>
         </div>
@@ -45,27 +45,27 @@
       <div class="checkbox">
         <label>
           <input type="hidden" name="show" value="0">
-          <input type="checkbox" name="show" value="1"<?php if ($programs['show']) echo " checked"; ?>>Отображать программу на сайте
+          <input type="checkbox" name="show" value="1"<?php if ($programs->show) echo " checked"; ?>>Отображать программу на сайте
         </label>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="meta">
       <div class="form-group">
         <label for="alt_name">Ссылка на страницу</label>
-        <input type="text" class="form-control" name="alt_name" id="alt_name" value="<?= $programs['alt_name'] ?>">
+        <input type="text" class="form-control" name="alt_name" id="alt_name" value="<?= $programs->alt_name ?>">
         <p class="help-block">Оставьте поле пустым для автоматической генерации адреса</p>
       </div>
       <div class="form-group">
         <label for="seo_title">Заголовок страницы</label>
-        <input type="text" class="form-control" name="seo_title" id="seo_title" value="<?= $programs['seo_title'] ?>">
+        <input type="text" class="form-control" name="seo_title" id="seo_title" value="<?= $programs->seo_title ?>">
       </div>
       <div class="form-group">
         <label for="seo_description">SEO Описание</label>
-        <textarea class="form-control" name="seo_description" id="seo_description"><?= $programs['seo_description'] ?></textarea>
+        <textarea class="form-control" name="seo_description" id="seo_description"><?= $programs->seo_description ?></textarea>
       </div>
       <div class="form-group">
         <label for="seo_keywords">Ключевые слова</label>
-        <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?= $programs['seo_keywords'] ?>">
+        <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?= $programs->seo_keywords ?>">
       </div>
     </div>
   </div>

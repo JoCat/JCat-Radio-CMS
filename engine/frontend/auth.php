@@ -28,12 +28,12 @@ if (!empty($_POST))
         {
             $helpers->addMessage('Логин <b>' . htmlentities($_POST['login']) . '</b> не найден!', true);
         } else {
-            if (password_verify($_POST['pass'], $row['password'])) {
+            if (password_verify($_POST['pass'], $row->password)) {
                 $_SESSION['auth'] = true;
                 $_SESSION['user_data'] = [
-                    'username' => $row['login'],
-                    'usergroup' => $row['name'],
-                    'image' => $row['image']
+                    'username' => $row->login,
+                    'usergroup' => $row->name,
+                    'image' => $row->image
                 ];
                 header('Location:http://' . $_SERVER['HTTP_HOST']);
                 exit;
