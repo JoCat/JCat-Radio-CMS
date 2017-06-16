@@ -30,10 +30,10 @@
     <?php else: ?>
       <?php foreach ($data as $row): ?>
       <tr>
-        <td><?= $row['url'] ?></td>
-        <td><?= $row['seo_title'] ?></td>
-        <td width="50" align="center"><a href="/admin.php?do=static&update=<?= $row["id"] ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Изменить"></a></span></td>
-        <td width="50" align="center"><a href="/admin.php?do=static&delete=<?= $row["id"] ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true" title="Удалить"></a></span></td>
+        <td><?= $row->url ?></td>
+        <td><?= $row->seo_title ?></td>
+        <td width="50" align="center"><a href="/admin.php?do=static&update=<?= $row->id ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Изменить"></a></span></td>
+        <td width="50" align="center"><a href="/admin.php?do=static&delete=<?= $row->id ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true" title="Удалить"></a></span></td>
       </tr>
       <?php endforeach; ?>
     <?php endif; ?>

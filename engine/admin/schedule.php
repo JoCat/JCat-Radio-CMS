@@ -122,20 +122,12 @@ if (isset($_GET['create'])) {
     $limit_from = ($cur_page - 1) * 20;
     $stmt = $pdo->query('SELECT * FROM `programs` WHERE `show` = 1 ORDER BY id DESC');
     while ($row = $stmt->fetch()) {
-        $programs_array[$row['id']] = $row['title'];
+        $programs_array[$row->id] = $row->title;
     }
     //Выполняем запрос к БД с последующим выводом эфиров
     $stmt = $pdo->prepare('SELECT * FROM `schedule` ORDER BY id DESC LIMIT :limit_from,20');
     $stmt->execute(['limit_from' => $limit_from]);
-    while($row = $stmt->fetch()){
-        $data[] = [
-            'id' => $row['id'],
-            'day' => $days[$row['day']],
-            'title' => $programs_array[$row['program_id']],
-            'start_time' => $helpers->get_time($row['start_time']),
-            'end_time' => $helpers->get_time($row['end_time']),
-        ];
-    }
+    $data = $stmt->fetchAll();
     //узнаем общее количество страниц и заполняем массив со ссылками
     $stmt = $pdo->query('SELECT COUNT(*) FROM `schedule`');
     $rows = $stmt->fetchColumn();

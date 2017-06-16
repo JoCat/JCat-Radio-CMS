@@ -11,25 +11,25 @@
     <div role="tabpanel" class="tab-pane active" id="general">
       <div class="form-group">
         <label for="url">Ссылка на страницу</label>
-        <input type="text" required class="form-control" name="url" id="url" value="<?= $static['url'] ?>">
+        <input type="text" required class="form-control" name="url" id="url" value="<?= $static->url ?>">
       </div>
       <div class="form-group">
         <label for="content">Контент страницы</label>
-        <textarea name="content" id="content"><?= $static['content'] ?></textarea>
+        <textarea name="content" id="content"><?= $static->content ?></textarea>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="meta">
       <div class="form-group">
         <label for="seo_title">Заголовок страницы</label>
-        <input type="text" class="form-control" name="seo_title" id="seo_title" value="<?= $static['seo_title'] ?>">
+        <input type="text" class="form-control" name="seo_title" id="seo_title" value="<?= $static->seo_title ?>">
       </div>
       <div class="form-group">
         <label for="seo_description">SEO Описание</label>
-        <textarea class="form-control" name="seo_description" id="seo_description"><?= $static['seo_description'] ?></textarea>
+        <textarea class="form-control" name="seo_description" id="seo_description"><?= $static->seo_description ?></textarea>
       </div>
       <div class="form-group">
         <label for="seo_keywords">Ключевые слова</label>
-        <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?= $static['seo_keywords'] ?>">
+        <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?= $static->seo_keywords ?>">
       </div>
     </div>
   </div>

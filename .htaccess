@@ -21,8 +21,10 @@ RewriteRule ^schedule$ index.php?do=schedule [L]
 RewriteRule ^user/([a-z0-9_-]+)$ index.php?do=user&username=$1 [L]
 
 RewriteRule ^auth$ index.php?do=auth [L]
-RewriteRule ^reg$ index.php?do=reg [L]
 RewriteRule ^logout$ index.php?do=logout [L]
+
+RewriteRule ^reg$ index.php?do=reg [L]
+RewriteRule ^reg/activate/([a-z0-9_-]+)$ index.php?do=reg&key=$1 [L]
 
 #Вывод статических страниц
 RewriteRule ^([a-z0-9_-]+)$ index.php?do=static&url=$1 [L]

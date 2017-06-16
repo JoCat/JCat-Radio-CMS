@@ -30,17 +30,18 @@ $days = [
 foreach ($days as $key => $value) {
     $stmt->execute(['day' => $key]);
     while($row = $stmt->fetch()) {
-        $data[$key][] = [
-            'title' => $row["title"],
-            'start_time' => $row["start_time"],
-            'end_time' => $row["end_time"],
+        $schedule[$key][] = [
+            'title' => $row->title,
+            'start_time' => $helpers->get_time($row->start_time),
+            'end_time' => $helpers->get_time($row->end_time),
         ];
     }
 }
-if (empty($data)){
-    $error = '<div class="error-alert">
+if (empty($schedule)) {
+    echo '<div class="error-alert">
     <b>Внимание! Обнаружена ошибка.</b><br>
     На данный момент у нас нет расписания, заходите позже :)
     </div>';
+} else {
+    include $template . '/schedule.php';
 }
-include $template . '/schedule.php';

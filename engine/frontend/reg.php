@@ -14,12 +14,6 @@ if (!defined ('JRE_KEY')) die ("Hacking attempt!");
 include(ENGINE_DIR . '/classes/db_connect.php');
 include(ENGINE_DIR . '/classes/helpers.php');
 
-if (isset($_GET['status']) && $_GET['status'] == 'ok') $helpers->addMessage('Вы успешно зарегистрировались! Пожалуйста активируйте свой аккаунт!');
-if (isset($_GET['active']) && $_GET['active'] == 'ok')
-{
-    header('Refresh:3; URL=http://'. $_SERVER['HTTP_HOST'] .'/admin.php');
-    $helpers->addMessage('Ваш аккаунт успешно активирован!');
-}
 if (isset($_GET['key']))
 {
     $stmt = $pdo->prepare('SELECT * FROM `users` WHERE `active_hex` = :key');
@@ -29,15 +23,15 @@ if (isset($_GET['key']))
     if (!empty($row))
     {
         $stmt = $pdo->prepare('UPDATE `users` SET `status` = 1 WHERE `login` = :login');
-        $stmt->bindValue(':login', $row['login'], PDO::PARAM_STR);
+        $stmt->bindValue(':login', $row->login, PDO::PARAM_STR);
         $stmt->execute();
-        header('Location:http://'. $_SERVER['HTTP_HOST'] .'/admin.php?do=reg&active=ok');
-        exit;
+        header('Refresh:3; URL=http://'. $_SERVER['HTTP_HOST'] .'/auth');
+        $helpers->addMessage('Ваш аккаунт успешно активирован!');
     } else {
         $helpers->addMessage('Ключ активации не верен!', true);
     }
 }
-if (isset($_POST['submit']))
+if (!empty($_POST))
 {
     if (empty($_POST['login'])) $helpers->addMessage('Поле Логин не может быть пустым', true);
     if (empty($_POST['email'])) {
@@ -79,7 +73,7 @@ if (isset($_POST['submit']))
                     $stmt->execute();
                     
                     //Отправляем письмо для активации
-                    $url = 'http://'. $_SERVER['HTTP_HOST'] .'/admin.php?do=reg&key='. $key;
+                    $url = 'http://'. $_SERVER['HTTP_HOST'] .'/reg/activate/'. $key;
                     $message = <<<MSG
 <html>
   <head>
@@ -92,19 +86,17 @@ if (isset($_POST['submit']))
 </html>
 MSG;
                     
-                   //Формируем заголовки для почтового сервера
-                   $headers = "MIME-Version: 1.0\r\n";
-                   $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
-                   $headers .= "To: ". $_POST['email'] . "\r\n";
-                   $headers .= "From: ". $config->admin_mail ."\r\n";
-                   $headers .= "Date: ". date('D, d M Y h:i:s O');
+                    //Формируем заголовки для почтового сервера
+                    $headers = "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+                    $headers .= "To: ". $_POST['email'] . "\r\n";
+                    $headers .= "From: ". $config->admin_mail ."\r\n";
+                    $headers .= "Date: ". date('D, d M Y h:i:s O');
 
-                   //Отправляем данные на почту
-                   mail($_POST['email'], 'Регистрация на сайте ' . $_SERVER['HTTP_HOST'], $message, $headers);
-                    
-                    //Сбрасываем параметры
-                    header('Location:http://'. $_SERVER['HTTP_HOST'] .'/admin.php?do=reg&status=ok');
-                    exit;
+                    //Отправляем данные на почту
+                    mail($_POST['email'], 'Регистрация на сайте ' . $_SERVER['HTTP_HOST'], $message, $headers);
+                        
+                    $helpers->addMessage('Вы успешно зарегистрировались! Пожалуйста активируйте свой аккаунт!');
                 }
             }
         }
