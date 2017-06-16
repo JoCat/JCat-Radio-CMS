@@ -5,7 +5,7 @@
     <select class="form-control" required name="program" id="program">
       <option value="" hidden disabled selected>Выберите программу</option>
       <?php foreach ($programs as $value): ?>
-      <option value="<?= $value['id'] ?>"><?= $value['title'] ?></option>
+      <option value="<?= $value->id ?>"><?= $value->title ?></option>
       <?php endforeach; ?>
     </select>
   </div>

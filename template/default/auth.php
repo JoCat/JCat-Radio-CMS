@@ -1,4 +1,5 @@
 <h1 class="title">Авторизация</h1>
+<?php if (!empty($helpers->msg)) echo $helpers->msg; ?>
 <form class="form-horizontal" action="" method="POST">
   <div class="form-group">
     <label for="login" class="col-xs-2 control-label">Логин</label>

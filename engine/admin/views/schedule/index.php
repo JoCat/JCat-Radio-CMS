@@ -32,12 +32,12 @@
     <?php else: ?>
       <?php foreach ($data as $row): ?>
       <tr>
-        <td><?= $row['title'] ?></td>
-        <td><?= $row['day'] ?></td>
-        <td><?= $row['start_time'] ?></td>
-        <td><?= $row['end_time'] ?></td>
-        <td width="50" align="center"><a href="/admin.php?do=schedule&update=<?= $row["id"] ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Изменить"></a></span></td>
-        <td width="50" align="center"><a href="/admin.php?do=schedule&delete=<?= $row["id"] ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true" title="Удалить"></a></span></td>
+        <td><?= $programs_array[$row->program_id] ?></td>
+        <td><?= $days[$row->day] ?></td>
+        <td><?= $helpers->get_time($row->start_time) ?></td>
+        <td><?= $helpers->get_time($row->end_time) ?></td>
+        <td width="50" align="center"><a href="/admin.php?do=schedule&update=<?= $row->id ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Изменить"></a></span></td>
+        <td width="50" align="center"><a href="/admin.php?do=schedule&delete=<?= $row->id ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true" title="Удалить"></a></span></td>
       </tr>
       <?php endforeach; ?>
     <?php endif; ?>

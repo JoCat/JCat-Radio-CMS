@@ -1,4 +1,5 @@
 <h1 class="title">Регистрация</h1>
+<?php if (!empty($helpers->msg)) echo $helpers->msg; ?>
 <form class="form-horizontal" action="" method="POST">
   <div class="form-group">
     <label for="login" class="col-xs-3 control-label">Логин</label>

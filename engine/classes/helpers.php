@@ -52,13 +52,20 @@ class Helpers
      */
     public function get_error($reason)
     {
-        return '<div class="error-alert">
+      global $template;
+        $content = '<div class="error-alert">
           <p>
             <b>Внимание! Обнаружена ошибка.</b><br>
             '.$reason.'
           </p>
           <button onclick="history.go(-1);" class="btn btn-danger">Вернутся назад</button>
         </div>';
+        if (!isset($_SERVER['HTTP_X_PJAX'])) {
+            include $template . '/main.php';
+        } else {
+            include $template . '/ajax.php';
+        }
+        die();
     }
 
     public function get_templates()

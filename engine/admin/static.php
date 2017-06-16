@@ -45,6 +45,12 @@ if (isset($_GET['create'])) {
     if (isset($_POST['submit'])) {
         if (empty($_POST['url'])) echo $helpers->get_error('Не указана ссылка на страницу.');
         elseif (empty($_POST['content'])) echo $helpers->get_error('Отсутствует контент страницы.');
+
+/*
+При повторении url /  обработать и выкинуть предупреждение
+Fatal error: Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'about' for key 'url'' in C:\OpenServer\domains\jrc.test\engine\admin\static.php:57 Stack trace: #0 C:\OpenServer\domains\jrc.test\engine\admin\static.php(57): PDOStatement->execute(Array) #1 C:\OpenServer\domains\jrc.test\engine\admin.php(43): require_once('C:\\OpenServer\\d...') #2 C:\OpenServer\domains\jrc.test\admin.php(27): require_once('C:\\OpenServer\\d...') #3 {main} thrown in C:\OpenServer\domains\jrc.test\engine\admin\static.php on line 57
+ */
+
         else {
             $stmt = $pdo->prepare('INSERT INTO `static_page`(`url`, `content`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:url,:content,:seo_title,:seo_description,:seo_keywords)');
             $purifier = load_htmlpurifier($allowed);
@@ -62,7 +68,7 @@ if (isset($_GET['create'])) {
         include $template . 'views/static/create.php';
     }
 } elseif (isset($_GET['update'])) {
-    if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана Страница.');
+    if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана cтраница.');
     elseif (isset($_POST['submit'])) {
         if (empty($_POST['url'])) echo $helpers->get_error('Не указана ссылка на страницу.');
         elseif (empty($_POST['content'])) echo $helpers->get_error('Отсутствует контент страницы.');
@@ -112,13 +118,7 @@ if (isset($_GET['create'])) {
     //Выполняем запрос к БД с последующим выводом статических страниц
     $stmt = $pdo->prepare('SELECT * FROM `static_page` ORDER BY id DESC LIMIT :limit_from,20');
     $stmt->execute(['limit_from' => $limit_from]);
-    while($row = $stmt->fetch()){
-        $data[] = [
-            'id' => $row['id'],
-            'url' => $row['url'],
-            'seo_title' => $row['seo_title']
-        ];
-    }
+    $data = $stmt->fetchAll();
     //узнаем общее количество страниц и заполняем массив со ссылками
     $stmt = $pdo->query('SELECT COUNT(*) FROM `static_page`');
     $rows = $stmt->fetchColumn();

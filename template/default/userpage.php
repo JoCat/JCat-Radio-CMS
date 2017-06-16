@@ -1,9 +1,11 @@
-<?php if (!empty($error)): ?>
-    <?= $error ?>
-<? else: ?>
-    <div class="userpage">
-      <img src="<?= $data['image'] ?>" class="img-circle user-img">
-      <h1><?= $data['username'] ?></h1>
-      <h2>Группа: <?= $data['usergroup'] ?></h2>
+<div class="userpage block">
+  <div class="clearfix">
+    <div class="pull-left" style="margin-right: 10px">
+      <img src="<?= $user['image'] ?>" class="img-circle user-img">
     </div>
-<?php endif; ?>
+    <div class="pull-left" style="margin-top: 20px;">
+      <h1><?= $user['username'] ?></h1>
+      <h2>Группа: <?= $user['usergroup'] ?></h2>
+    </div>
+  </div>
+</div>

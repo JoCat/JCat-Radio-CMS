@@ -43,30 +43,28 @@ $menu->set_sidebar_menu([
 
 if (isset($_GET['create'])) {
     if (isset($_POST['submit'])) {
-        if (empty($_POST['title'])) echo $helpers->get_error('Не указано название новости.');
-        elseif (empty($_POST['short_text'])) echo $helpers->get_error('Не указано краткое содержание новости.');
-        else {
-            $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
-            $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
-            $stmt = $pdo->prepare('SELECT `id` FROM `users` WHERE login = :login');
-            $stmt->execute(['login' => $user->get('username')]);
-            $author_id = $stmt->fetch();
-            $stmt = $pdo->prepare('INSERT INTO `news`(`title`, `alt_name`, `short_text`, `full_text`, `show`, `author_id`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:title, :alt_name, :short_text, :full_text, :show, :author_id, :seo_title, :seo_description, :seo_keywords)');
-            $purifier = load_htmlpurifier($allowed);
-            $stmt->execute([
-                'title' => strip_tags($_POST['title']),
-                'alt_name' => strip_tags($alt_name),
-                'short_text' => $purifier->purify($_POST['short_text']),
-                'full_text' => $purifier->purify($_POST['full_text']),
-                'show' => $_POST['show'],
-                'author_id' => $author_id->id,
-                'seo_title' => strip_tags($seo_title),
-                'seo_description' => strip_tags($_POST['seo_description']),
-                'seo_keywords' => strip_tags($_POST['seo_keywords'])
-            ]);
-            echo '<p>Новость успешно добавлена</p>
-            <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
-        }
+        if (empty($_POST['title'])) $helpers->get_error('Не указано название новости.');
+        if (empty($_POST['short_text'])) $helpers->get_error('Не указано краткое содержание новости.');
+        $alt_name = empty($_POST['alt_name']) ? Url::str2url($_POST['title']) : $_POST['alt_name'];
+        $seo_title = empty($_POST['seo_title']) ? $_POST['title'] . ' &raquo; '. $config->title : $_POST['seo_title'];
+        $stmt = $pdo->prepare('SELECT `id` FROM `users` WHERE login = :login');
+        $stmt->execute(['login' => $user->get('username')]);
+        $author_id = $stmt->fetch();
+        $stmt = $pdo->prepare('INSERT INTO `news`(`title`, `alt_name`, `short_text`, `full_text`, `show`, `author_id`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:title, :alt_name, :short_text, :full_text, :show, :author_id, :seo_title, :seo_description, :seo_keywords)');
+        $purifier = load_htmlpurifier($allowed);
+        $stmt->execute([
+            'title' => strip_tags($_POST['title']),
+            'alt_name' => strip_tags($alt_name),
+            'short_text' => $purifier->purify($_POST['short_text']),
+            'full_text' => $purifier->purify($_POST['full_text']),
+            'show' => $_POST['show'],
+            'author_id' => $author_id->id,
+            'seo_title' => strip_tags($seo_title),
+            'seo_description' => strip_tags($_POST['seo_description']),
+            'seo_keywords' => strip_tags($_POST['seo_keywords'])
+        ]);
+        echo '<p>Новость успешно добавлена</p>
+        <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
     } else {
         include $template . 'views/news/create.php';
     }
