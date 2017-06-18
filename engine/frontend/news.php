@@ -55,6 +55,9 @@ switch($_GET['show'])
             <b>Внимание! Обнаружена ошибка.</b><br>
             По данному адресу публикаций на сайте не найдено.
             </div>';
+        }
+        if (isset($error)) {
+            echo $error;
         } else {
             $pagination = $pagination['content'];
             include $template . '/news.php';
