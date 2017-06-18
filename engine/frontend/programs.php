@@ -29,7 +29,7 @@ switch($_GET['show'])
         $stmt = $pdo->prepare('SELECT * FROM programs WHERE `show` = 1 ORDER BY id DESC LIMIT :limit_from, :per_page');
         $stmt->execute(['limit_from' => $limit_from, 'per_page' => $per_page]);
         while($row = $stmt->fetch()) {
-            $data[] = [
+            $programs[] = [
                 'title' => $row->title,
                 'description' => $row->description,
                 'link' => '/programs/'. $row->alt_name,
@@ -38,7 +38,7 @@ switch($_GET['show'])
                     '/uploads/images/programs/' . $row->image
             ];
         }
-        if (empty($data)) {
+        if (empty($programs)) {
             $error = '<div class="error-alert">
             <b>Внимание! Обнаружена ошибка</b><br>
             На данный момент у нас нет программ или они не указаны.
@@ -57,9 +57,12 @@ switch($_GET['show'])
             По данному адресу публикаций на сайте не найдено.
             </div>';
         }
-        $pagination .= $pagination['content'];
-
-        include $template . '/programs.php';
+        if (isset($error)) {
+            echo $error;
+        } else {
+            $pagination = $pagination['content'];
+            include $template . '/programs.php';
+        }
         break;
 
     case 'programs':

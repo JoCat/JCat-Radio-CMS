@@ -21,7 +21,7 @@ if (empty($result = $stmt->fetch())) {
     Пользователь не найден.
     </div>';
 } else {
-    $user = [
+    $user_info = [
         'username' => $result->login,
         'usergroup' => $result->name,
         'image' => empty($result->image) ?
