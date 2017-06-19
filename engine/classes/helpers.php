@@ -12,7 +12,7 @@ class Helpers
      */
     public function addMessage($data, $error = false)
     {
-        $this->msg .= '<span style="'. (($error == true) ? 'color:red;' : '') .'background-color:white;padding:2px;">'. $data .'</span><br>';
+        $this->msg .= '<div class="alert '. (($error == true) ? 'alert-danger' : 'alert-success') .'" role="alert">'. $data .'</div>';
     }
 
     /**
