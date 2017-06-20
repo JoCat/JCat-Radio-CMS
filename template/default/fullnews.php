@@ -1,7 +1,7 @@
 <div class="block">
-    <b class="right"><?= $data['date'] ?></b>
-    <h1><?= $data['title'] ?></h1><hr>
-    <div><?= $data['full_text'] ?></div>
+    <b class="right"><?= $post->date ?></b>
+    <h1><?= $post->title ?></h1><hr>
+    <div><?= $post->full_text ?></div>
     <hr>
-    Автор: <b><?= $data['author'] ?></b>
+    Автор: <b><?= $post->author ?></b>
 </div>

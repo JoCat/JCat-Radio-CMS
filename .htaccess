@@ -1,35 +1,7 @@
 DirectoryIndex index.php
 AddDefaultCharset UTF-8
 
-<IfModule mod_rewrite.c>
 RewriteEngine On
-
-#Вывод новостей
-RewriteRule ^news$ index.php?do=news&show=shortnews [L]
-RewriteRule ^news/([0-9]+)/$ index.php?do=news&show=shortnews&page=$1 [L]
-RewriteRule ^news/([0-9]+)-([a-z0-9_-]+)$ index.php?do=news&show=fullnews&id=$1&alt=$2 [L]
-
-#Вывод программ
-RewriteRule ^programs$ index.php?do=programs&show=all [L]
-RewriteRule ^programs/([0-9]+)/$ index.php?do=programs&show=all&page=$1 [L]
-RewriteRule ^programs/([a-z0-9_-]+)$ index.php?do=programs&show=programs&alt=$1 [L]
-
-#Вывод расписания
-RewriteRule ^schedule$ index.php?do=schedule [L]
-
-#Вывод страницы пользователя
-RewriteRule ^user/([a-z0-9_-]+)$ index.php?do=user&username=$1 [L]
-
-RewriteRule ^auth$ index.php?do=auth [L]
-RewriteRule ^reg$ index.php?do=reg [L]
-RewriteRule ^logout$ index.php?do=logout [L]
-
-#Вывод статических страниц
-RewriteRule ^([a-z0-9_-]+)$ index.php?do=static&url=$1 [L]
-
-#RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
-#RewriteRule ^robots.txt$ modules/robots.txt [L]
-</IfModule>
-
-#	Not found
-#ErrorDocument 404 /modules/errors/404.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php [L]

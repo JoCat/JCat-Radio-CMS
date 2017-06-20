@@ -1,0 +1,19 @@
+{
+    "name": "jocat/jrcms",
+    "description": "Simple CMS for online radio site",
+    "type": "project",
+    "require": {
+        "php":">=5.5.0"
+    },
+    "authors": [
+        {
+            "name": "Andrew Molchanov",
+            "email": "mr.catmanrus@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "JRC\\":"engine/"
+        }
+    }
+}
