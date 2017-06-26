@@ -5,7 +5,7 @@
       <hr>
       <p><?= $post->short_text ?></p>
       <hr>
-      <a class="pull-right" href="/news/view/<?= $post->id.'-'.$post->alt_name ?>">Подробнее</a>
+      <a class="pull-right" href="<?= $post->link ?>">Подробнее</a>
     </div>
     <?php endforeach;
     //echo $pagination;

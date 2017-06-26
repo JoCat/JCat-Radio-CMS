@@ -3,7 +3,8 @@
     "description": "Simple CMS for online radio site",
     "type": "project",
     "require": {
-        "php":">=5.5.0"
+        "php":">=5.5.0",
+        "php-activerecord/php-activerecord": "dev-master"
     },
     "authors": [
         {
