@@ -5,7 +5,7 @@ return [
     'views_dir' => dirname(__DIR__) . '/views/',
     'controllers_dir' => dirname(__DIR__) . '/controllers/',
     'controllers_namespace' => 'JRC\Frontend\Controllers\\',
-    'connect' => 'mysql://root:@127.0.0.1/jrc_db',
+    'connect' => 'mysql://root:@127.0.0.1/jrc2_db',
     'admin_mail' => 'admin@test.home',
     'base_dir' => '/'
 ];

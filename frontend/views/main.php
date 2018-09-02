@@ -100,7 +100,7 @@ $user = new User();
     <footer class="hidden-xs">
     <div class="container">
       <div class="left">
-        <b>JRE</b> Template 2016–2017. Все права защищены.<br>
+        <b>JRE</b> Template 2016 – <?= date('Y') ?>. Все права защищены.<br>
         Дизайн и разработка: <a target="_blank" href="http://vk.com/johny_cat">Johny_Cat</a> (<a target="_blank" href="http://jocat.ru/">JoCat.ru</a>)
       </div>
       <div class="right">
