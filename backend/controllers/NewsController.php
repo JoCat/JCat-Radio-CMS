@@ -19,7 +19,7 @@ class NewsController extends \JRC\Core\Controller
             'offset' => 0
         ]);
 
-        $this->render('news', [
+        $this->render('index', [
             'news' => $news
         ]);
     }

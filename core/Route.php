@@ -33,10 +33,14 @@ final class Route
 
     public function run()
     {
-        $route = explode('/', str_replace($this->base_dir, '', $_SERVER['REQUEST_URI']));
-        // Bug 1 : Fix url parse
-        // ltrim => /admin/news | /admin => 'ews'
-        // str_replace $this->base_dir = '/' eat all slashes
+        $route = explode('/',
+            substr(
+                $_SERVER['REQUEST_URI'],
+                //strpos($_SERVER['REQUEST_URI'], $this->base_dir) + strlen($this->base_dir)
+                strlen($this->base_dir)
+            )
+        );
+        // Bug 1 : Fix url parse| Fixed?
 
         $link = implode('/', $route);
 

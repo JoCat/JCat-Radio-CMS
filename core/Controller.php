@@ -26,8 +26,8 @@ class Controller
         );
 
         ob_start();
-        include rtrim($app->views_dir, '/') . '/' . $dir . '/' . $content_view . '.php';
+        include $app->views_dir . $dir . '/' . $content_view . '.php';
         $content = ob_get_clean();
-        include rtrim($app->views_dir, '/') . '/' . $template_view . '.php';
+        include $app->views_dir . 'layout/' . $template_view . '.php';
     }
 }
