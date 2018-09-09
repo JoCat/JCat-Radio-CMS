@@ -14,7 +14,7 @@ if (!defined('JRE_KEY')) die("Hacking attempt!");
 switch ($config->main_page) {
 	case 2:
 		$_GET['show'] = 'shortnews';
-		include ENGINE_DIR . '/template/news.php';
+		include ENGINE_DIR . '/frontend/news.php';
 		break;
 	
 	case 1:

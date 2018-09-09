@@ -38,8 +38,7 @@ class ErrorHandler
     </div>
     <hr>
     <footer>
-      <div>JCat Radio Engine v.2.0</div>
-      <div>Apache 2.4</div>
+      Powered by: JCat Radio Engine v.1.3_dev
     </footer>
   </body>
 </html>');

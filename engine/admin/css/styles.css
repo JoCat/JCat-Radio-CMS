@@ -143,3 +143,39 @@ aside {
         width: 150px;
     }
 }
+
+.in-air {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.chat .msg .img {
+    float: left;
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.chat .msg .text {
+    float: left;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 10px 15px;
+    padding: 5px 8px;
+}
+
+.chat .msg.right .img, .chat .msg.right .text{
+    float: right;
+}
+
+.chat .msg.right .text{
+    background-color: #c9d7ff;
+}
+
+.chat {
+    height: 400px;
+}

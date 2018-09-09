@@ -63,7 +63,7 @@ if (!empty($_POST))
                 {
                     $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
                     $key = md5($_POST['login'] . time());
-                    $sql = 'INSERT INTO `users`(`login`, `password`, `email`, `active_hex`, `status`) VALUES (:login, :pass, :email, :key, 0)';
+                    $sql = 'INSERT INTO `users`(`login`, `password`, `email`, `active_hex`, `status`, `usergroup_id`) VALUES (:login, :pass, :email, :key, 0, 1)';
                     //Подготавливаем PDO выражение для SQL запроса
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(':login', $_POST['login'], PDO::PARAM_STR);

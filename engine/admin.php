@@ -21,7 +21,7 @@ $db_config = ConfigLoader::load('db_config');
 $template = ENGINE_DIR . "/admin/";
 include (ENGINE_DIR . '/classes/user.php');
 
-if (isset($_SESSION['auth']))
+if (isset($_SESSION['auth']) && $user->get('is_admin') == true)
 {
     $do = isset($_GET['do']) ? $_GET['do'] : false;
     switch($do)
@@ -40,6 +40,9 @@ if (isset($_SESSION['auth']))
         case 'schedule':
         case 'static':
         case 'settings':
+        case 'rj':
+        case 'users':
+        case 'users_group':
             require_once(ENGINE_DIR . '/admin/'. $do .'.php');
         break;
     }

@@ -33,7 +33,9 @@ if (!empty($_POST))
                 $_SESSION['user_data'] = [
                     'username' => $row->login,
                     'usergroup' => $row->name,
-                    'image' => $row->image
+                    'image' => $row->image,
+                    
+                    'is_admin' => $row->is_admin
                 ];
                 header('Location:http://' . $_SERVER['HTTP_HOST']);
                 exit;

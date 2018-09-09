@@ -22,7 +22,7 @@
   <div class="form-group">
     <label for="password" class="col-xs-3 control-label">E-Mail</label>
     <div class="col-xs-9 col-sm-6">
-      <input class="form-control" required placeholder="Введите E-Mail" type="password" name="email" id="password">
+      <input class="form-control" required placeholder="Введите E-Mail" type="email" name="email" id="password">
     </div>
   </div>
   <div class="form-group">

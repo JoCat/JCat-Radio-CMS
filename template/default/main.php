@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <?= $head ?>
     <link rel="shortcut icon" href="/template/default/images/radio.ico" />
     <link rel="stylesheet" type="text/css" href="/template/default/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/template/default/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/template/default/css/radio.css">
 </head>
 <body>
     <div class="wrapper">
@@ -28,7 +29,7 @@
             <li><a href="/programs">Программы</a></li>
             <li><a href="/schedule">Расписание</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right hidden-sm">
+          <ul class="nav navbar-nav navbar-right">
             <?php if ($user->is_user_authed()): ?>
             <li class="dropdown userinfo">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -37,11 +38,13 @@
               <span class="glyphicon glyphicon-chevron-down"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="/admin.php">Админпанель</a></li>
+                <?php if($user->get('is_admin') == true)
+                echo '<li><a class="not-pjax" href="/admin.php">Админпанель</a></li>'
+                ?>
                 <li><a href="/user/<?= mb_strtolower($user->get('username')) ?>">Профиль</a></li>
                 <li class="disabled"><a href="#">Управление аккаунтом</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/logout">Выход</a></li>
+                <li><a class="not-pjax" href="/logout">Выход</a></li>
               </ul>
             </li>
             <?php else: ?>
@@ -59,6 +62,7 @@
      </noscript>
     
      <div class="placeholder">
+      <div class="background"></div>
       <div class="container">
         <h1>Основной шаблон</h1>
         <p>Тестовый сайт на движке JRE</p>
@@ -69,14 +73,25 @@
       <div class="container">
        <div class="row">
         <div class="col-md-4">
-          <div class="block hidden-xs hidden-sm">
-            <div><b>Плеер</b></div><hr>
-            <div id="jcp-player"></div>
-            <div id="jsi-info">Загрузка...</div>
+          <div class="panel panel-default hidden-xs hidden-sm">
+            <div class="panel-heading">Наше радио</div>
+            <div class="panel-body">
+              <div id="jcp-player"></div>
+              <div id="informer">
+                Сейчас играет: <span id="artist"></span> -
+                <span id="title"></span><br>
+                Слушателей: <span id="listeners"></span><br>
+                Ведущий: <span id="rj"></span><br>
+                Программа: <span id="program"></span>
+              </div>
+            </div>
           </div>
-          <div class="block hidden-xs hidden-sm">
-            <div><b>Информационный блок</b></div><hr>
-            <div>Например социальный виджет (Сообщество в ВК)</div>            
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Эфиры сегодня</div>
+            <div class="panel-body">
+              <?php include ROOT_DIR . '/modules/schedule.php'; ?>
+            </div>
           </div>
         </div>
         <div class="col-md-8" id="pjax-container">
@@ -89,10 +104,10 @@
     </div>
 
     <!-- Footer -->
-    <footer class="hidden-xs">
+    <footer>
     <div class="container">
       <div class="left">
-        <b>JRE</b> Template 2016–2017. Все права защищены.<br>
+        <b>JRE</b> Template 2015–2018. Все права защищены.<br>
         Дизайн и разработка: <a target="_blank" href="http://vk.com/johny_cat">Johny_Cat</a> (<a target="_blank" href="http://jocat.ru/">JoCat.ru</a>)
       </div>
       <div class="right">
@@ -107,6 +122,16 @@
     <script src="/template/default/js/jquery.pjax.js"></script>
     <script src="/template/default/js/bootstrap.min.js"></script>
     <script src="/template/default/js/background-slide.js"></script>
+
+    <script>
+        $(document).pjax('a:not(.not-pjax)', '#pjax-container');
+    </script>
+    <script src="/template/default/js/radio.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script type="text/javascript">
+      src = 'http://83.220.168.158:8000/live';   //Поток радио эфира
+      infolink = 'http://83.220.168.158:8080/';   //Информационный файл
+    </script>
     <!-- Script End -->
 </body>
 </html>

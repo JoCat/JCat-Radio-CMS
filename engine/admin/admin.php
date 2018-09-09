@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/admin.php">Управление сайтом</a></li>
-            <!-- <li><a href="/admin.php?do=rj">Панель ведущих</a></li> -->
+            <li><a href="/admin.php?do=rj">Панель управления вещанием</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="hidden-xs"><a href="/admin.php?do=settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>

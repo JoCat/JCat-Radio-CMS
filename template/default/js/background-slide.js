@@ -16,17 +16,17 @@ var imgHead = [
 	function BGSlide(){
 
 		if(i > (imgHead.length-1)){
-			$('.placeholder').animate({'opacity':'0'},1000,function(){
+			$('.placeholder .background').animate({'opacity':'0'},1000,function(){
 				i=1;
-				$('.placeholder').css('background','url('+imgHead[0]+') 50% 15% / cover no-repeat');
+				$('.placeholder .background').css('background','url('+imgHead[0]+') 50% 15% / cover no-repeat');
 			});
-			$('.placeholder').animate({'opacity':'1'},1000);
+			$('.placeholder .background').animate({'opacity':'1'},1000);
 		}else{
-			$('.placeholder').animate({'opacity':'0'},1000,function(){
-				$('.placeholder').css('background','url('+imgHead[i]+') 50% 15% / cover no-repeat');
+			$('.placeholder .background').animate({'opacity':'0'},1000,function(){
+				$('.placeholder .background').css('background','url('+imgHead[i]+') 50% 15% / cover no-repeat');
 				i++;
 			});
-			$('.placeholder').animate({'opacity':'1'},1000);
+			$('.placeholder .background').animate({'opacity':'1'},1000);
 		}
 		
 	}
