@@ -39,6 +39,14 @@ $menu->set_sidebar_menu([
         'link' => '?do=static',
         'active' => true,
     ],
+    [
+        'name' => 'Пользователи',
+        'link' => '?do=users',
+    ],
+    [
+        'name' => 'Группы пользователей',
+        'link' => '?do=users_group',
+    ],
 ], 'admin.php');
 
 if (isset($_GET['create'])) {

@@ -53,10 +53,16 @@ if (isset($_GET['create'])) {
     if (isset($_POST['submit'])) {
         if (empty($_POST['name'])) echo $helpers->get_error('Не указано название группы');
         else {
-            $stmt = $pdo->prepare('INSERT INTO `user_groups`(`name`, `is_admin`) VALUES ( :name, :is_admin)');
+            $stmt = $pdo->prepare('INSERT INTO `user_groups`(`name`, `is_admin`, `news_edit`, `programs_edit`, `schedule_edit`, `page_edit`, `users_view`, `users_edit`) VALUES (:name, :is_admin, :news_edit, :programs_edit, :schedule_edit, :page_edit, :users_view, :users_edit)');
             $stmt->execute([
                 'name' => $_POST['name'],
-                'is_admin' => $_POST['is_admin']
+                'is_admin' => $_POST['is_admin'],
+                'news_edit' => $_POST['news_edit'],
+                'programs_edit' => $_POST['programs_edit'],
+                'schedule_edit' => $_POST['schedule_edit'],
+                'page_edit' => $_POST['page_edit'],
+                'users_view' => $_POST['users_view'],
+                'users_edit' => $_POST['users_edit']
             ]);
             echo '<p>Группа успешно добавлена</p>
             <a href="/admin.php?do=users_group" class="btn btn-success">Вернутся назад</a>';
@@ -68,11 +74,17 @@ if (isset($_GET['create'])) {
     if (isset($_POST['submit'])) {
         if (empty($_POST['name'])) echo $helpers->get_error('Не указано название группы');
         else {
-            $stmt = $pdo->prepare('UPDATE `user_groups` SET `name`=:name,`is_admin`=:is_admin WHERE `id`=:id');
+            $stmt = $pdo->prepare('UPDATE `user_groups` SET `name`=:name,`is_admin`=:is_admin,`news_edit`=:news_edit,`programs_edit`=:programs_edit,`schedule_edit`=:schedule_edit,`page_edit`=:page_edit,`users_view`=:users_view,`users_edit`=:users_edit WHERE `id`=:id');
             $stmt->execute([
                 'id' => $_GET['edit'],
                 'name' => $_POST['name'],
-                'is_admin' => $_POST['is_admin']
+                'is_admin' => $_POST['is_admin'],
+                'news_edit' => $_POST['news_edit'],
+                'programs_edit' => $_POST['programs_edit'],
+                'schedule_edit' => $_POST['schedule_edit'],
+                'page_edit' => $_POST['page_edit'],
+                'users_view' => $_POST['users_view'],
+                'users_edit' => $_POST['users_edit']
             ]);
             echo '<p>Группа успешно изменена</p>
             <a href="/admin.php?do=users_group" class="btn btn-success">Вернутся назад</a>';

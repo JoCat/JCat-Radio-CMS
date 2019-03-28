@@ -37,6 +37,14 @@ $menu->set_sidebar_menu([
         'name' => 'Статические страницы',
         'link' => '?do=static',
     ],
+    [
+        'name' => 'Пользователи',
+        'link' => '?do=users',
+    ],
+    [
+        'name' => 'Группы пользователей',
+        'link' => '?do=users_group',
+    ],
 ], 'admin.php');
 
 $days = [
