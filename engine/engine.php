@@ -5,7 +5,7 @@
 ---------------------------------------
  *site*
 ---------------------------------------
- Copyright (c) 2016-2017 Molchanov A.I.
+ Copyright (c) 2016-2019 Molchanov A.I.
 =======================================
  Главный обработчик движка
 =======================================
@@ -19,7 +19,7 @@ $config = ConfigLoader::load('config');
 $db_config = ConfigLoader::load('db_config');
 $template = ROOT_DIR . '/template/' . $config->tpl_dir;
 include (ENGINE_DIR . '/classes/user.php');
-//include (ENGINE_DIR . '/classes/stats.php');
+include (ENGINE_DIR . '/classes/stats.php');
 
 $do = isset($_GET['do']) ? $_GET['do'] : false;
 switch($do)
@@ -51,5 +51,5 @@ $head .= empty($seo_keywords) ? '<meta name="keywords" content="' . $config->key
 if (!isset($_SERVER['HTTP_X_PJAX'])) {
     include $template . '/main.php';
 } else {
-    include $template . '/ajax.php';
+    echo $head, $content;
 }

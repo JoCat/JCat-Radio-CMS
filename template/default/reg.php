@@ -14,15 +14,15 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="col-xs-3 control-label">Повторите пароль</label>
+    <label for="password2" class="col-xs-3 control-label">Повторите пароль</label>
     <div class="col-xs-9 col-sm-6">
-      <input class="form-control" required placeholder="Введите пароль" type="password" name="pass2" id="password">
+      <input class="form-control" required placeholder="Введите пароль" type="password" name="pass2" id="password2">
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="col-xs-3 control-label">E-Mail</label>
+    <label for="email" class="col-xs-3 control-label">E-Mail</label>
     <div class="col-xs-9 col-sm-6">
-      <input class="form-control" required placeholder="Введите E-Mail" type="email" name="email" id="password">
+      <input class="form-control" required placeholder="Введите E-Mail" type="email" name="email" id="email">
     </div>
   </div>
   <div class="form-group">

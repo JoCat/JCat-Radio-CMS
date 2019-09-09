@@ -8,6 +8,14 @@
     <link rel="stylesheet" type="text/css" href="/template/default/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/template/default/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/template/default/css/radio.css">
+    <!--
+      Подключение комментариев ВКонтакте
+      на страницах подробного просмотра новостей
+    -->
+    <script src="//vk.com/js/api/openapi.js?154"></script>
+    <script type="text/javascript">
+      VK.init({apiId: ID_вашего_приложения, onlyWidgets: true});
+    </script>
 </head>
 <body>
     <div class="wrapper">
@@ -78,11 +86,8 @@
             <div class="panel-body">
               <div id="jcp-player"></div>
               <div id="informer">
-                Сейчас играет: <span id="artist"></span> -
-                <span id="title"></span><br>
-                Слушателей: <span id="listeners"></span><br>
-                Ведущий: <span id="rj"></span><br>
-                Программа: <span id="program"></span>
+                Сейчас играет: <span id="jcp-title"></span><br>
+                Слушателей: <span id="jcp-listeners"></span>
               </div>
             </div>
           </div>
@@ -107,8 +112,8 @@
     <footer>
     <div class="container">
       <div class="left">
-        <b>JRE</b> Template 2015–2018. Все права защищены.<br>
-        Дизайн и разработка: <a target="_blank" href="http://vk.com/johny_cat">Johny_Cat</a> (<a target="_blank" href="http://jocat.ru/">JoCat.ru</a>)
+        <b>JRE</b> Template 2015–2019. Все права защищены.<br>
+        Дизайн и разработка: <a target="_blank" href="https://vk.com/johny_cat">Johny_Cat</a> (<a target="_blank" href="https://jocat.ru/">JoCat.ru</a>)
       </div>
       <div class="right">
         counters
@@ -127,10 +132,8 @@
         $(document).pjax('a:not(.not-pjax)', '#pjax-container');
     </script>
     <script src="/template/default/js/radio.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script type="text/javascript">
-      src = 'http://83.220.168.158:8000/live';   //Поток радио эфира
-      infolink = 'http://83.220.168.158:8080/';   //Информационный файл
+      // JCPlayer.init();
     </script>
     <!-- Script End -->
 </body>
