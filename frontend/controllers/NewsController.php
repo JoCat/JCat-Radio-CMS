@@ -5,46 +5,39 @@ namespace JRC\Frontend\Controllers;
 use JRC\Common\Models\News;
 use JRC\Core\Exceptions\NotFoundException;
 
-/**
-* 
-*/
 class NewsController extends \JRC\Core\Controller
 {
     public function actionIndex()
     {
         $news = News::all([
             'conditions' => [
-                '`show` =?', 1
+                '`show` = ?', 1
             ],
             'limit' => 10,
             'offset' => 0
         ]);
 
-        foreach ($news as $value) {
-            $value->link = '/news/'. $value->id .'-'. $value->alt_name;
+        foreach ($news as $el) {
+            $el->link = '/news/'. $el->id .'-'. $el->alt_name;
         }
 
-        $this->render('news', [
-            'news' => $news
-        ]);
+        $this->render('index', compact('news'));
     }
 
     public function actionView($id, $alt)
     {
         $post = News::find($id ,[
             'conditions' => [
-                'alt_name =?', $alt
+                '`alt_name` = ?', $alt
             ],
-            'select' => '`news`.*, `users`.login',
-            'joins' => ['users']
+            'select' => '`news`.*, `users`.`login`',
+            'joins' => ['user']
         ]);
 
         if (empty($post)) {
             throw new NotFoundException("Post not found");
         }
 
-        $this->render('fullnews', [
-            'post' => $post
-        ]);
+        $this->render('view', compact('post'));
     }
 }

@@ -2,19 +2,14 @@
 
 namespace JRC\Frontend\Controllers;
 
-use JRC\Common\Models\Programs;
+use JRC\Common\Models\Program;
 use JRC\Core\Exceptions\NotFoundException;
-/**
-* 
-*/
+
 class ProgramsController extends \JRC\Core\Controller
 {
     public function actionIndex()
     {
-        $programs = Programs::all([
-            'conditions' => [
-                '`show` =?', 1
-            ],
+        $programs = Program::find_all_by_show(1, [
             'limit' => 10,
             'offset' => 0
         ]);
@@ -26,20 +21,13 @@ class ProgramsController extends \JRC\Core\Controller
                 '/uploads/images/programs/' . $value->image;
         }
 
-        $this->render('programs', [
-            'programs' => $programs
-        ]);
+        $this->render('index', compact('programs'));
     }
 
     public function actionView($link)
     {
-        $program = Programs::find([
-            'conditions' => [
-                'alt_name =?', $link
-            ],
-        ]);
+        $program = Program::find_by_alt_name($link);
 
-        $program->link = '/programs/'. $program->alt_name;
         $program->image = empty($program->image) ?
             '/images/no_image.png' :
             '/uploads/images/programs/' . $program->image;
@@ -48,8 +36,6 @@ class ProgramsController extends \JRC\Core\Controller
             throw new NotFoundException("Program not found");
         }
 
-        $this->render('fullprog', [
-            'program' => $program
-        ]);
+        $this->render('view', compact('program'));
     }
 }

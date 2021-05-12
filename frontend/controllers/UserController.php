@@ -2,31 +2,18 @@
 
 namespace JRC\Frontend\Controllers;
 
-use JRC\Common\Models\Users;
-use JRC\Core\Exceptions\NotFoundException;
-/**
-* 
-*/
+use JRC\Common\Models\User;
+
 class UserController extends \JRC\Core\Controller
 {
     public function actionView($username)
     {
-        $user = Users::find([
-            'conditions' => [
-                'login =?', $username
-            ],
-            'select' => '`users`.login, `users`.image, `user_groups`.name',
-            'joins' => 'JOIN `user_groups` ON users.usergroup_id = user_groups.id'
-        ]);
+        $user = User::find_by_login($username);
 
-        $user->username = $user->login;
-        $user->usergroup = $user->name;
         $user->image = empty($user->image) ?
-            '/template/' . 'default' /*$config->tpl_dir*/ . '/images/no_avatar.png' :
+            '/images/no_avatar.png' :
             '/uploads/images/users/' . $user->image;
 
-        $this->render('userpage', [
-            'user' => $user
-        ]);
+        $this->render('view', compact('user'));
     }
 }

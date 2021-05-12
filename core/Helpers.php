@@ -1,9 +1,7 @@
 <?php
 
 namespace JRC\Core;
-/**
- * 
- */
+
 final class Helpers
 {
 	public function get_date($date)
@@ -20,8 +18,8 @@ final class Helpers
 
 	public function text_cut($text, $lenght)
     {
-      return mb_strlen($text) > $lenght ?
-        mb_substr($text, 0, $lenght) . '...' :
-        $text;
+        return mb_strlen($text) > $lenght ?
+            mb_substr($text, 0, $lenght) . '...' :
+            $text;
     }
 }

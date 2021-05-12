@@ -8,9 +8,6 @@ use JRC\Common\Models\Programs;
 use JRC\Common\Models\Schedule;
 use JRC\Backend\Models\VisitStats;
 
-/**
-* 
-*/
 class MainController extends \JRC\Core\Controller
 {
     public function actionIndex()
@@ -41,10 +38,10 @@ class MainController extends \JRC\Core\Controller
             'group' => '`date`'
         ]);
 
-        $this->render('index', [
-            'stats' => $stats,
-            'visit_stats' => $visit_stats,
-            'visit_table' => $visit_table
-        ]);
+        $this->render('index', compact(
+            'stats',
+            'visit_stats',
+            'visit_table'
+        ));
     }
 }

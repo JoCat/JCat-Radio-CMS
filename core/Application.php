@@ -2,22 +2,13 @@
 
 namespace JRC\Core;
 
-/**
-* 
-*/
 final class Application
 {
-
     public $models_dir;
-
     public $views_dir;
-
     public $controllers_dir;
-
     public $controllers_namespace;
-
     public $base_dir;
-
     public $connect;
 
     function __construct($config)

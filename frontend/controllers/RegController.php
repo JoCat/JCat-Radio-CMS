@@ -4,9 +4,6 @@ namespace JRC\Frontend\Controllers;
 
 use JRC\Common\Components\Reg;
 
-/**
-* 
-*/
 class RegController extends \JRC\Core\Controller
 {
     
@@ -15,7 +12,7 @@ class RegController extends \JRC\Core\Controller
         if (!empty($_POST)) {
             (new Reg)->reg();
         } else {
-            $this->render('reg');
+            $this->render('index');
         }
     }
 

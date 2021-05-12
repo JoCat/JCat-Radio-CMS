@@ -1,31 +1,7 @@
 <?php
 use JRC\Common\Components\SidebarMenu;
-
-$menu = new SidebarMenu();
-$menu->set_sidebar_menu([
-    [
-        'name' => 'Главная',
-        'link' => '',
-        'active' => true,
-    ],
-    [
-        'name' => 'Новости',
-        'link' => '/news',
-    ],
-    [
-        'name' => 'Программы',
-        'link' => '/programs',
-    ],
-    [
-        'name' => 'Расписание',
-        'link' => '/schedule',
-    ],
-    [
-        'name' => 'Статические страницы',
-        'link' => '/static',
-    ],
-], 'admin');
 ?>
+
 <h2 class="tac">Добро пожаловать в панель управления<br>JCat Radio Engine</h2>
 <div class="panel panel-default">
     <table class="table table-striped table-bordered">

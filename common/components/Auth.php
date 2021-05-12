@@ -4,12 +4,8 @@ namespace JRC\Common\Components;
 
 use JRC\Common\Models\Users;
 
-/**
-* 
-*/
 class Auth
 {
-
     // Login
     public $login;
     // Password
@@ -18,7 +14,7 @@ class Auth
     function __construct()
     {
         // Start session
-        session_start();
+        session_start(); // TODO check
         // Add and check value
         $this->login = $this->getPostValue('login');
         $this->password = $this->getPostValue('password');

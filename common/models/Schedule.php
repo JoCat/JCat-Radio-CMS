@@ -2,26 +2,21 @@
 
 namespace JRC\Common\Models;
 
-/**
-* 
-*/
 class Schedule extends \JRC\Core\Model
 {
-    static $table_name = 'schedule';
-
     public $data;
 
-    static $belongs_to = [['programs', 'class_name' => '\JRC\Common\Models\Programs']];
+    static $belongs_to = ['program'];
 
-    public function getDay($day)
+    public static function getDay($day)
     {
         return Schedule::all([
             'conditions' => [
-                'schedule.day = ? AND schedule.show = ?', $day, 1
+                '`schedules`.`day` = ? AND `schedules`.`show` = ?', $day, 1
             ],
-            'select' => '`schedule`.*, `programs`.*',
-            'joins' => ['programs'],
-            'order' => 'schedule.start_time ASC'
+            'select' => '`schedules`.*, `programs`.*',
+            'joins' => ['program'],
+            'order' => 'schedules.start_time ASC'
         ]);
     }
 }

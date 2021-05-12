@@ -2,9 +2,6 @@
 
 namespace JRC\Common\Components;
 
-/**
-* 
-*/
 class SidebarMenu
 {
     public $sidebar_menu;

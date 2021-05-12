@@ -2,9 +2,6 @@
 
 namespace JRC\Common\Components;
 
-/*
-*
-*/
 class User
 {
     public $user_data;

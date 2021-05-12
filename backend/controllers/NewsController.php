@@ -4,9 +4,6 @@ namespace JRC\Backend\Controllers;
 
 use JRC\Common\Models\News;
 
-/**
-* 
-*/
 class NewsController extends \JRC\Core\Controller
 {
     public function actionIndex()
@@ -19,8 +16,13 @@ class NewsController extends \JRC\Core\Controller
             'offset' => 0
         ]);
 
-        $this->render('index', [
-            'news' => $news
-        ]);
+        $this->render('index', compact('news'));
+    }
+
+    public function actionCreate()
+    {
+        // $news = new News();
+
+        $this->render('create');
     }
 }

@@ -1,32 +1,7 @@
 <?php
-use JRC\Common\Components\SidebarMenu;
 use JRC\Core\Helpers;
-
-$menu = new SidebarMenu();
-$menu->set_sidebar_menu([
-    [
-        'name' => 'Главная',
-        'link' => '',
-    ],
-    [
-        'name' => 'Новости',
-        'link' => '/news',
-        'active' => true,
-    ],
-    [
-        'name' => 'Программы',
-        'link' => '/programs',
-    ],
-    [
-        'name' => 'Расписание',
-        'link' => '/schedule',
-    ],
-    [
-        'name' => 'Статические страницы',
-        'link' => '/static',
-    ],
-], 'admin');
 ?>
+
 <div class="row mb10">
   <div class="col-xs-2">
     <a class="btn btn-success" href="/admin/news/create" role="button">Добавить новость</a>
