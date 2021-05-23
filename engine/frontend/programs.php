@@ -10,29 +10,28 @@
  Вывод программ
 =======================================
 */
-if (!defined('JRE_KEY')) die("Hacking attempt!");
-include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/pagination.php');
-include (ENGINE_DIR . '/classes/error_handler.php');
 
-switch($_GET['show'])
-{
+include(ENGINE_DIR . '/classes/db_connect.php');
+include(ENGINE_DIR . '/classes/pagination.php');
+include(ENGINE_DIR . '/classes/error_handler.php');
+
+switch ($_GET['show']) {
     case 'all':
-        $seo_title = 'Программы &raquo; '. $config->title;
+        $seo_title = 'Программы &raquo; ' . $config->title;
         $per_page = $config->prog_num;
-        
+
         //получаем номер страницы и значение для лимита
         (isset($_GET['page']) && $_GET['page'] >= 1) ? $cur_page = $_GET['page'] : $cur_page = 1;
         $limit_from = ($cur_page - 1) * $per_page;
-        
+
         //выполняем запрос к БД с последующим выводом новостей
         $stmt = $pdo->prepare('SELECT * FROM programs WHERE `show` = 1 ORDER BY id DESC LIMIT :limit_from, :per_page');
         $stmt->execute(['limit_from' => $limit_from, 'per_page' => $per_page]);
-        while($row = $stmt->fetch()) {
+        while ($row = $stmt->fetch()) {
             $programs[] = [
                 'title' => $row->title,
                 'description' => $row->description,
-                'link' => '/programs/'. $row->alt_name,
+                'link' => '/programs/' . $row->alt_name,
                 'image' => empty($row->image) ?
                     '/template/' . $config->tpl_dir . '/images/no_image.png' :
                     '/uploads/images/programs/' . $row->image

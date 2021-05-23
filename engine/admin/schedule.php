@@ -10,7 +10,7 @@
  Управление расписанием
 =======================================
 */
-if (!defined('JRE_KEY')) die("Hacking attempt!");
+
 include(ENGINE_DIR . '/classes/db_connect.php');
 include(ENGINE_DIR . '/classes/pagination.php');
 include(ENGINE_DIR . '/classes/helpers.php');

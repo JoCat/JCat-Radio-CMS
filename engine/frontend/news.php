@@ -10,17 +10,16 @@
  Вывод новостей
 =======================================
 */
-if (!defined('JRE_KEY')) die("Hacking attempt!");
-include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/pagination.php');
-include (ENGINE_DIR . '/classes/helpers.php');
-include (ENGINE_DIR . '/classes/error_handler.php');
 
-switch($_GET['show'])
-{
+include(ENGINE_DIR . '/classes/db_connect.php');
+include(ENGINE_DIR . '/classes/pagination.php');
+include(ENGINE_DIR . '/classes/helpers.php');
+include(ENGINE_DIR . '/classes/error_handler.php');
+
+switch ($_GET['show']) {
     case 'shortnews':
         //Присваиваем основные значения
-        $seo_title = 'Новости &raquo; '. $config->title;
+        $seo_title = 'Новости &raquo; ' . $config->title;
         $per_page = $config->news_num;
 
         //получаем номер страницы и значение для лимита
@@ -30,12 +29,12 @@ switch($_GET['show'])
         //выполняем запрос к БД с последующим выводом новостей
         $stmt = $pdo->prepare('SELECT * FROM `news` WHERE `show` = 1 ORDER BY date DESC LIMIT :limit_from, :per_page');
         $stmt->execute(['limit_from' => $limit_from, 'per_page' => $per_page]);
-        while($row = $stmt->fetch()) {
+        while ($row = $stmt->fetch()) {
             $news[] = [
                 'title' => $row->title,
                 'date' => $helpers->get_date($row->date),
                 'short_text' => $row->short_text,
-                'link' => '/news/'. $row->id .'-'. $row->alt_name
+                'link' => '/news/' . $row->id . '-' . $row->alt_name
             ];
         }
         if (empty($news)) {

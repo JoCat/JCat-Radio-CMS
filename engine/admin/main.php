@@ -10,7 +10,7 @@
  Админпанель
 =======================================
 */
-if (!defined('JRE_KEY')) die("Hacking attempt!");
+
 include(ENGINE_DIR . '/classes/db_connect.php');
 include(ENGINE_DIR . '/classes/helpers.php');
 

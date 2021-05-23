@@ -10,7 +10,6 @@
  Главный обработчик движка
 =======================================
 */
-if (!defined('JRE_KEY')) die("Hacking attempt!");
 include(ENGINE_DIR . '/classes/config_loader.php');
 session_start();
 ob_start();

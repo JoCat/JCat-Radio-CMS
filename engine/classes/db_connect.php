@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('JRE_KEY')) die("Hacking attempt!");
+
 $db = 'mysql:host=' . $db_config->host . ';dbname=' . $db_config->database . ';charset=utf8';
 $opt = array(
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

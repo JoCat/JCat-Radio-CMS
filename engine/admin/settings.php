@@ -10,7 +10,7 @@
  Управление настройками сайта
 =======================================
 */
-if (!defined('JRE_KEY')) die("Hacking attempt!");
+
 include(ENGINE_DIR . '/classes/purifier.php');
 include(ENGINE_DIR . '/classes/helpers.php');
 
@@ -27,10 +27,6 @@ $menu->set_sidebar_menu([
     [
         'name' => 'Настройка программ',
         'link' => 'programs',
-    ],
-    [
-        'name' => 'Настройка расписания',
-        'link' => 'schedule',
     ],
 ], '#', true);
 
@@ -146,7 +142,6 @@ else : ?>
                     </table>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="schedule"></div>
         </div>
         <button class="btn btn-success" type="submit">Сохранить</button>
     </form>
