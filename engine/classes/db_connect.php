@@ -1,15 +1,5 @@
 <?php
-/*
-=====================================
- JCat Radio Engine
--------------------------------------
- http://radiocms.tk
--------------------------------------
- Copyright (c) 2016 Molchanov A.I.
-=====================================
- Класс подключения к БД
-=====================================
-*/
+
 if (!defined('JRE_KEY')) die("Hacking attempt!");
 $db = 'mysql:host=' . $db_config->host . ';dbname=' . $db_config->database . ';charset=utf8';
 $opt = array(

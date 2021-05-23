@@ -1,15 +1,5 @@
 <?php
-/*
-=====================================
- JCat Radio Engine
--------------------------------------
- http://radiocms.tk
--------------------------------------
- Copyright (c) 2016 Molchanov A.I.
-=====================================
- Класс генерации URL
-=====================================
-*/
+
 class Url
 {
     public static function str2url($string)
@@ -34,5 +24,4 @@ class Url
         $str = preg_replace('~[^-a-z0-9_]+~u', '-', $str);
         return trim($str, "-");
     }
-
 }

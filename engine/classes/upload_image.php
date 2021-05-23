@@ -1,7 +1,5 @@
 <?php
-/**
-* 
-*/
+
 class UploadImage
 {
     public $uploadDir;
@@ -49,7 +47,7 @@ class UploadImage
 
         $blacklist = ['.php', '.phtml', '.php3', '.php4', '.php5', '.php7'];
         foreach ($blacklist as $item) {
-            if(preg_match("/$item\$/i", $file['name'])) {
+            if (preg_match("/$item\$/i", $file['name'])) {
                 return "Загруженный файл не является изображением";
             }
         }

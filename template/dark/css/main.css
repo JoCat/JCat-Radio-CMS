@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap");
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -7,6 +9,7 @@ html {
 body {
     margin-bottom: 78px; /* Margin bottom by footer height */
     background-color: #1a1a1a;
+    font-family: "Nunito", sans-serif;
 }
 
 footer {
@@ -35,6 +38,12 @@ nav {
     background: url(../images/placeholder.jpg) center no-repeat;
     background-size: cover;
     height: 400px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.placeholder .container {
+    color: #fff;
 }
 
 .navbar-brand img {
@@ -65,9 +74,12 @@ nav {
     z-index: 1100;
 }
 
-main > .container,
-footer > .container {
+main > .container {
     padding-top: 30px;
+}
+
+footer > .container {
+    padding: 15px;
 }
 
 .custom-card {

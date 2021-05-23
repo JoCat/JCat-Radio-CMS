@@ -1,7 +1,5 @@
 <?php
-/**
-* 
-*/
+
 class Menu
 {
     public $sidebar_menu;
@@ -25,9 +23,9 @@ class Menu
     {
         foreach ($list as $val) {
             $value .= '
-<li'.(isset($val['active']) && $val['active'] ? ' class="active"' : '').'>
-    <a href="'.(isset($link_prefix) ? $link_prefix : '').$val['link'].'"'
-    .($set_tab_menu ? ' aria-controls="'.$val['link'].'" data-toggle="tab"' : '').'>'.$val['name'].'</a>
+<li' . (isset($val['active']) && $val['active'] ? ' class="active"' : '') . '>
+    <a href="' . (isset($link_prefix) ? $link_prefix : '') . $val['link'] . '"'
+                . ($set_tab_menu ? ' aria-controls="' . $val['link'] . '" data-toggle="tab"' : '') . '>' . $val['name'] . '</a>
 </li>';
         }
     }

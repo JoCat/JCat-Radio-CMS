@@ -2,9 +2,10 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Rage Radio</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <?= $head ?>
+    <link rel="shortcut icon" href="/template/dark/images/radio.ico" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/template/dark/css/main.css">
     <link rel="stylesheet" href="/template/dark/css/iceplayer.css">
@@ -65,7 +66,12 @@
             Для правильной работы сайта рекомендуем включить поддержку JavaScript на нашем сайте.<br>
             Если вы не отключали поддержку JavaScript, то возможно ваш браузер устарел и он не поддерживает JavaScript.
         </noscript>
-        <div class="placeholder"></div>
+        <div class="placeholder">
+            <div class="container">
+                <h1><b>JRE</b> Dark Template</h1>
+                <p>Тестовый сайт на движке JRE</p>
+            </div>
+        </div>
 
         <div class="container">
             <div class="row">
@@ -98,7 +104,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <b>JRE</b> Template Dark 2018–2021. Все права защищены.<br>
+            <b>JRE</b> Dark Template 2018–2021. Все права защищены.<br>
             <span class="d-none d-md-inline">Дизайн и разработка: <a target="_blank" href="https://jocat.ru/">JoCat</a></span>
         </div>
     </footer>

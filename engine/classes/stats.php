@@ -1,13 +1,11 @@
 <?php
 require_once __DIR__ . '/phpbrowscap/Browscap.php';
-require_once (ENGINE_DIR . '/classes/db_connect.php');
+require_once ENGINE_DIR . '/classes/db_connect.php';
+
 use phpbrowscap\Browscap;
 
 $browscap = new Browscap(ENGINE_DIR . '/cache/phpbrowscap/');
 
-/**
-* 
-*/
 class Statistics
 {
     function __construct()

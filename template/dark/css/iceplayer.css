@@ -54,12 +54,13 @@
 /* Player Icons */
 @font-face {
     font-family: "iceplayer";
-    src: url("../font/iceplayer.eot?77906441");
-    src: url("../font/iceplayer.eot?77906441#iefix") format("embedded-opentype"),
-        url("../font/iceplayer.woff2?77906441") format("woff2"),
-        url("../font/iceplayer.woff?77906441") format("woff"),
-        url("../font/iceplayer.ttf?77906441") format("truetype"),
-        url("../font/iceplayer.svg?77906441#iceplayer") format("svg");
+    src: url("../fonts/iceplayer.eot?77906441");
+    src: url("../fonts/iceplayer.eot?77906441#iefix")
+            format("embedded-opentype"),
+        url("../fonts/iceplayer.woff2?77906441") format("woff2"),
+        url("../fonts/iceplayer.woff?77906441") format("woff"),
+        url("../fonts/iceplayer.ttf?77906441") format("truetype"),
+        url("../fonts/iceplayer.svg?77906441#iceplayer") format("svg");
     font-weight: normal;
     font-style: normal;
 }

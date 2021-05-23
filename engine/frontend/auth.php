@@ -35,7 +35,14 @@ if (!empty($_POST))
                     'usergroup' => $row->name,
                     'image' => $row->image,
                     
-                    'is_admin' => $row->is_admin
+                    'is_admin' => $row->is_admin,
+                    'news_edit' => $row->news_edit,
+                    'programs_edit' => $row->programs_edit,
+                    'schedule_edit' => $row->schedule_edit,
+                    'page_edit' => $row->page_edit,
+                    'users_view' => $row->users_view,
+                    'users_edit' => $row->users_edit,
+                    'groups_edit' => $row->groups_edit
                 ];
                 header('Location:http://' . $_SERVER['HTTP_HOST']);
                 exit;

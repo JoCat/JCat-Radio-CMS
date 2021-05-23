@@ -11,22 +11,21 @@
 =======================================
 */
 if (!defined('JRE_KEY')) die("Hacking attempt!");
-include (ENGINE_DIR . '/classes/config_loader.php');
+include(ENGINE_DIR . '/classes/config_loader.php');
 session_start();
 ob_start();
 
 $config = ConfigLoader::load('config');
 $db_config = ConfigLoader::load('db_config');
 $template = ROOT_DIR . '/template/' . $config->tpl_dir;
-include (ENGINE_DIR . '/classes/user.php');
-include (ENGINE_DIR . '/classes/stats.php');
+include(ENGINE_DIR . '/classes/user.php');
+// include (ENGINE_DIR . '/classes/stats.php');
 
-$do = isset($_GET['do']) ? $_GET['do'] : false;
-switch($do)
-{
+$do = isset($_GET['do']) ? $_GET['do'] : null;
+switch ($do) {
     default:
         require_once(ENGINE_DIR . '/frontend/index.php');
-    break;
+        break;
 
     case 'news':
     case 'programs':
@@ -35,19 +34,20 @@ switch($do)
     case 'user':
     case 'auth':
     case 'reg':
-        require_once(ENGINE_DIR . '/frontend/'. $do .'.php');
-    break;
+        require_once(ENGINE_DIR . '/frontend/' . $do . '.php');
+        break;
 
     case 'logout':
         session_destroy();
-        header('Location:http://'. $_SERVER['HTTP_HOST']);
-    break;
+        header('Location:http://' . $_SERVER['HTTP_HOST']);
+        break;
 }
 $content = ob_get_clean();
 
-$head = empty($seo_title) ? '<title>'. $config->title .'</title>' : '<title>'. $seo_title .'</title>';
+$head = empty($seo_title) ? '<title>' . $config->title . '</title>' : '<title>' . $seo_title . '</title>';
 $head .= empty($seo_description) ? '<meta name="description" content="' . $config->description . '">' : '<meta name="description" content="' . $seo_description . '">';
 $head .= empty($seo_keywords) ? '<meta name="keywords" content="' . $config->keywords . '">' : '<meta name="keywords" content="' . $seo_keywords . '">';
+
 if (!isset($_SERVER['HTTP_X_PJAX'])) {
     include $template . '/main.php';
 } else {

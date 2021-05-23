@@ -1,7 +1,5 @@
 <?php
-/**
-* 
-*/
+
 class ErrorHandler
 {
     const ERROR_404_RU = 'Ошибка 404';
@@ -26,15 +24,15 @@ class ErrorHandler
     {
         header($header);
         die('<!DOCTYPE html>
-<html lang="'.$lang.'">
+<html lang="' . $lang . '">
   <head>
     <meta charset="UTF-8">
-    <title>'.$err_num.' : '.$err_text.'</title>
+    <title>' . $err_num . ' : ' . $err_text . '</title>
   </head>
   <body>
     <div>
-      <h1>'.$err_num.'</h1>
-      <h2>'.$err_text.'</h2>
+      <h1>' . $err_num . '</h1>
+      <h2>' . $err_text . '</h2>
     </div>
     <hr>
     <footer>

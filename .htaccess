@@ -1,6 +1,10 @@
 DirectoryIndex index.php
 AddDefaultCharset UTF-8
 
+<FilesMatch "(.editorconfig|.gitignore|CHANGELOG|LICENSE|README.md)$">
+    Deny from all
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
@@ -33,5 +37,5 @@ RewriteRule ^([a-z0-9_-]+)$ index.php?do=static&url=$1 [L]
 #RewriteRule ^robots.txt$ modules/robots.txt [L]
 </IfModule>
 
-#	Not found
+# Not found
 #ErrorDocument 404 /modules/errors/404.php

@@ -37,13 +37,19 @@
   <div class="checkbox">
     <label>
       <input type="hidden" name="users_view" value="0">
-      <input type="checkbox" name="users_view" value="1"> Доступ к списку пользователей
+      <input type="checkbox" name="users_view" value="1"> Просмотр списка пользователей
     </label>
   </div>
   <div class="checkbox">
     <label>
       <input type="hidden" name="users_edit" value="0">
       <input type="checkbox" name="users_edit" value="1"> Редактирование пользователей
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="hidden" name="groups_edit" value="0">
+      <input type="checkbox" name="groups_edit" value="1"> Редактирование пользователей
     </label>
   </div>
   <button type="submit" class="btn btn-success" name="submit">Добавить</button>

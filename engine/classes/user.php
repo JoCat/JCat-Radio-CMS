@@ -1,11 +1,9 @@
 <?php
-/**
-* 
-*/
+
 class User
 {
     public $user_data;
-    
+
     public function __construct()
     {
         if ($this->is_user_authed()) {
@@ -13,15 +11,18 @@ class User
         }
     }
 
-    public function is_user_authed() {
+    public function is_user_authed()
+    {
         return isset($_SESSION['user_data']) ? true : false;
     }
 
-    public function get($value) {
+    public function get($value)
+    {
         return $this->user_data[$value];
     }
 
-    public function get_avatar() {
+    public function get_avatar()
+    {
         global $config;
         return empty($this->user_data['image']) ?
             '/template/' . $config->tpl_dir . '/images/no_avatar.png' :

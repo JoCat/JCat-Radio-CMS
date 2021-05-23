@@ -1,31 +1,28 @@
-/*
- * JCat Background Image Slider
- * Взят с сайта: http://javascript.ru/forum/showthread.php?p=331963
- * Автор: hfts_rider
- * Доработал: Johny_Cat
- * Работает на JQuery
-*/
+let i = 1;
+const images = [
+    "url(/template/default/images/1.jpg) 50% 20% / cover no-repeat",
+    "url(/template/default/images/2.jpg) 50% 20% / cover no-repeat",
+    "url(/template/default/images/3.jpg) 50% 35% / cover no-repeat",
+    "url(/template/default/images/4.jpg) 50% 25% / cover no-repeat",
+    "url(/template/default/images/5.jpg) 50% 15% / cover no-repeat",
+    "url(/template/default/images/6.jpg) 50% 45% / cover no-repeat",
+    "url(/template/default/images/7.jpg) 50% 20% / cover no-repeat",
+    "url(/template/default/images/8.jpg) 50% 20% / cover no-repeat",
+    "url(/template/default/images/9.jpg) 50% 25% / cover no-repeat",
+    "url(/template/default/images/10.jpg) 50% 15% / cover no-repeat",
+    "url(/template/default/images/11.jpg) 50% 30% / cover no-repeat",
+];
+function BGSlide() {
+    if (i > images.length - 1) {
+        i = 0;
+        return BGSlide();
+    }
 
-var imgHead = [
-	'/template/default/images/1.jpg',
-	'/template/default/images/2.jpg',
-	'/template/default/images/3.jpg',
-	'/template/default/images/4.jpg',
-	'/template/default/images/5.jpg'
-], i=1;
-function BGSlide(){
-	if(i > (imgHead.length-1)){
-		$('.placeholder .background').animate({'opacity':'0'},1000,function(){
-			i=1;
-			$('.placeholder .background').css('background','url('+imgHead[0]+') 50% 15% / cover no-repeat');
-		});
-		$('.placeholder .background').animate({'opacity':'1'},1000);
-	}else{
-		$('.placeholder .background').animate({'opacity':'0'},1000,function(){
-			$('.placeholder .background').css('background','url('+imgHead[i]+') 50% 15% / cover no-repeat');
-			i++;
-		});
-		$('.placeholder .background').animate({'opacity':'1'},1000);
-	}
+    $(".placeholder .background").css("opacity", 0);
+    setTimeout(() => {
+        $(".placeholder .background").css("background", images[i]);
+        $(".placeholder .background").css("opacity", 1);
+        i++;
+    }, 1000);
 }
-var intervalBGSlide = setInterval(BGSlide,15000);
+const intervalBGSlide = setInterval(BGSlide, 5000);
