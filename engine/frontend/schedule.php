@@ -11,8 +11,8 @@
 =======================================
 */
 
-include(ENGINE_DIR . '/classes/db_connect.php');
-include(ENGINE_DIR . '/classes/helpers.php');
+include ENGINE_DIR . '/classes/db_connect.php';
+include ENGINE_DIR . '/classes/helpers.php';
 
 $seo_title = 'Расписание &raquo; ' . $config->title;
 

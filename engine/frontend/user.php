@@ -11,7 +11,7 @@
 =======================================
 */
 
-include(ENGINE_DIR . '/classes/db_connect.php');
+include ENGINE_DIR . '/classes/db_connect.php';
 
 $stmt = $pdo->prepare('SELECT * FROM `users` JOIN `user_groups` ON users.usergroup_id = user_groups.id WHERE users.login = :login');
 $stmt->execute(['login' => $_GET['username']]);

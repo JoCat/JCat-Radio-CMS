@@ -11,8 +11,8 @@
 =======================================
 */
 
-include(ENGINE_DIR . '/classes/purifier.php');
-include(ENGINE_DIR . '/classes/helpers.php');
+include ENGINE_DIR . '/classes/purifier.php';
+include ENGINE_DIR . '/classes/helpers.php';
 
 $menu->set_sidebar_menu([
     [

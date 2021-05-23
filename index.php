@@ -20,7 +20,6 @@
 
 mb_internal_encoding("UTF-8");
 
-define('JRE_KEY', true);
 define('ROOT_DIR', __DIR__);
 define('ENGINE_DIR', ROOT_DIR . '/engine');
 

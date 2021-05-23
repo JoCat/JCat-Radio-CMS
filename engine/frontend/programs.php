@@ -11,9 +11,9 @@
 =======================================
 */
 
-include(ENGINE_DIR . '/classes/db_connect.php');
-include(ENGINE_DIR . '/classes/pagination.php');
-include(ENGINE_DIR . '/classes/error_handler.php');
+include ENGINE_DIR . '/classes/db_connect.php';
+include ENGINE_DIR . '/classes/pagination.php';
+include ENGINE_DIR . '/classes/error_handler.php';
 
 switch ($_GET['show']) {
     case 'all':

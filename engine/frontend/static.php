@@ -10,9 +10,8 @@
  Вывод статических страниц
 =======================================
 */
-if (!defined ('JRE_KEY')) die("Hacking attempt!");
-include (ENGINE_DIR . '/classes/db_connect.php');
-include (ENGINE_DIR . '/classes/error_handler.php');
+include ENGINE_DIR . '/classes/db_connect.php';
+include ENGINE_DIR . '/classes/error_handler.php';
 
 //Выполняем запрос к БД с последующим выводом страницы
 $stmt = $pdo->prepare('SELECT * FROM `static_page` WHERE `url`=:url');
