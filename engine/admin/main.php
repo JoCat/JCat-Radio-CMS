@@ -1,11 +1,11 @@
 <?php
 /*
 =======================================
- JCat Radio Engine
+ JCat Radio CMS
 ---------------------------------------
- *site*
+ https://radio-cms.ru/
 ---------------------------------------
- Copyright (c) 2016-2017 Molchanov A.I.
+ Copyright (c) 2016-2021 Molchanov A.I.
 =======================================
  Админпанель
 =======================================
@@ -56,7 +56,7 @@ function getCount($table, $where = null)
     return $stmt->fetchColumn();
 }
 ?>
-<h2 class="tac">Добро пожаловать в панель управления<br>JCat Radio Engine</h2>
+<h2 class="tac">Добро пожаловать в панель управления<br>JCat Radio CMS</h2>
 <div class="panel panel-default">
     <table class="table table-striped table-bordered">
         <caption>Статистика сайта</caption>
