@@ -8,7 +8,7 @@
             <?= $row['short_text'] ?>
         </div>
         <div class="card-footer clearfix">
-            <a class="float-right btn btn-primary" href="<?= $row['link'] ?>">Подробнее</a>
+            <a class="float-right btn btn-outline-primary" href="<?= $row['link'] ?>">Подробнее</a>
         </div>
     </div>
 <?php endforeach;

@@ -25,4 +25,4 @@ function BGSlide() {
         i++;
     }, 1000);
 }
-const intervalBGSlide = setInterval(BGSlide, 5000);
+const intervalBGSlide = setInterval(BGSlide, 15000);

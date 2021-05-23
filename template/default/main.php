@@ -117,13 +117,13 @@
     <script src="/template/default/js/jquery.pjax.js"></script>
     <script src="/template/default/js/bootstrap.min.js"></script>
     <script src="/template/default/js/background-slide.js"></script>
-    <script>
-        $(document).pjax('a:not(.not-pjax)', '#pjax-container', {
-            timeout: 5000
-        });
-    </script>
     <script src="/template/default/js/iceplayer.min.js"></script>
     <script type="text/javascript">
+        $(document).pjax('a:not(.not-pjax)', '#pjax-container', {
+            timeout: 1000,
+            scrollTo: false
+        });
+
         new IcePlayer('#ice-player', {
             server_address: 'https://air.radiorecord.ru:805/',
             stream_mount: 'rr_320',
