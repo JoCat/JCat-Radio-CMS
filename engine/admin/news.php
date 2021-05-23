@@ -11,11 +11,11 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/purifier.php';
-include ENGINE_DIR . '/classes/helpers.php';
-include ENGINE_DIR . '/classes/url.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/purifier.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/url.php';
 
 $menu->set_sidebar_menu([
     [
@@ -75,7 +75,7 @@ if ($user->get('news_edit')) {
             echo '<p>Новость успешно добавлена</p>
             <a href="/admin.php?do=news" class="btn btn-success">Вернутся назад</a>';
         } else {
-            include $template . 'views/news/create.php';
+            require_once $template . 'views/news/create.php';
         }
     } elseif (isset($_GET['update'])) {
         if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана новость.');
@@ -107,7 +107,7 @@ if ($user->get('news_edit')) {
             $news = $stmt->fetch();
             if (empty($news)) echo $helpers->get_error('Новость не найдена.');
             else {
-                include $template . 'views/news/update.php';
+                require_once $template . 'views/news/update.php';
             }
         }
     } elseif (isset($_GET['delete'])) {
@@ -123,7 +123,7 @@ if ($user->get('news_edit')) {
             $news = $stmt->fetch();
             if (empty($news)) echo $helpers->get_error('Новость не найдена.');
             else {
-                include $template . 'views/news/delete.php';
+                require_once $template . 'views/news/delete.php';
             }
         }
     } else {
@@ -142,14 +142,14 @@ if ($user->get('news_edit')) {
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
             echo $helpers->get_error('Публикации не найдены.');
         } else {
-            include $template . 'views/news/index.php';
+            require_once $template . 'views/news/index.php';
             echo $pagination['content'];
         }
     }
 } else {
-    echo '<h1 class="tac">Доступ закрыт</h1>
-<h2 class="tac">Недостаточно прав</h2>
-<div class="tac">
+    echo '<h1 class="text-center">Доступ закрыт</h1>
+<h2 class="text-center">Недостаточно прав</h2>
+<div class="text-center">
 <button class="btn btn-primary" type="button" onClick="javascript:history.back();">Вернутся назад</button>
 </div>';
 }

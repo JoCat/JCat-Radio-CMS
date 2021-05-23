@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Exo+2:400,700');
+@import url("https://fonts.googleapis.com/css?family=Exo+2:400,700");
 body {
-    font-family: 'Exo 2', sans-serif;
+    font-family: "Exo 2", sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #eee;
 }
-html, body {
+html,
+body {
     height: 100%;
 }
 .navbar {
@@ -24,10 +25,10 @@ html, body {
     display: block;
     padding: 3px 20px;
 }
-.navbar-nav>li>a {
+.navbar-nav > li > a {
     line-height: 30px;
 }
-.nav>li>a {
+.nav > li > a {
     padding: 10px 20px;
 }
 .navbar-brand {
@@ -36,13 +37,19 @@ html, body {
     font-weight: 700;
     width: 215px;
 }
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
     background-color: #fff;
 }
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav > li > a {
     color: #fff;
 }
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -67,7 +74,7 @@ aside {
     background-color: #f2f2f2;
     border-right: 1px solid #ddd;
 }
-.sidebar-menu>li>a {
+.sidebar-menu > li > a {
     display: block;
     padding: 20px 50px;
     font-size: 18px;
@@ -75,10 +82,11 @@ aside {
     color: #333;
     text-decoration: none;
 }
-.sidebar-menu>li>a:focus, .sidebar-menu>li>a:hover {
+.sidebar-menu > li > a:focus,
+.sidebar-menu > li > a:hover {
     background-color: #ddd;
 }
-.sidebar-menu>li.active {
+.sidebar-menu > li.active {
     background-color: #fff;
     width: 215px;
 }
@@ -89,13 +97,14 @@ aside {
     padding: 70px 20px 20px;
 }
 .error-alert {
-  padding: 10px;
-  background-color: #ff9999;
-  border: #ff6666 solid 1px;
-  font-size: 16px;
+    padding: 10px;
+    background-color: #ff9999;
+    border: #ff6666 solid 1px;
+    font-size: 16px;
 }
-.tac {text-align: center;}
-.mb10 {margin-bottom: 10px;}
+.mb10 {
+    margin-bottom: 10px;
+}
 .settings td:last-child {
     width: 300px;
 }
@@ -127,10 +136,12 @@ aside {
     .navbar-nav {
         margin: 0px -15px;
     }
-    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #fff;
     }
-    .navbar-default .navbar-nav .open .dropdown-menu>.active>a, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover {
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
         color: #333;
         background-color: #efefef;
         border-top: 1px solid #ccc;
@@ -168,11 +179,12 @@ aside {
     padding: 5px 8px;
 }
 
-.chat .msg.right .img, .chat .msg.right .text{
+.chat .msg.right .img,
+.chat .msg.right .text {
     float: right;
 }
 
-.chat .msg.right .text{
+.chat .msg.right .text {
     background-color: #c9d7ff;
 }
 

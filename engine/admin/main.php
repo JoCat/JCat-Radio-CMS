@@ -11,8 +11,8 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
 
 $menu->set_sidebar_menu([
     [
@@ -56,7 +56,7 @@ function getCount($table, $where = null)
     return $stmt->fetchColumn();
 }
 ?>
-<h2 class="tac">Добро пожаловать в панель управления<br>JCat Radio CMS</h2>
+<h2 class="text-center">Добро пожаловать в панель управления<br>JCat Radio CMS</h2>
 <div class="panel panel-default">
     <table class="table table-striped table-bordered">
         <caption>Статистика сайта</caption>

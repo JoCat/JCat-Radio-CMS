@@ -50,7 +50,6 @@ class Helpers
      */
     public function get_error($reason)
     {
-        global $template;
         return '<div class="error-alert">
           <p>
             <b>Внимание! Обнаружена ошибка.</b><br>

@@ -9,6 +9,6 @@ class ConfigLoader
 
     static public function save($filename, $data)
     {
-        file_put_contents(ENGINE_DIR . '/data/' . $filename . '.json', json_encode($data));
+        file_put_contents(ENGINE_DIR . '/data/' . $filename . '.json', json_encode($data, JSON_PRETTY_PRINT));
     }
 }

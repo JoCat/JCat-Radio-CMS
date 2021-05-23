@@ -11,8 +11,8 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/purifier.php';
-include ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/purifier.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
 
 $menu->set_sidebar_menu([
     [
@@ -35,7 +35,7 @@ if (!empty($_POST)) :
     echo '<p>Настройки успешно сохранены</p>
     <a href="/admin.php?do=settings" class="btn btn-success">Вернутся назад</a>';
 else : ?>
-    <h1 class="tac">Настройки сайта</h1>
+    <h1 class="text-center">Настройки сайта</h1>
     <form id="form" action="" method="POST">
         <!-- Tab panes -->
         <div class="tab-content">

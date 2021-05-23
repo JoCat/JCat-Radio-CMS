@@ -11,11 +11,11 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/purifier.php';
-include ENGINE_DIR . '/classes/helpers.php';
-include ENGINE_DIR . '/classes/url.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/purifier.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/url.php';
 
 $menu->set_sidebar_menu([
     [
@@ -56,9 +56,9 @@ if ($user->get('page_edit')) {
             elseif (empty($_POST['content'])) echo $helpers->get_error('Отсутствует контент страницы.');
 
             /*
-    При повторении url /  обработать и выкинуть предупреждение
-    Fatal error: Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'about' for key 'url'' in C:\OpenServer\domains\jrc.test\engine\admin\static.php:57 Stack trace: #0 C:\OpenServer\domains\jrc.test\engine\admin\static.php(57): PDOStatement->execute(Array) #1 C:\OpenServer\domains\jrc.test\engine\admin.php(43): require_once('C:\\OpenServer\\d...') #2 C:\OpenServer\domains\jrc.test\admin.php(27): require_once('C:\\OpenServer\\d...') #3 {main} thrown in C:\OpenServer\domains\jrc.test\engine\admin\static.php on line 57
-     */
+             * При повторении url /  обработать и выкинуть предупреждение
+             * Fatal error: Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'about' for key 'url'' in C:\OpenServer\domains\jrc.test\engine\admin\static.php:57 Stack trace: #0 C:\OpenServer\domains\jrc.test\engine\admin\static.php(57): PDOStatement->execute(Array) #1 C:\OpenServer\domains\jrc.test\engine\admin.php(43): require_once('C:\\OpenServer\\d...') #2 C:\OpenServer\domains\jrc.test\admin.php(27): require_once('C:\\OpenServer\\d...') #3 {main} thrown in C:\OpenServer\domains\jrc.test\engine\admin\static.php on line 57
+            */
 
             else {
                 $stmt = $pdo->prepare('INSERT INTO `static_page`(`url`, `content`, `seo_title`, `seo_description`, `seo_keywords`) VALUES (:url,:content,:seo_title,:seo_description,:seo_keywords)');
@@ -74,7 +74,7 @@ if ($user->get('page_edit')) {
                 <a href="/admin.php?do=static" class="btn btn-success">Вернутся назад</a>';
             }
         } else {
-            include $template . 'views/static/create.php';
+            require_once $template . 'views/static/create.php';
         }
     } elseif (isset($_GET['update'])) {
         if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана cтраница.');
@@ -101,7 +101,7 @@ if ($user->get('page_edit')) {
             $static = $stmt->fetch();
             if (empty($static)) echo $helpers->get_error('Страница не найдена.');
             else {
-                include $template . 'views/static/update.php';
+                require_once $template . 'views/static/update.php';
             }
         }
     } elseif (isset($_GET['delete'])) {
@@ -117,7 +117,7 @@ if ($user->get('page_edit')) {
             $static = $stmt->fetch();
             if (empty($static)) echo $helpers->get_error('Страница не найдена.');
             else {
-                include $template . 'views/static/delete.php';
+                require_once $template . 'views/static/delete.php';
             }
         }
     } else {
@@ -136,14 +136,14 @@ if ($user->get('page_edit')) {
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
             echo $helpers->get_error('Страницы не найдены.');
         } else {
-            include $template . 'views/static/index.php';
+            require_once $template . 'views/static/index.php';
             echo $pagination['content'];
         }
     }
 } else {
-    echo '<h1 class="tac">Доступ закрыт</h1>
-<h2 class="tac">Недостаточно прав</h2>
-<div class="tac">
+    echo '<h1 class="text-center">Доступ закрыт</h1>
+<h2 class="text-center">Недостаточно прав</h2>
+<div class="text-center">
 <button class="btn btn-primary" type="button" onClick="javascript:history.back();">Вернутся назад</button>
 </div>';
 }

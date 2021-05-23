@@ -1,6 +1,6 @@
 <?php
-include_once(ENGINE_DIR . '/classes/db_connect.php');
-include_once(ENGINE_DIR . '/classes/helpers.php');
+require_once(ENGINE_DIR . '/classes/db_connect.php');
+require_once(ENGINE_DIR . '/classes/helpers.php');
 
 $stmt = $pdo->prepare('SELECT * FROM `schedule` JOIN `programs` ON schedule.program_id = programs.id WHERE schedule.day = :day AND schedule.show = 1 ORDER BY schedule.start_time ASC');
 $stmt->execute(['day' => strtolower(date("l"))]);

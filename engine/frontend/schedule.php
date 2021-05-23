@@ -11,8 +11,8 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
 
 $seo_title = 'Расписание &raquo; ' . $config->title;
 
@@ -43,5 +43,5 @@ if (empty($schedule)) {
     На данный момент у нас нет расписания, заходите позже :)
     </div>';
 } else {
-    include $template . '/schedule.php';
+    require_once $template . '/schedule.php';
 }

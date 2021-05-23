@@ -11,7 +11,7 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
 
 $stmt = $pdo->prepare('SELECT * FROM `users` JOIN `user_groups` ON users.usergroup_id = user_groups.id WHERE users.login = :login');
 $stmt->execute(['login' => $_GET['username']]);
@@ -28,5 +28,5 @@ if (empty($result = $stmt->fetch())) {
             '/template/' . $config->tpl_dir . '/images/no_avatar.png' :
             '/uploads/images/users/' . $result->image
     ];
-    include $template . '/userpage.php';
+    require_once $template . '/userpage.php';
 }

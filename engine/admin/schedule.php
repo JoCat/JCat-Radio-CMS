@@ -11,9 +11,9 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
 
 $menu->set_sidebar_menu([
     [
@@ -78,7 +78,7 @@ if ($user->get('schedule_edit')) {
         } else {
             $stmt = $pdo->query('SELECT * FROM `programs` WHERE `show` = 1 ORDER BY id DESC');
             $programs = $stmt->fetchAll();
-            include $template . 'views/schedule/create.php';
+            require_once $template . 'views/schedule/create.php';
         }
     } elseif (isset($_GET['update'])) {
         if (isset($_POST['submit'])) {
@@ -106,7 +106,7 @@ if ($user->get('schedule_edit')) {
             $schedule = $stmt->fetch();
             if (empty($schedule)) echo $helpers->get_error('Эфир не найден.');
             else {
-                include $template . 'views/schedule/update.php';
+                require_once $template . 'views/schedule/update.php';
             }
         }
     } elseif (isset($_GET['delete'])) {
@@ -122,7 +122,7 @@ if ($user->get('schedule_edit')) {
             $schedule = $stmt->fetch();
             if (empty($schedule)) echo $helpers->get_error('Эфир не найден.');
             else {
-                include $template . 'views/schedule/delete.php';
+                require_once $template . 'views/schedule/delete.php';
             }
         }
     } else {
@@ -145,14 +145,14 @@ if ($user->get('schedule_edit')) {
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
             echo $helpers->get_error('Эфиры не найдены.');
         } else {
-            include $template . 'views/schedule/index.php';
+            require_once $template . 'views/schedule/index.php';
             echo $pagination['content'];
         }
     }
 } else {
-    echo '<h1 class="tac">Доступ закрыт</h1>
-<h2 class="tac">Недостаточно прав</h2>
-<div class="tac">
+    echo '<h1 class="text-center">Доступ закрыт</h1>
+<h2 class="text-center">Недостаточно прав</h2>
+<div class="text-center">
 <button class="btn btn-primary" type="button" onClick="javascript:history.back();">Вернутся назад</button>
 </div>';
 }

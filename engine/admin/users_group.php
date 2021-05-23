@@ -11,11 +11,11 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/purifier.php';
-include ENGINE_DIR . '/classes/helpers.php';
-include ENGINE_DIR . '/classes/url.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/purifier.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/url.php';
 
 $menu->set_sidebar_menu([
     [
@@ -70,7 +70,7 @@ if ($user->get('groups_edit')) {
                 <a href="/admin.php?do=users_group" class="btn btn-success">Вернутся назад</a>';
             }
         } else {
-            include $template . 'views/users_group/create.php';
+            require_once $template . 'views/users_group/create.php';
         }
     } elseif (isset($_GET['edit'])) {
         if (isset($_POST['submit'])) {
@@ -98,7 +98,7 @@ if ($user->get('groups_edit')) {
             $data = $stmt->fetch();
             if (empty($data)) echo $helpers->get_error('Группа не найдена');
             else {
-                include $template . 'views/users_group/edit.php';
+                require_once $template . 'views/users_group/edit.php';
             }
         }
     } elseif (isset($_GET['delete'])) {
@@ -114,7 +114,7 @@ if ($user->get('groups_edit')) {
             $data = $stmt->fetch();
             if (empty($data)) echo $helpers->get_error('Группа не найдена');
             else {
-                include $template . 'views/users_group/delete.php';
+                require_once $template . 'views/users_group/delete.php';
             }
         }
     } else {
@@ -132,14 +132,14 @@ if ($user->get('groups_edit')) {
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
             echo $helpers->get_error('Группы не найдены');
         } else {
-            include $template . 'views/users_group/index.php';
+            require_once $template . 'views/users_group/index.php';
             echo $pagination['content'];
         }
     }
 } else {
-    echo '<h1 class="tac">Доступ закрыт</h1>
-<h2 class="tac">Недостаточно прав</h2>
-<div class="tac">
+    echo '<h1 class="text-center">Доступ закрыт</h1>
+<h2 class="text-center">Недостаточно прав</h2>
+<div class="text-center">
 <button class="btn btn-primary" type="button" onClick="javascript:history.back();">Вернутся назад</button>
 </div>';
 }

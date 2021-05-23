@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>JRE Admin Panel</title>
+    <title>JRC Admin Panel</title>
     <link rel="stylesheet" href="/engine/admin/css/bootstrap.min.css">
     <link rel="stylesheet" href="/engine/admin/css/bootstrap-clockpicker.min.css">
     <link rel="stylesheet" href="/engine/admin/css/styles.css">
@@ -20,12 +20,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/admin.php">JRE Admin Panel</a>
+                <a class="navbar-brand" href="/admin.php">JRC Admin Panel</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/admin.php">Управление сайтом</a></li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden-xs"><a href="/admin.php?do=settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
                     <li class="visible-xs"><a href="/admin.php?do=settings">Настройки сайта</a></li>
@@ -38,8 +35,8 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <img src="<?= $user->get_avatar() ?>" alt="" class="img-circle user-img-big center-block">
-                                <span class="tac"><?= $user->get('username') ?></span>
-                                <span class="tac"><?= $user->get('usergroup') ?></span>
+                                <span class="text-center"><?= $user->get('username') ?></span>
+                                <span class="text-center"><?= $user->get('usergroup') ?></span>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/" target="_blank">Просмотр сайта</a></li>

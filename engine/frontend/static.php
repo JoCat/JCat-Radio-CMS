@@ -10,8 +10,8 @@
  Вывод статических страниц
 =======================================
 */
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/error_handler.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/error_handler.php';
 
 //Выполняем запрос к БД с последующим выводом страницы
 $stmt = $pdo->prepare('SELECT * FROM `static_page` WHERE `url`=:url');
@@ -21,4 +21,4 @@ $seo_title = $result->seo_title;
 $seo_description = $result->seo_description;
 $seo_keywords = $result->seo_keywords;
 $content = $result->content;
-include $template . '/static.php';
+require_once $template . '/static.php';

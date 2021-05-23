@@ -12,13 +12,13 @@
 */
 
 switch ($config->main_page) {
-	case 2:
-		$_GET['show'] = 'shortnews';
-		include ENGINE_DIR . '/frontend/news.php';
-		break;
+    case 2:
+        $_GET['show'] = 'shortnews';
+        require_once ENGINE_DIR . '/frontend/news.php';
+        break;
 
-	case 1:
-	default:
-		include $template . '/index.php';
-		break;
+    case 1:
+    default:
+        require_once $template . '/index.php';
+        break;
 }

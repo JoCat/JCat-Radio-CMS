@@ -11,10 +11,10 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/helpers.php';
-include ENGINE_DIR . '/classes/error_handler.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/error_handler.php';
 
 switch ($_GET['show']) {
     case 'shortnews':
@@ -59,7 +59,7 @@ switch ($_GET['show']) {
             echo $error;
         } else {
             $pagination = $pagination['content'];
-            include $template . '/news.php';
+            require_once $template . '/news.php';
         }
         break;
 
@@ -74,7 +74,7 @@ switch ($_GET['show']) {
             'full_text' => empty($result->full_text) ? $result->short_text : $result->full_text,
             'author' => '<a href="/user/' . strtolower($result->login) . '">' . $result->login . '</a>'
         ];
-        include $template . '/fullnews.php';
+        require_once $template . '/fullnews.php';
         $seo_title = $result->seo_title;
         $seo_description = $result->seo_description;
         $seo_keywords = $result->seo_keywords;

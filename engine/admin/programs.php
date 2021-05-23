@@ -11,12 +11,12 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/upload_image.php';
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/purifier.php';
-include ENGINE_DIR . '/classes/helpers.php';
-include ENGINE_DIR . '/classes/url.php';
+require_once ENGINE_DIR . '/classes/upload_image.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/purifier.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/url.php';
 
 $menu->set_sidebar_menu([
     [
@@ -85,7 +85,7 @@ if ($user->get('programs_edit')) {
                 }
             }
         } else {
-            include $template . 'views/programs/create.php';
+            require_once $template . 'views/programs/create.php';
         }
     } elseif (isset($_GET['update'])) {
         if (empty($_GET['update'])) echo $helpers->get_error('Не выбрана программа.');
@@ -132,7 +132,7 @@ if ($user->get('programs_edit')) {
             $programs = $stmt->fetch();
             if (empty($programs)) echo $helpers->get_error('Программа не найдена.');
             else {
-                include $template . 'views/programs/update.php';
+                require_once $template . 'views/programs/update.php';
             }
         }
     } elseif (isset($_GET['delete'])) {
@@ -153,7 +153,7 @@ if ($user->get('programs_edit')) {
                     echo '<p>Программа успешно удалена</p>
                     <a href="/admin.php?do=programs" class="btn btn-success">Вернутся назад</a>';
                 } else {
-                    include $template . 'views/programs/delete.php';
+                    require_once $template . 'views/programs/delete.php';
                 }
             }
         }
@@ -173,14 +173,14 @@ if ($user->get('programs_edit')) {
         if (isset($_GET['page']) && $_GET['page'] > $pagination['num_pages']) {
             echo $helpers->get_error('Программы не найдены.');
         } else {
-            include $template . 'views/programs/index.php';
+            require_once $template . 'views/programs/index.php';
             echo $pagination['content'];
         }
     }
 } else {
-    echo '<h1 class="tac">Доступ закрыт</h1>
-<h2 class="tac">Недостаточно прав</h2>
-<div class="tac">
+    echo '<h1 class="text-center">Доступ закрыт</h1>
+<h2 class="text-center">Недостаточно прав</h2>
+<div class="text-center">
 <button class="btn btn-primary" type="button" onClick="javascript:history.back();">Вернутся назад</button>
 </div>';
 }

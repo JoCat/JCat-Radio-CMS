@@ -10,8 +10,8 @@
  Авторизация пользователя
 =======================================
 */
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
 
 if (!empty($_POST)) {
     if (empty($_POST['login'])) $helpers->addMessage('Не введен Логин', true);
@@ -48,4 +48,4 @@ if (!empty($_POST)) {
         }
     }
 }
-include $template . '/auth.php';
+require_once $template . '/auth.php';

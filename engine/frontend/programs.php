@@ -11,9 +11,9 @@
 =======================================
 */
 
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/pagination.php';
-include ENGINE_DIR . '/classes/error_handler.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/pagination.php';
+require_once ENGINE_DIR . '/classes/error_handler.php';
 
 switch ($_GET['show']) {
     case 'all':
@@ -60,7 +60,7 @@ switch ($_GET['show']) {
             echo $error;
         } else {
             $pagination = $pagination['content'];
-            include $template . '/programs.php';
+            require_once $template . '/programs.php';
         }
         break;
 
@@ -75,7 +75,7 @@ switch ($_GET['show']) {
                 '/template/' . $config->tpl_dir . '/images/no_image.png' :
                 '/uploads/images/programs/' . $result->image
         ];
-        include $template . '/fullprog.php';
+        require_once $template . '/fullprog.php';
         $seo_title = $result->seo_title;
         $seo_description = $result->seo_description;
         $seo_keywords = $result->seo_keywords;

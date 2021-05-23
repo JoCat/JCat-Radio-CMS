@@ -36,6 +36,3 @@ RewriteRule ^([a-z0-9_-]+)$ index.php?do=static&url=$1 [L]
 #RewriteRule ^sitemap.xml$ modules/sitemap.xml [L]
 #RewriteRule ^robots.txt$ modules/robots.txt [L]
 </IfModule>
-
-# Not found
-#ErrorDocument 404 /modules/errors/404.php

@@ -10,8 +10,8 @@
  Регистрация пользователя
 =======================================
 */
-include ENGINE_DIR . '/classes/db_connect.php';
-include ENGINE_DIR . '/classes/helpers.php';
+require_once ENGINE_DIR . '/classes/db_connect.php';
+require_once ENGINE_DIR . '/classes/helpers.php';
 
 if (isset($_GET['key'])) {
     $stmt = $pdo->prepare('SELECT * FROM `users` WHERE `active_hex` = :key');
@@ -123,4 +123,4 @@ MSG;
         }
     }
 }
-include $template . '/reg.php';
+require_once $template . '/reg.php';

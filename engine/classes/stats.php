@@ -39,7 +39,7 @@ class Statistics
                         'user_agent' => json_encode([
                             'browser' => $user_agent->Parent,
                             'platform' => $user_agent->Platform,
-                            'device_type' => ($user_agent->isTablet) ? 'tablet' : ($user_agent->isMobileDevice) ? 'mobile' : 'standalone'
+                            'device_type' => ($user_agent->isTablet) ? 'tablet' : (($user_agent->isMobileDevice) ? 'mobile' : 'standalone')
                         ]),
                     ]);
                     $_SESSION['count_check'] = true;
